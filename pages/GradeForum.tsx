@@ -8,7 +8,7 @@ interface GradeForumProps {
   userName: string;
   userId: string;
   posts: ForumPost[];
-  setPosts: (posts: ForumPost[]) => void;
+  setPosts: React.Dispatch<React.SetStateAction<ForumPost[]>>;
 }
 
 const GradeForum: React.FC<GradeForumProps> = ({ userRole, userGrade, userName, userId, posts = [], setPosts }) => {
@@ -155,12 +155,12 @@ const GradeForum: React.FC<GradeForumProps> = ({ userRole, userGrade, userName, 
     if (activeTab === 'forum') {
       // Tampilkan postingan publik untuk angkatan aktif
       return result.filter(p => {
-        const isPublic = p.isPrivate === false || p.isPrivate === 0 || p.isPrivate === 'false' || !p.isPrivate;
+        const isPublic = p.isPrivate === false || (p.isPrivate as any) === 0 || (p.isPrivate as any) === 'false' || !p.isPrivate;
         return isPublic && p.grade === activeGrade;
       });
     } else {
       // Mode Konseling
-      const isPostPrivate = (p: ForumPost) => p.isPrivate === true || p.isPrivate === 1 || p.isPrivate === 'true';
+      const isPostPrivate = (p: ForumPost) => p.isPrivate === true || (p.isPrivate as any) === 1 || (p.isPrivate as any) === 'true';
       if (userRole === 'student' || userRole === 'ketua_murid') {
         // Siswa hanya melihat chat privat milik mereka sendiri
         return result.filter(p => isPostPrivate(p) && p.userId === userId);
@@ -389,7 +389,7 @@ const GradeForum: React.FC<GradeForumProps> = ({ userRole, userGrade, userName, 
 
       <div className="space-y-6">
         {filteredPosts.map(post => (
-          <div key={post.id} className={`${(post.isPrivate === true || post.isPrivate === 1 || post.isPrivate === 'true') ? 'bg-teal-50/30 border-teal-100' : 'bg-white border-slate-100'} p-6 md:p-8 rounded-[2.5rem] border shadow-sm hover:shadow-md transition-all`}>
+          <div key={post.id} className={`${(post.isPrivate === true || (post.isPrivate as any) === 1 || (post.isPrivate as any) === 'true') ? 'bg-teal-50/30 border-teal-100' : 'bg-white border-slate-100'} p-6 md:p-8 rounded-[2.5rem] border shadow-sm hover:shadow-md transition-all`}>
             <div className="flex justify-between items-start mb-4">
               <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${post.userRole === 'counselor' ? 'bg-emerald-500' : 'bg-teal-500'}`}>
@@ -398,7 +398,7 @@ const GradeForum: React.FC<GradeForumProps> = ({ userRole, userGrade, userName, 
                 <div>
                   <h4 className="text-sm font-black text-slate-800">
                     {getDisplayName(post.userName, post.userRole, post.isPrivate)}
-                    {(post.isPrivate === true || post.isPrivate === 1 || post.isPrivate === 'true') && <span className="ml-2 text-[10px] bg-teal-200 text-teal-700 px-2 py-0.5 rounded-full uppercase">Pribadi</span>}
+                    {(post.isPrivate === true || (post.isPrivate as any) === 1 || (post.isPrivate as any) === 'true') && <span className="ml-2 text-[10px] bg-teal-200 text-teal-700 px-2 py-0.5 rounded-full uppercase">Pribadi</span>}
                   </h4>
                   <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
                     {new Date(post.timestamp).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}
@@ -425,7 +425,7 @@ const GradeForum: React.FC<GradeForumProps> = ({ userRole, userGrade, userName, 
 
             <p className="text-slate-700 leading-relaxed mb-6 whitespace-pre-wrap">{post.content}</p>
 
-            {!(post.isPrivate === true || post.isPrivate === 1 || post.isPrivate === 'true') && (
+            {!(post.isPrivate === true || (post.isPrivate as any) === 1 || (post.isPrivate as any) === 'true') && (
               <div className="flex items-center gap-4 mb-6 border-b border-slate-50 pb-4">
                 <button onClick={() => handleLike(post.id)} className="flex items-center gap-2 text-slate-400 hover:text-rose-500 transition-colors group">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="group-hover:fill-rose-500"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>

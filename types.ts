@@ -411,6 +411,7 @@ export interface SchoolProfile {
   editCount?: number;
   academicYears?: string[];
   activeAcademicYear?: string;
+  updated_at?: string;
 }
 
 export interface CounselorProfileData {
