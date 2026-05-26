@@ -11,7 +11,7 @@ interface SchoolProfileProps {
 }
 
 const SchoolProfilePage: React.FC<SchoolProfileProps> = ({ profile, setProfile, notify, userRole }) => {
-  const isEffectivelyLocked = profile.isLocked && userRole !== 'super_admin';
+  const isEffectivelyLocked = userRole !== 'super_admin';
   const [isEditMode, setIsEditMode] = useState(false);
   const [formData, setFormData] = useState<SchoolProfile>(profile);
   const [newMission, setNewMission] = useState('');
@@ -38,21 +38,13 @@ const SchoolProfilePage: React.FC<SchoolProfileProps> = ({ profile, setProfile, 
       return;
     }
 
-    const isSuperAdmin = userRole === 'super_admin';
-    const newEditCount = isSuperAdmin ? (formData.editCount || 0) : (formData.editCount || 0) + 1;
-    // Super Admin akan mengunci secara permanen setelah simpan.
-    // User lain mengunci jika sudah mencapai 4x edit.
-    const isNowLocked = isSuperAdmin ? true : newEditCount >= 4;
-
     const updatedProfile = { 
         ...formData, 
-        editCount: newEditCount, 
-        isLocked: isNowLocked,
         updated_at: new Date().toISOString()
     };
     setProfile(updatedProfile);
     setIsEditMode(false);
-    notify(isSuperAdmin ? "Profil sekolah berhasil diperbarui dan dikunci." : "Profil sekolah berhasil diperbarui.", "success");
+    notify("Profil sekolah berhasil diperbarui.", "success");
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -214,40 +206,50 @@ const SchoolProfilePage: React.FC<SchoolProfileProps> = ({ profile, setProfile, 
           <p className="text-slate-500 text-sm flex items-center gap-2">
             Informasi identitas resmi institusi pendidikan.
             {userRole === 'super_admin' ? (
-              <div className="flex gap-2 items-center">
-                <span className="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded text-xs font-bold">Akses Super Admin</span>
-                {profile.isLocked ? (
-                  <span className="bg-rose-100 text-rose-600 px-2 py-0.5 rounded text-xs font-bold flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                    Data Terkunci
-                  </span>
-                ) : (
-                  <span className="bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded text-xs font-bold flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>
-                    Terbuka (Siap Edit)
-                  </span>
-                )}
+              <div className="flex gap-2 items-center mt-1">
+                <span className="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded text-xs font-bold border border-emerald-200">Akses Super Admin</span>
+                <button
+                  onClick={() => {
+                    if (!isEditMode) {
+                      setProfile(prev => ({ ...prev, isLocked: !prev.isLocked, updated_at: new Date().toISOString() }));
+                      notify(profile.isLocked ? "Akses edit profil dibuka." : "Profil sekolah dikunci.", "success");
+                    }
+                  }}
+                  disabled={isEditMode}
+                  className={`flex items-center gap-1 px-2 py-0.5 rounded text-xs font-bold transition-all ${
+                    profile.isLocked 
+                      ? 'bg-rose-100 text-rose-600 hover:bg-rose-200 cursor-pointer border border-rose-200' 
+                      : 'bg-indigo-100 text-indigo-600 hover:bg-indigo-200 cursor-pointer border border-indigo-200'
+                  } ${isEditMode ? 'opacity-50 cursor-not-allowed' : ''}`}
+                >
+                  {profile.isLocked ? (
+                    <>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                      Data Terkunci (Klik untuk Buka)
+                    </>
+                  ) : (
+                    <>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>
+                      Terbuka - Siap Edit (Klik untuk Kunci)
+                    </>
+                  )}
+                </button>
               </div>
-            ) : isEffectivelyLocked ? (
-              <span className="bg-rose-100 text-rose-600 px-2 py-0.5 rounded text-xs font-bold">Terkunci (Maksimal 4x Edit)</span>
             ) : (
-              <span className="bg-amber-100 text-amber-700 px-2 py-0.5 rounded text-xs font-bold">Sisa Edit: {4 - (profile.editCount || 0)}x</span>
+              <span className="bg-rose-100 text-rose-600 px-2 py-0.5 rounded text-xs font-bold border border-rose-200 inline-block mt-1">Terkunci (Hanya Akses Super Admin)</span>
             )}
           </p>
         </div>
         {!isEditMode ? (
-          <button
-            onClick={() => {
-              if (userRole === 'super_admin') {
-                setProfile(prev => ({ ...prev, isLocked: false }));
-              }
-              setIsEditMode(true);
-            }}
-            className="bg-indigo-600 text-white px-6 py-2.5 rounded-2xl text-sm font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-100 transition-all flex items-center justify-center gap-2 active:scale-95"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" /></svg>
-            Edit Profil
-          </button>
+          (userRole === 'super_admin' && !profile.isLocked) ? (
+            <button
+              onClick={() => setIsEditMode(true)}
+              className="bg-indigo-600 text-white px-6 py-2.5 rounded-2xl text-sm font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-100 transition-all flex items-center justify-center gap-2 active:scale-95"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" /></svg>
+              Edit Profil
+            </button>
+          ) : <div />
         ) : (
           <div className="flex gap-2">
             <button

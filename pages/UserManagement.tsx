@@ -79,10 +79,13 @@ const UserManagement: React.FC<UserManagementProps> = ({ appUsers, setAppUsers, 
         return teachers.filter(t => t.role === 'Guru Mapel');
       case 'humas':
         return teachers.filter(t => t.role === 'Humas');
-      case 'principal':
       case 'supervisor':
+        return teachers.filter(t => t.role === 'Pengawas');
+      case 'curriculum':
+        return teachers.filter(t => t.role === 'Kurikulum');
+      case 'principal':
       case 'super_admin':
-        // Untuk admin/kepsek/pengawas, tampilkan semua guru (karena biasanya diambil dari salah satu guru senior/staf)
+        // Untuk admin/kepsek, tampilkan semua guru
         return teachers;
       default:
         return teachers;
@@ -184,6 +187,7 @@ const UserManagement: React.FC<UserManagementProps> = ({ appUsers, setAppUsers, 
       case 'homeroom': return 'Wali Kelas';
       case 'teacher': return 'Guru Mapel';
       case 'supervisor': return 'Pengawas Sekolah';
+      case 'curriculum': return 'Kurikulum';
       case 'humas': return 'Humas';
       default: return role;
     }
@@ -197,6 +201,7 @@ const UserManagement: React.FC<UserManagementProps> = ({ appUsers, setAppUsers, 
       case 'homeroom': return 'bg-cyan-100 text-cyan-700';
       case 'teacher': return 'bg-slate-100 text-slate-700';
       case 'supervisor': return 'bg-purple-100 text-purple-700';
+      case 'curriculum': return 'bg-pink-100 text-pink-700';
       case 'humas': return 'bg-orange-100 text-orange-700';
       default: return 'bg-slate-100 text-slate-700';
     }
@@ -207,7 +212,7 @@ const UserManagement: React.FC<UserManagementProps> = ({ appUsers, setAppUsers, 
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold text-slate-900">Manajemen Pengguna</h2>
-          <p className="text-slate-500 text-sm">Kelola akses akun Konselor, Kepala Sekolah, Guru, dan Pengawas.</p>
+          <p className="text-slate-500 text-sm">Kelola akses akun Konselor, Kepala Sekolah, Guru, Pengawas, dan Kurikulum.</p>
         </div>
         <button
           onClick={handleOpenAdd}
@@ -225,6 +230,7 @@ const UserManagement: React.FC<UserManagementProps> = ({ appUsers, setAppUsers, 
         <button onClick={() => setActiveTab('humas')} className={`px-5 py-2 rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'humas' ? 'bg-white text-orange-600 shadow-sm' : 'text-slate-500'}`}>Humas</button>
         <button onClick={() => setActiveTab('homeroom')} className={`px-5 py-2 rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'homeroom' ? 'bg-white text-cyan-600 shadow-sm' : 'text-slate-500'}`}>Wali Kelas</button>
         <button onClick={() => setActiveTab('teacher')} className={`px-5 py-2 rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'teacher' ? 'bg-white text-slate-600 shadow-sm' : 'text-slate-500'}`}>Guru Mapel</button>
+        <button onClick={() => setActiveTab('curriculum')} className={`px-5 py-2 rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'curriculum' ? 'bg-white text-pink-600 shadow-sm' : 'text-slate-500'}`}>Kurikulum</button>
         <button onClick={() => setActiveTab('principal')} className={`px-5 py-2 rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'principal' ? 'bg-white text-amber-600 shadow-sm' : 'text-slate-500'}`}>Kepsek</button>
         <button onClick={() => setActiveTab('supervisor')} className={`px-5 py-2 rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'supervisor' ? 'bg-white text-purple-600 shadow-sm' : 'text-slate-500'}`}>Pengawas</button>
       </div>
@@ -353,6 +359,7 @@ const UserManagement: React.FC<UserManagementProps> = ({ appUsers, setAppUsers, 
                   <option value="counselor">Konselor (Guru BK)</option>
                   <option value="principal">Kepala Sekolah</option>
                   <option value="supervisor">Pengawas Sekolah</option>
+                  <option value="curriculum">Kurikulum</option>
                   <option value="homeroom">Wali Kelas</option>
                   <option value="teacher">Guru Mata Pelajaran</option>
                   <option value="humas">Humas</option>

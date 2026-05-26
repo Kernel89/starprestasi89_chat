@@ -25,7 +25,7 @@ const TeachersList: React.FC<TeachersListProps> = ({
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
   const [editingTeacher, setEditingTeacher] = useState<Teacher | null>(null);
-  const [activeTab, setActiveTab] = useState<'Semua' | 'Konselor' | 'Wali Kelas' | 'Guru Mapel' | 'Humas' | 'Kepala Sekolah'>('Semua');
+  const [activeTab, setActiveTab] = useState<'Semua' | 'Konselor' | 'Wali Kelas' | 'Guru Mapel' | 'Humas' | 'Kepala Sekolah' | 'Pengawas' | 'Kurikulum'>('Semua');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 50;
 
@@ -232,6 +232,8 @@ const TeachersList: React.FC<TeachersListProps> = ({
         if (rawRole.includes('konselor') || rawRole.includes('bk')) role = 'Konselor';
         else if (rawRole.includes('wali')) role = 'Wali Kelas';
         else if (rawRole.includes('humas')) role = 'Humas';
+        else if (rawRole.includes('pengawas')) role = 'Pengawas' as any;
+        else if (rawRole.includes('kurikulum')) role = 'Kurikulum' as any;
 
         const teacher: Teacher = {
           id: `t-imp-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
@@ -400,7 +402,9 @@ const TeachersList: React.FC<TeachersListProps> = ({
         <button onClick={() => setActiveTab('Wali Kelas')} className={`px-5 py-2 rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'Wali Kelas' ? 'bg-white text-emerald-600 shadow-sm' : 'text-slate-500'}`}>Wali Kelas</button>
         <button onClick={() => setActiveTab('Humas')} className={`px-5 py-2 rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'Humas' ? 'bg-white text-orange-600 shadow-sm' : 'text-slate-500'}`}>Humas</button>
         <button onClick={() => setActiveTab('Guru Mapel')} className={`px-5 py-2 rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'Guru Mapel' ? 'bg-white text-slate-600 shadow-sm' : 'text-slate-500'}`}>Guru Mapel</button>
+        <button onClick={() => setActiveTab('Kurikulum')} className={`px-5 py-2 rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'Kurikulum' ? 'bg-white text-pink-600 shadow-sm' : 'text-slate-500'}`}>Kurikulum</button>
         <button onClick={() => setActiveTab('Kepala Sekolah')} className={`px-5 py-2 rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'Kepala Sekolah' ? 'bg-white text-rose-600 shadow-sm' : 'text-slate-500'}`}>Kepala Sekolah</button>
+        <button onClick={() => setActiveTab('Pengawas')} className={`px-5 py-2 rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'Pengawas' ? 'bg-white text-purple-600 shadow-sm' : 'text-slate-500'}`}>Pengawas</button>
       </div>
 
       <div className="bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden">
@@ -434,7 +438,10 @@ const TeachersList: React.FC<TeachersListProps> = ({
                     <td className="px-8 py-5">
                         <span className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-tight ${teacher.role === 'Konselor' ? 'bg-blue-100 text-blue-700' :
                           teacher.role === 'Wali Kelas' ? 'bg-emerald-100 text-emerald-700' : 
-                          teacher.role === 'Humas' ? 'bg-orange-100 text-orange-700' : 'bg-slate-100 text-slate-700'
+                          teacher.role === 'Humas' ? 'bg-orange-100 text-orange-700' : 
+                          teacher.role === 'Pengawas' ? 'bg-purple-100 text-purple-700' :
+                          teacher.role === 'Kurikulum' ? 'bg-pink-100 text-pink-700' :
+                          teacher.role === 'Kepala Sekolah' ? 'bg-rose-100 text-rose-700' : 'bg-slate-100 text-slate-700'
                         }`}>
                         {teacher.role}
                       </span>
@@ -640,7 +647,9 @@ const TeachersList: React.FC<TeachersListProps> = ({
                   <option value="Konselor">Konselor</option>
                   <option value="Guru Mapel">Guru Mapel</option>
                   <option value="Humas">Humas</option>
+                  <option value="Kurikulum">Kurikulum</option>
                   <option value="Kepala Sekolah">Kepala Sekolah</option>
+                  <option value="Pengawas">Pengawas</option>
                 </select>
                 <p className="text-[9px] text-slate-400 mt-2 italic">*Jika Konselor, akun akses akan aktif otomatis.</p>
               </div>
@@ -730,7 +739,9 @@ const TeachersList: React.FC<TeachersListProps> = ({
                   <option value="Konselor">Konselor</option>
                   <option value="Guru Mapel">Guru Mapel</option>
                   <option value="Humas">Humas</option>
+                  <option value="Kurikulum">Kurikulum</option>
                   <option value="Kepala Sekolah">Kepala Sekolah</option>
+                  <option value="Pengawas">Pengawas</option>
                 </select>
               </div>
 
@@ -783,7 +794,10 @@ const TeachersList: React.FC<TeachersListProps> = ({
                   <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${
                     selectedTeacher.role === 'Konselor' ? 'bg-blue-100 text-blue-700' :
                     selectedTeacher.role === 'Wali Kelas' ? 'bg-emerald-100 text-emerald-700' : 
-                    selectedTeacher.role === 'Humas' ? 'bg-orange-100 text-orange-700' : 'bg-slate-100 text-slate-700'
+                    selectedTeacher.role === 'Humas' ? 'bg-orange-100 text-orange-700' :
+                    selectedTeacher.role === 'Pengawas' ? 'bg-purple-100 text-purple-700' :
+                    selectedTeacher.role === 'Kurikulum' ? 'bg-pink-100 text-pink-700' :
+                    selectedTeacher.role === 'Kepala Sekolah' ? 'bg-rose-100 text-rose-700' : 'bg-slate-100 text-slate-700'
                   }`}>
                     {selectedTeacher.role}
                   </span>

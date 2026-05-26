@@ -173,7 +173,7 @@ export const onRequest: PagesFunction<Env> = async (context: { request: Request;
                       
                       if (keys.includes('updated_at')) {
                           // Note: In DO UPDATE SET, we refer to the existing row's columns directly.
-                          query += `WHERE excluded.updated_at > updated_at OR updated_at IS NULL`;
+                          query += `WHERE excluded.updated_at > updated_at OR updated_at IS NULL OR updated_at = 'null'`;
                       }
                   } else {
                       // If only 'id' is present, we can just use INSERT OR IGNORE

@@ -131,7 +131,10 @@ const DEFAULT_SCHOOL_PROFILE: SchoolProfile = {
   academicYears: ['2023/2024'],
   activeAcademicYear: '2023/2024',
   logo: '',
-  loginBackground: ''
+  loginBackground: '',
+  isLocked: false,
+  editCount: 0,
+  updated_at: ''
 };
 
 const sanitizeProfile = (raw: any): SchoolProfile => {

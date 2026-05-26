@@ -1,5 +1,5 @@
 
-export type UserRole = 'super_admin' | 'principal' | 'counselor' | 'homeroom' | 'teacher' | 'supervisor' | 'student' | 'humas' | 'ketua_murid';
+export type UserRole = 'super_admin' | 'principal' | 'counselor' | 'homeroom' | 'teacher' | 'supervisor' | 'student' | 'humas' | 'ketua_murid' | 'curriculum';
 
 export enum Mood {
   SangatSenang = 'Sangat Senang',
@@ -126,7 +126,7 @@ export interface Teacher {
   id: string;
   name: string;
   nip: string;
-  role: 'Konselor' | 'Wali Kelas' | 'Guru Mapel' | 'Humas' | 'Kepala Sekolah';
+  role: 'Konselor' | 'Wali Kelas' | 'Guru Mapel' | 'Humas' | 'Kepala Sekolah' | 'Pengawas' | 'Kurikulum';
   assignment: string;
   email?: string;
 }
