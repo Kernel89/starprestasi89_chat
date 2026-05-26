@@ -1,0 +1,16 @@
+[
+  {
+    "id": "u2",
+    "name": "Konselor Umum",
+    "nip": "199001012015011001",
+    "gender": "Laki-laki",
+    "education": "S1 Bimbingan Konseling",
+    "university": "Universitas Negeri",
+    "certification": "Konselor Pendidikan",
+    "expertise": "Konseling Remaja",
+    "email": "konselor@sekolah.id",
+    "phone": "081234567890",
+    "address": "Jl. Guru No. 1",
+    "motto": "Melayani dengan hati."
+  }
+]

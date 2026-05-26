@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Developer Name",
+    "role": "Full Stack Engineer",
+    "expertise": "React, Node.js, AI Integration",
+    "location": "Jakarta, Indonesia",
+    "email": "dev@example.com",
+    "whatsapp": "+62 812 3456 7890",
+    "quote": "Code is poetry.",
+    "visionTitle": "Innovating Education",
+    "visionDesc": "Building tools for better learning environments.",
+    "skillsTitle": "Professional Background",
+    "skillsDesc": "Experienced in building scalable educational platforms.",
+    "privacyTitle": "Data Privacy",
+    "privacyDesc": "Committed to user data protection and privacy.",
+    "benefits": [
+      {
+        "id": "b1",
+        "title": "Efficiency",
+        "desc": "Streamlined workflows.",
+        "color": "blue",
+        "icon": "M13 10V3L4 14h7v7l9-11h-7z"
+      },
+      {
+        "id": "b2",
+        "title": "Security",
+        "desc": "Data protection first.",
+        "color": "emerald",
+        "icon": "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"
+      }
+    ],
+    "isLocked": false
+  }
+]

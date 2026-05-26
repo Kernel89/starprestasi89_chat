@@ -1,0 +1,884 @@
+[
+  {
+    "id": "mp-auto-1779377263305-0",
+    "programName": "ADMINISTRASI PENDIDIKAN",
+    "overview": "Program studi ADMINISTRASI PENDIDIKAN mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.306Z"
+  },
+  {
+    "id": "mp-auto-1779377263370-1",
+    "programName": "ADMINISTRASI PERKANTORAN",
+    "overview": "Program studi ADMINISTRASI PERKANTORAN membekali mahasiswa dengan kemampuan untuk mengelola sumber daya, merencanakan strategi finansial, dan mengorganisir operasional suatu instansi atau perusahaan agar efektif dan efisien.",
+    "courses": "[\"Pengantar Manajemen\",\"Akuntansi Dasar\",\"Ekonomi Makro & Mikro\",\"Manajemen Keuangan\",\"Perilaku Organisasi\",\"Hukum Bisnis\"]",
+    "careers": "[\"Manajer Perusahaan\",\"Akuntan\",\"Analis Keuangan\",\"Konsultan Bisnis\",\"Pengusaha (Entrepreneur)\",\"PNS - Kemenkeu/Pemda\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Brawijaya (UB)\",\"Universitas Airlangga (Unair)\",\"Universitas Padjadjaran (Unpad)\"]",
+    "dateCreated": "2026-05-21T15:27:43.370Z"
+  },
+  {
+    "id": "mp-auto-1779377263370-2",
+    "programName": "AGROEKOTEKNOLOGI",
+    "overview": "Program studi AGROEKOTEKNOLOGI fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.370Z"
+  },
+  {
+    "id": "mp-auto-1779377263370-3",
+    "programName": "AKUAKULTUR",
+    "overview": "Program studi AKUAKULTUR mempelajari ilmu, teori, dan praktik terkait bidang ini secara komprehensif. Mahasiswa akan dilatih untuk memiliki kemampuan analitis, manajerial, dan teknis yang dibutuhkan di dunia kerja modern.",
+    "courses": "[\"Pengantar Ilmu Dasar\",\"Metodologi Penelitian\",\"Manajemen Proyek\",\"Etika Profesi\",\"Seminar Nasional\",\"Tugas Akhir/Skripsi\"]",
+    "careers": "[\"Spesialis di Bidang Terkait\",\"Konsultan Independen\",\"Akademisi/Dosen\",\"Pegawai Negeri Sipil (PNS)\",\"Peneliti\",\"Pengusaha\"]",
+    "campuses": "[\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Universitas Brawijaya (UB)\",\"Universitas Diponegoro (Undip)\",\"Universitas Hasanuddin (Unhas)\"]",
+    "dateCreated": "2026-05-21T15:27:43.370Z"
+  },
+  {
+    "id": "mp-auto-1779377263370-4",
+    "programName": "AKUNTANSI PERPAJAKAN",
+    "overview": "Program studi AKUNTANSI PERPAJAKAN membekali mahasiswa dengan kemampuan untuk mengelola sumber daya, merencanakan strategi finansial, dan mengorganisir operasional suatu instansi atau perusahaan agar efektif dan efisien.",
+    "courses": "[\"Pengantar Manajemen\",\"Akuntansi Dasar\",\"Ekonomi Makro & Mikro\",\"Manajemen Keuangan\",\"Perilaku Organisasi\",\"Hukum Bisnis\"]",
+    "careers": "[\"Manajer Perusahaan\",\"Akuntan\",\"Analis Keuangan\",\"Konsultan Bisnis\",\"Pengusaha (Entrepreneur)\",\"PNS - Kemenkeu/Pemda\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Brawijaya (UB)\",\"Universitas Airlangga (Unair)\",\"Universitas Padjadjaran (Unpad)\"]",
+    "dateCreated": "2026-05-21T15:27:43.370Z"
+  },
+  {
+    "id": "mp-auto-1779377263370-5",
+    "programName": "AKUNTANSI SEKTOR PUBLIK",
+    "overview": "Program studi AKUNTANSI SEKTOR PUBLIK membekali mahasiswa dengan kemampuan untuk mengelola sumber daya, merencanakan strategi finansial, dan mengorganisir operasional suatu instansi atau perusahaan agar efektif dan efisien.",
+    "courses": "[\"Pengantar Manajemen\",\"Akuntansi Dasar\",\"Ekonomi Makro & Mikro\",\"Manajemen Keuangan\",\"Perilaku Organisasi\",\"Hukum Bisnis\"]",
+    "careers": "[\"Manajer Perusahaan\",\"Akuntan\",\"Analis Keuangan\",\"Konsultan Bisnis\",\"Pengusaha (Entrepreneur)\",\"PNS - Kemenkeu/Pemda\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Brawijaya (UB)\",\"Universitas Airlangga (Unair)\",\"Universitas Padjadjaran (Unpad)\"]",
+    "dateCreated": "2026-05-21T15:27:43.370Z"
+  },
+  {
+    "id": "mp-auto-1779377263370-6",
+    "programName": "ANTROPOLOGI SOSIAL",
+    "overview": "Program studi ANTROPOLOGI SOSIAL mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.370Z"
+  },
+  {
+    "id": "mp-auto-1779377263370-7",
+    "programName": "BAHASA DAN KEBUDAYAAN JEPANG",
+    "overview": "Program studi BAHASA DAN KEBUDAYAAN JEPANG mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.370Z"
+  },
+  {
+    "id": "mp-auto-1779377263370-8",
+    "programName": "BAHASA DAN KEBUDAYAAN KOREA",
+    "overview": "Program studi BAHASA DAN KEBUDAYAAN KOREA mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.370Z"
+  },
+  {
+    "id": "mp-auto-1779377263370-9",
+    "programName": "BAHASA DAN SASTRA INDONESIA",
+    "overview": "Program studi BAHASA DAN SASTRA INDONESIA mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.370Z"
+  },
+  {
+    "id": "mp-auto-1779377263370-10",
+    "programName": "BAHASA DAN SASTRA INGGRIS",
+    "overview": "Program studi BAHASA DAN SASTRA INGGRIS mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.370Z"
+  },
+  {
+    "id": "mp-auto-1779377263370-11",
+    "programName": "BAHASA DAN SASTRA PRANCIS",
+    "overview": "Program studi BAHASA DAN SASTRA PRANCIS mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.370Z"
+  },
+  {
+    "id": "mp-auto-1779377263370-12",
+    "programName": "BAHASA INGGRIS",
+    "overview": "Program studi BAHASA INGGRIS mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.370Z"
+  },
+  {
+    "id": "mp-auto-1779377263370-13",
+    "programName": "BIMBINGAN DAN KONSELING",
+    "overview": "Program studi BIMBINGAN DAN KONSELING mempelajari ilmu, teori, dan praktik terkait bidang ini secara komprehensif. Mahasiswa akan dilatih untuk memiliki kemampuan analitis, manajerial, dan teknis yang dibutuhkan di dunia kerja modern.",
+    "courses": "[\"Pengantar Ilmu Dasar\",\"Metodologi Penelitian\",\"Manajemen Proyek\",\"Etika Profesi\",\"Seminar Nasional\",\"Tugas Akhir/Skripsi\"]",
+    "careers": "[\"Spesialis di Bidang Terkait\",\"Konsultan Independen\",\"Akademisi/Dosen\",\"Pegawai Negeri Sipil (PNS)\",\"Peneliti\",\"Pengusaha\"]",
+    "campuses": "[\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Universitas Brawijaya (UB)\",\"Universitas Diponegoro (Undip)\",\"Universitas Hasanuddin (Unhas)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-14",
+    "programName": "BIOINFORMATIKA",
+    "overview": "Program studi BIOINFORMATIKA fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-15",
+    "programName": "BIOTEKNOLOGI",
+    "overview": "Program studi BIOTEKNOLOGI fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-16",
+    "programName": "BISNIS DIGITAL",
+    "overview": "Program studi BISNIS DIGITAL membekali mahasiswa dengan kemampuan untuk mengelola sumber daya, merencanakan strategi finansial, dan mengorganisir operasional suatu instansi atau perusahaan agar efektif dan efisien.",
+    "courses": "[\"Pengantar Manajemen\",\"Akuntansi Dasar\",\"Ekonomi Makro & Mikro\",\"Manajemen Keuangan\",\"Perilaku Organisasi\",\"Hukum Bisnis\"]",
+    "careers": "[\"Manajer Perusahaan\",\"Akuntan\",\"Analis Keuangan\",\"Konsultan Bisnis\",\"Pengusaha (Entrepreneur)\",\"PNS - Kemenkeu/Pemda\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Brawijaya (UB)\",\"Universitas Airlangga (Unair)\",\"Universitas Padjadjaran (Unpad)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-17",
+    "programName": "DESAIN KOMUNIKASI VISUAL",
+    "overview": "Program studi DESAIN KOMUNIKASI VISUAL mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-18",
+    "programName": "DESAIN MODE",
+    "overview": "Program studi DESAIN MODE mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-19",
+    "programName": "EKONOMI ISLAM",
+    "overview": "Program studi EKONOMI ISLAM membekali mahasiswa dengan kemampuan untuk mengelola sumber daya, merencanakan strategi finansial, dan mengorganisir operasional suatu instansi atau perusahaan agar efektif dan efisien.",
+    "courses": "[\"Pengantar Manajemen\",\"Akuntansi Dasar\",\"Ekonomi Makro & Mikro\",\"Manajemen Keuangan\",\"Perilaku Organisasi\",\"Hukum Bisnis\"]",
+    "careers": "[\"Manajer Perusahaan\",\"Akuntan\",\"Analis Keuangan\",\"Konsultan Bisnis\",\"Pengusaha (Entrepreneur)\",\"PNS - Kemenkeu/Pemda\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Brawijaya (UB)\",\"Universitas Airlangga (Unair)\",\"Universitas Padjadjaran (Unpad)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-20",
+    "programName": "EKONOMI PEMBANGUNAN",
+    "overview": "Program studi EKONOMI PEMBANGUNAN membekali mahasiswa dengan kemampuan untuk mengelola sumber daya, merencanakan strategi finansial, dan mengorganisir operasional suatu instansi atau perusahaan agar efektif dan efisien.",
+    "courses": "[\"Pengantar Manajemen\",\"Akuntansi Dasar\",\"Ekonomi Makro & Mikro\",\"Manajemen Keuangan\",\"Perilaku Organisasi\",\"Hukum Bisnis\"]",
+    "careers": "[\"Manajer Perusahaan\",\"Akuntan\",\"Analis Keuangan\",\"Konsultan Bisnis\",\"Pengusaha (Entrepreneur)\",\"PNS - Kemenkeu/Pemda\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Brawijaya (UB)\",\"Universitas Airlangga (Unair)\",\"Universitas Padjadjaran (Unpad)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-21",
+    "programName": "GEOGRAFI",
+    "overview": "Program studi GEOGRAFI mempelajari ilmu, teori, dan praktik terkait bidang ini secara komprehensif. Mahasiswa akan dilatih untuk memiliki kemampuan analitis, manajerial, dan teknis yang dibutuhkan di dunia kerja modern.",
+    "courses": "[\"Pengantar Ilmu Dasar\",\"Metodologi Penelitian\",\"Manajemen Proyek\",\"Etika Profesi\",\"Seminar Nasional\",\"Tugas Akhir/Skripsi\"]",
+    "careers": "[\"Spesialis di Bidang Terkait\",\"Konsultan Independen\",\"Akademisi/Dosen\",\"Pegawai Negeri Sipil (PNS)\",\"Peneliti\",\"Pengusaha\"]",
+    "campuses": "[\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Universitas Brawijaya (UB)\",\"Universitas Diponegoro (Undip)\",\"Universitas Hasanuddin (Unhas)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-22",
+    "programName": "HUBUNGAN INTERNASIONAL",
+    "overview": "Program studi HUBUNGAN INTERNASIONAL mendalami struktur sosial, hukum, perilaku manusia, serta bagaimana manusia berinteraksi dan berkomunikasi dalam skala individu hingga tatanan negara. Ilmu ini esensial untuk menjaga ketertiban dan kesejahteraan masyarakat.",
+    "courses": "[\"Pengantar Ilmu Hukum/Politik\",\"Teori Komunikasi\",\"Sosiologi Dasar\",\"Psikologi Sosial\",\"Hukum Tata Negara\",\"Analisis Kebijakan Publik\"]",
+    "careers": "[\"Ahli Hukum/Pengacara\",\"Analis Politik/Kebijakan\",\"Public Relations (PR)\",\"Jurnalis\",\"HR/Psikolog\",\"PNS/Diplomat\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Universitas Airlangga (Unair)\",\"Universitas Brawijaya (UB)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-23",
+    "programName": "HUBUNGAN MASYARAKAT",
+    "overview": "Program studi HUBUNGAN MASYARAKAT mendalami struktur sosial, hukum, perilaku manusia, serta bagaimana manusia berinteraksi dan berkomunikasi dalam skala individu hingga tatanan negara. Ilmu ini esensial untuk menjaga ketertiban dan kesejahteraan masyarakat.",
+    "courses": "[\"Pengantar Ilmu Hukum/Politik\",\"Teori Komunikasi\",\"Sosiologi Dasar\",\"Psikologi Sosial\",\"Hukum Tata Negara\",\"Analisis Kebijakan Publik\"]",
+    "careers": "[\"Ahli Hukum/Pengacara\",\"Analis Politik/Kebijakan\",\"Public Relations (PR)\",\"Jurnalis\",\"HR/Psikolog\",\"PNS/Diplomat\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Universitas Airlangga (Unair)\",\"Universitas Brawijaya (UB)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-24",
+    "programName": "HUKUM",
+    "overview": "Program studi HUKUM mendalami struktur sosial, hukum, perilaku manusia, serta bagaimana manusia berinteraksi dan berkomunikasi dalam skala individu hingga tatanan negara. Ilmu ini esensial untuk menjaga ketertiban dan kesejahteraan masyarakat.",
+    "courses": "[\"Pengantar Ilmu Hukum/Politik\",\"Teori Komunikasi\",\"Sosiologi Dasar\",\"Psikologi Sosial\",\"Hukum Tata Negara\",\"Analisis Kebijakan Publik\"]",
+    "careers": "[\"Ahli Hukum/Pengacara\",\"Analis Politik/Kebijakan\",\"Public Relations (PR)\",\"Jurnalis\",\"HR/Psikolog\",\"PNS/Diplomat\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Universitas Airlangga (Unair)\",\"Universitas Brawijaya (UB)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-25",
+    "programName": "ILMU ADMINISTRASI NEGARA",
+    "overview": "Program studi ILMU ADMINISTRASI NEGARA membekali mahasiswa dengan kemampuan untuk mengelola sumber daya, merencanakan strategi finansial, dan mengorganisir operasional suatu instansi atau perusahaan agar efektif dan efisien.",
+    "courses": "[\"Pengantar Manajemen\",\"Akuntansi Dasar\",\"Ekonomi Makro & Mikro\",\"Manajemen Keuangan\",\"Perilaku Organisasi\",\"Hukum Bisnis\"]",
+    "careers": "[\"Manajer Perusahaan\",\"Akuntan\",\"Analis Keuangan\",\"Konsultan Bisnis\",\"Pengusaha (Entrepreneur)\",\"PNS - Kemenkeu/Pemda\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Brawijaya (UB)\",\"Universitas Airlangga (Unair)\",\"Universitas Padjadjaran (Unpad)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-26",
+    "programName": "ILMU GIZI",
+    "overview": "Program studi ILMU GIZI dirancang untuk mencetak tenaga medis dan profesional kesehatan yang tanggap, berempati, dan memiliki kapabilitas klinis yang mumpuni. Kurikulum meliputi teori dasar medis hingga praktik klinis di fasilitas kesehatan.",
+    "courses": "[\"Anatomi Fisiologi\",\"Biokimia Kedokteran\",\"Etika dan Hukum Kesehatan\",\"Patologi\",\"Farmakologi Dasar\",\"Keterampilan Klinis (Skill Lab)\"]",
+    "careers": "[\"Dokter/Tenaga Medis\",\"Perawat Klinis\",\"Ahli Gizi/Dietisien\",\"Peneliti Medis\",\"Manajer Rumah Sakit\",\"Konsultan Kesehatan\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Airlangga (Unair)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Universitas Diponegoro (Undip)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-27",
+    "programName": "ILMU KEOLAHRAGAAN",
+    "overview": "Program studi ILMU KEOLAHRAGAAN mempelajari ilmu, teori, dan praktik terkait bidang ini secara komprehensif. Mahasiswa akan dilatih untuk memiliki kemampuan analitis, manajerial, dan teknis yang dibutuhkan di dunia kerja modern.",
+    "courses": "[\"Pengantar Ilmu Dasar\",\"Metodologi Penelitian\",\"Manajemen Proyek\",\"Etika Profesi\",\"Seminar Nasional\",\"Tugas Akhir/Skripsi\"]",
+    "careers": "[\"Spesialis di Bidang Terkait\",\"Konsultan Independen\",\"Akademisi/Dosen\",\"Pegawai Negeri Sipil (PNS)\",\"Peneliti\",\"Pengusaha\"]",
+    "campuses": "[\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Universitas Brawijaya (UB)\",\"Universitas Diponegoro (Undip)\",\"Universitas Hasanuddin (Unhas)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-28",
+    "programName": "ILMU KEPERAWATAN",
+    "overview": "Program studi ILMU KEPERAWATAN dirancang untuk mencetak tenaga medis dan profesional kesehatan yang tanggap, berempati, dan memiliki kapabilitas klinis yang mumpuni. Kurikulum meliputi teori dasar medis hingga praktik klinis di fasilitas kesehatan.",
+    "courses": "[\"Anatomi Fisiologi\",\"Biokimia Kedokteran\",\"Etika dan Hukum Kesehatan\",\"Patologi\",\"Farmakologi Dasar\",\"Keterampilan Klinis (Skill Lab)\"]",
+    "careers": "[\"Dokter/Tenaga Medis\",\"Perawat Klinis\",\"Ahli Gizi/Dietisien\",\"Peneliti Medis\",\"Manajer Rumah Sakit\",\"Konsultan Kesehatan\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Airlangga (Unair)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Universitas Diponegoro (Undip)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-29",
+    "programName": "ILMU KESEJAHTERAAN SOSIAL",
+    "overview": "Program studi ILMU KESEJAHTERAAN SOSIAL mempelajari ilmu, teori, dan praktik terkait bidang ini secara komprehensif. Mahasiswa akan dilatih untuk memiliki kemampuan analitis, manajerial, dan teknis yang dibutuhkan di dunia kerja modern.",
+    "courses": "[\"Pengantar Ilmu Dasar\",\"Metodologi Penelitian\",\"Manajemen Proyek\",\"Etika Profesi\",\"Seminar Nasional\",\"Tugas Akhir/Skripsi\"]",
+    "careers": "[\"Spesialis di Bidang Terkait\",\"Konsultan Independen\",\"Akademisi/Dosen\",\"Pegawai Negeri Sipil (PNS)\",\"Peneliti\",\"Pengusaha\"]",
+    "campuses": "[\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Universitas Brawijaya (UB)\",\"Universitas Diponegoro (Undip)\",\"Universitas Hasanuddin (Unhas)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-30",
+    "programName": "ILMU TANAH",
+    "overview": "Program studi ILMU TANAH mempelajari ilmu, teori, dan praktik terkait bidang ini secara komprehensif. Mahasiswa akan dilatih untuk memiliki kemampuan analitis, manajerial, dan teknis yang dibutuhkan di dunia kerja modern.",
+    "courses": "[\"Pengantar Ilmu Dasar\",\"Metodologi Penelitian\",\"Manajemen Proyek\",\"Etika Profesi\",\"Seminar Nasional\",\"Tugas Akhir/Skripsi\"]",
+    "careers": "[\"Spesialis di Bidang Terkait\",\"Konsultan Independen\",\"Akademisi/Dosen\",\"Pegawai Negeri Sipil (PNS)\",\"Peneliti\",\"Pengusaha\"]",
+    "campuses": "[\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Universitas Brawijaya (UB)\",\"Universitas Diponegoro (Undip)\",\"Universitas Hasanuddin (Unhas)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-31",
+    "programName": "INFORMATIKA",
+    "overview": "Program studi INFORMATIKA fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-32",
+    "programName": "KEDOKTERAN",
+    "overview": "Program studi KEDOKTERAN dirancang untuk mencetak tenaga medis dan profesional kesehatan yang tanggap, berempati, dan memiliki kapabilitas klinis yang mumpuni. Kurikulum meliputi teori dasar medis hingga praktik klinis di fasilitas kesehatan.",
+    "courses": "[\"Anatomi Fisiologi\",\"Biokimia Kedokteran\",\"Etika dan Hukum Kesehatan\",\"Patologi\",\"Farmakologi Dasar\",\"Keterampilan Klinis (Skill Lab)\"]",
+    "careers": "[\"Dokter/Tenaga Medis\",\"Perawat Klinis\",\"Ahli Gizi/Dietisien\",\"Peneliti Medis\",\"Manajer Rumah Sakit\",\"Konsultan Kesehatan\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Airlangga (Unair)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Universitas Diponegoro (Undip)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-33",
+    "programName": "KEDOKTERAN HEWAN",
+    "overview": "Program studi KEDOKTERAN HEWAN dirancang untuk mencetak tenaga medis dan profesional kesehatan yang tanggap, berempati, dan memiliki kapabilitas klinis yang mumpuni. Kurikulum meliputi teori dasar medis hingga praktik klinis di fasilitas kesehatan.",
+    "courses": "[\"Anatomi Fisiologi\",\"Biokimia Kedokteran\",\"Etika dan Hukum Kesehatan\",\"Patologi\",\"Farmakologi Dasar\",\"Keterampilan Klinis (Skill Lab)\"]",
+    "careers": "[\"Dokter/Tenaga Medis\",\"Perawat Klinis\",\"Ahli Gizi/Dietisien\",\"Peneliti Medis\",\"Manajer Rumah Sakit\",\"Konsultan Kesehatan\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Airlangga (Unair)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Universitas Diponegoro (Undip)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-34",
+    "programName": "KESELAMATAN DAN KESEHATAN KERJA",
+    "overview": "Program studi KESELAMATAN DAN KESEHATAN KERJA dirancang untuk mencetak tenaga medis dan profesional kesehatan yang tanggap, berempati, dan memiliki kapabilitas klinis yang mumpuni. Kurikulum meliputi teori dasar medis hingga praktik klinis di fasilitas kesehatan.",
+    "courses": "[\"Anatomi Fisiologi\",\"Biokimia Kedokteran\",\"Etika dan Hukum Kesehatan\",\"Patologi\",\"Farmakologi Dasar\",\"Keterampilan Klinis (Skill Lab)\"]",
+    "careers": "[\"Dokter/Tenaga Medis\",\"Perawat Klinis\",\"Ahli Gizi/Dietisien\",\"Peneliti Medis\",\"Manajer Rumah Sakit\",\"Konsultan Kesehatan\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Airlangga (Unair)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Universitas Diponegoro (Undip)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-35",
+    "programName": "KEWIRAUSAHAAN",
+    "overview": "Program studi KEWIRAUSAHAAN mempelajari ilmu, teori, dan praktik terkait bidang ini secara komprehensif. Mahasiswa akan dilatih untuk memiliki kemampuan analitis, manajerial, dan teknis yang dibutuhkan di dunia kerja modern.",
+    "courses": "[\"Pengantar Ilmu Dasar\",\"Metodologi Penelitian\",\"Manajemen Proyek\",\"Etika Profesi\",\"Seminar Nasional\",\"Tugas Akhir/Skripsi\"]",
+    "careers": "[\"Spesialis di Bidang Terkait\",\"Konsultan Independen\",\"Akademisi/Dosen\",\"Pegawai Negeri Sipil (PNS)\",\"Peneliti\",\"Pengusaha\"]",
+    "campuses": "[\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Universitas Brawijaya (UB)\",\"Universitas Diponegoro (Undip)\",\"Universitas Hasanuddin (Unhas)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-36",
+    "programName": "MANAJEMEN PEMASARAN",
+    "overview": "Program studi MANAJEMEN PEMASARAN membekali mahasiswa dengan kemampuan untuk mengelola sumber daya, merencanakan strategi finansial, dan mengorganisir operasional suatu instansi atau perusahaan agar efektif dan efisien.",
+    "courses": "[\"Pengantar Manajemen\",\"Akuntansi Dasar\",\"Ekonomi Makro & Mikro\",\"Manajemen Keuangan\",\"Perilaku Organisasi\",\"Hukum Bisnis\"]",
+    "careers": "[\"Manajer Perusahaan\",\"Akuntan\",\"Analis Keuangan\",\"Konsultan Bisnis\",\"Pengusaha (Entrepreneur)\",\"PNS - Kemenkeu/Pemda\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Brawijaya (UB)\",\"Universitas Airlangga (Unair)\",\"Universitas Padjadjaran (Unpad)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-37",
+    "programName": "MANAJEMEN PENDIDIKAN",
+    "overview": "Program studi MANAJEMEN PENDIDIKAN mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-38",
+    "programName": "MANAJEMEN SUMBERDAYA PERAIRAN",
+    "overview": "Program studi MANAJEMEN SUMBERDAYA PERAIRAN membekali mahasiswa dengan kemampuan untuk mengelola sumber daya, merencanakan strategi finansial, dan mengorganisir operasional suatu instansi atau perusahaan agar efektif dan efisien.",
+    "courses": "[\"Pengantar Manajemen\",\"Akuntansi Dasar\",\"Ekonomi Makro & Mikro\",\"Manajemen Keuangan\",\"Perilaku Organisasi\",\"Hukum Bisnis\"]",
+    "careers": "[\"Manajer Perusahaan\",\"Akuntan\",\"Analis Keuangan\",\"Konsultan Bisnis\",\"Pengusaha (Entrepreneur)\",\"PNS - Kemenkeu/Pemda\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Brawijaya (UB)\",\"Universitas Airlangga (Unair)\",\"Universitas Padjadjaran (Unpad)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-39",
+    "programName": "PEMASARAN DIGITAL",
+    "overview": "Program studi PEMASARAN DIGITAL mempelajari ilmu, teori, dan praktik terkait bidang ini secara komprehensif. Mahasiswa akan dilatih untuk memiliki kemampuan analitis, manajerial, dan teknis yang dibutuhkan di dunia kerja modern.",
+    "courses": "[\"Pengantar Ilmu Dasar\",\"Metodologi Penelitian\",\"Manajemen Proyek\",\"Etika Profesi\",\"Seminar Nasional\",\"Tugas Akhir/Skripsi\"]",
+    "careers": "[\"Spesialis di Bidang Terkait\",\"Konsultan Independen\",\"Akademisi/Dosen\",\"Pegawai Negeri Sipil (PNS)\",\"Peneliti\",\"Pengusaha\"]",
+    "campuses": "[\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Universitas Brawijaya (UB)\",\"Universitas Diponegoro (Undip)\",\"Universitas Hasanuddin (Unhas)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-40",
+    "programName": "PEND. BAHASA, SASTRA INDONESIA & DAERAH",
+    "overview": "Program studi PEND. BAHASA, SASTRA INDONESIA & DAERAH mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-41",
+    "programName": "PENDIDIKAN ADMINISTRASI PERKANTORAN",
+    "overview": "Program studi PENDIDIKAN ADMINISTRASI PERKANTORAN mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-42",
+    "programName": "PENDIDIKAN AKUNTANSI",
+    "overview": "Program studi PENDIDIKAN AKUNTANSI mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-43",
+    "programName": "PENDIDIKAN BAHASA ARAB",
+    "overview": "Program studi PENDIDIKAN BAHASA ARAB mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-44",
+    "programName": "PENDIDIKAN BAHASA JAWA",
+    "overview": "Program studi PENDIDIKAN BAHASA JAWA mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-45",
+    "programName": "PENDIDIKAN BAHASA JEPANG",
+    "overview": "Program studi PENDIDIKAN BAHASA JEPANG mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-46",
+    "programName": "PENDIDIKAN BAHASA JERMAN",
+    "overview": "Program studi PENDIDIKAN BAHASA JERMAN mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-47",
+    "programName": "PENDIDIKAN BISNIS",
+    "overview": "Program studi PENDIDIKAN BISNIS mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-48",
+    "programName": "PENDIDIKAN DOKTER GIGI",
+    "overview": "Program studi PENDIDIKAN DOKTER GIGI mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-49",
+    "programName": "PENDIDIKAN EKONOMI",
+    "overview": "Program studi PENDIDIKAN EKONOMI mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-50",
+    "programName": "PENDIDIKAN GEOGRAFI",
+    "overview": "Program studi PENDIDIKAN GEOGRAFI mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-51",
+    "programName": "PENDIDIKAN GURU SEKOLAH DASAR",
+    "overview": "Program studi PENDIDIKAN GURU SEKOLAH DASAR mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-52",
+    "programName": "PENDIDIKAN ILMU PENGETAHUAN ALAM",
+    "overview": "Program studi PENDIDIKAN ILMU PENGETAHUAN ALAM mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-53",
+    "programName": "PENDIDIKAN IPA",
+    "overview": "Program studi PENDIDIKAN IPA mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-54",
+    "programName": "PENDIDIKAN IPS",
+    "overview": "Program studi PENDIDIKAN IPS mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-55",
+    "programName": "PENDIDIKAN KEPELATIHAN OLAHRAGA",
+    "overview": "Program studi PENDIDIKAN KEPELATIHAN OLAHRAGA mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-56",
+    "programName": "PENDIDIKAN KHUSUS",
+    "overview": "Program studi PENDIDIKAN KHUSUS mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-57",
+    "programName": "PENDIDIKAN KIMIA",
+    "overview": "Program studi PENDIDIKAN KIMIA mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-58",
+    "programName": "PENDIDIKAN SEJARAH",
+    "overview": "Program studi PENDIDIKAN SEJARAH mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-59",
+    "programName": "PENDIDIKAN SENI MUSIK",
+    "overview": "Program studi PENDIDIKAN SENI MUSIK mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-60",
+    "programName": "PENDIDIKAN SENI RUPA",
+    "overview": "Program studi PENDIDIKAN SENI RUPA mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-61",
+    "programName": "PENDIDIKAN SENI TARI",
+    "overview": "Program studi PENDIDIKAN SENI TARI mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-62",
+    "programName": "PENDIDIKAN SOSIOLOGI",
+    "overview": "Program studi PENDIDIKAN SOSIOLOGI mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-63",
+    "programName": "PENDIDIKAN TATA BOGA",
+    "overview": "Program studi PENDIDIKAN TATA BOGA mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-64",
+    "programName": "PENDIDIKAN TATA BUSANA",
+    "overview": "Program studi PENDIDIKAN TATA BUSANA mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-65",
+    "programName": "PENDIDIKAN TEKNIK BANGUNAN",
+    "overview": "Program studi PENDIDIKAN TEKNIK BANGUNAN mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-66",
+    "programName": "PENDIDIKAN TEKNIK ELEKTRO",
+    "overview": "Program studi PENDIDIKAN TEKNIK ELEKTRO mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-67",
+    "programName": "PENDIDIKAN TEKNIK INFORMATIKA",
+    "overview": "Program studi PENDIDIKAN TEKNIK INFORMATIKA mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-68",
+    "programName": "PENDIDIKAN TEKNIK MESIN",
+    "overview": "Program studi PENDIDIKAN TEKNIK MESIN mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-69",
+    "programName": "PENDIDIKAN TEKNIK OTOMOTIF",
+    "overview": "Program studi PENDIDIKAN TEKNIK OTOMOTIF mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-70",
+    "programName": "PENGELOLAAN HUTAN",
+    "overview": "Program studi PENGELOLAAN HUTAN mempelajari ilmu, teori, dan praktik terkait bidang ini secara komprehensif. Mahasiswa akan dilatih untuk memiliki kemampuan analitis, manajerial, dan teknis yang dibutuhkan di dunia kerja modern.",
+    "courses": "[\"Pengantar Ilmu Dasar\",\"Metodologi Penelitian\",\"Manajemen Proyek\",\"Etika Profesi\",\"Seminar Nasional\",\"Tugas Akhir/Skripsi\"]",
+    "careers": "[\"Spesialis di Bidang Terkait\",\"Konsultan Independen\",\"Akademisi/Dosen\",\"Pegawai Negeri Sipil (PNS)\",\"Peneliti\",\"Pengusaha\"]",
+    "campuses": "[\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Universitas Brawijaya (UB)\",\"Universitas Diponegoro (Undip)\",\"Universitas Hasanuddin (Unhas)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-71",
+    "programName": "PENYULUHAN DAN KOMUNIKASI PERTANIAN",
+    "overview": "Program studi PENYULUHAN DAN KOMUNIKASI PERTANIAN mendalami struktur sosial, hukum, perilaku manusia, serta bagaimana manusia berinteraksi dan berkomunikasi dalam skala individu hingga tatanan negara. Ilmu ini esensial untuk menjaga ketertiban dan kesejahteraan masyarakat.",
+    "courses": "[\"Pengantar Ilmu Hukum/Politik\",\"Teori Komunikasi\",\"Sosiologi Dasar\",\"Psikologi Sosial\",\"Hukum Tata Negara\",\"Analisis Kebijakan Publik\"]",
+    "careers": "[\"Ahli Hukum/Pengacara\",\"Analis Politik/Kebijakan\",\"Public Relations (PR)\",\"Jurnalis\",\"HR/Psikolog\",\"PNS/Diplomat\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Universitas Airlangga (Unair)\",\"Universitas Brawijaya (UB)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-72",
+    "programName": "PERENCANAAN WILAYAH DAN KOTA",
+    "overview": "Program studi PERENCANAAN WILAYAH DAN KOTA mempelajari ilmu, teori, dan praktik terkait bidang ini secara komprehensif. Mahasiswa akan dilatih untuk memiliki kemampuan analitis, manajerial, dan teknis yang dibutuhkan di dunia kerja modern.",
+    "courses": "[\"Pengantar Ilmu Dasar\",\"Metodologi Penelitian\",\"Manajemen Proyek\",\"Etika Profesi\",\"Seminar Nasional\",\"Tugas Akhir/Skripsi\"]",
+    "careers": "[\"Spesialis di Bidang Terkait\",\"Konsultan Independen\",\"Akademisi/Dosen\",\"Pegawai Negeri Sipil (PNS)\",\"Peneliti\",\"Pengusaha\"]",
+    "campuses": "[\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Universitas Brawijaya (UB)\",\"Universitas Diponegoro (Undip)\",\"Universitas Hasanuddin (Unhas)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-73",
+    "programName": "PERPAJAKAN",
+    "overview": "Program studi PERPAJAKAN mempelajari ilmu, teori, dan praktik terkait bidang ini secara komprehensif. Mahasiswa akan dilatih untuk memiliki kemampuan analitis, manajerial, dan teknis yang dibutuhkan di dunia kerja modern.",
+    "courses": "[\"Pengantar Ilmu Dasar\",\"Metodologi Penelitian\",\"Manajemen Proyek\",\"Etika Profesi\",\"Seminar Nasional\",\"Tugas Akhir/Skripsi\"]",
+    "careers": "[\"Spesialis di Bidang Terkait\",\"Konsultan Independen\",\"Akademisi/Dosen\",\"Pegawai Negeri Sipil (PNS)\",\"Peneliti\",\"Pengusaha\"]",
+    "campuses": "[\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Universitas Brawijaya (UB)\",\"Universitas Diponegoro (Undip)\",\"Universitas Hasanuddin (Unhas)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-74",
+    "programName": "PERPUSTAKAAN DAN SAINS INFORMASI",
+    "overview": "Program studi PERPUSTAKAAN DAN SAINS INFORMASI fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-75",
+    "programName": "PROTEKSI TANAMAN",
+    "overview": "Program studi PROTEKSI TANAMAN mempelajari ilmu, teori, dan praktik terkait bidang ini secara komprehensif. Mahasiswa akan dilatih untuk memiliki kemampuan analitis, manajerial, dan teknis yang dibutuhkan di dunia kerja modern.",
+    "courses": "[\"Pengantar Ilmu Dasar\",\"Metodologi Penelitian\",\"Manajemen Proyek\",\"Etika Profesi\",\"Seminar Nasional\",\"Tugas Akhir/Skripsi\"]",
+    "careers": "[\"Spesialis di Bidang Terkait\",\"Konsultan Independen\",\"Akademisi/Dosen\",\"Pegawai Negeri Sipil (PNS)\",\"Peneliti\",\"Pengusaha\"]",
+    "campuses": "[\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Universitas Brawijaya (UB)\",\"Universitas Diponegoro (Undip)\",\"Universitas Hasanuddin (Unhas)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-76",
+    "programName": "SAINS DATA",
+    "overview": "Program studi SAINS DATA fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-77",
+    "programName": "SASTRA CINA",
+    "overview": "Program studi SASTRA CINA mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-78",
+    "programName": "SASTRA JERMAN",
+    "overview": "Program studi SASTRA JERMAN mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-79",
+    "programName": "SASTRA PERANCIS",
+    "overview": "Program studi SASTRA PERANCIS mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-80",
+    "programName": "SASTRA RUSIA",
+    "overview": "Program studi SASTRA RUSIA mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-81",
+    "programName": "SEJARAH",
+    "overview": "Program studi SEJARAH mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-82",
+    "programName": "SENI RUPA",
+    "overview": "Program studi SENI RUPA mengkaji budaya, bahasa, seni, dan dinamika sosial masyarakat. Mahasiswa didorong untuk mengeksplorasi kreativitas serta memahami nilai-nilai humaniora yang mempengaruhi peradaban manusia masa kini dan masa lalu.",
+    "courses": "[\"Pengantar Linguistik/Sastra\",\"Sejarah Kebudayaan\",\"Estetika dan Kritik Seni\",\"Sosiologi Sastra\",\"Metodologi Penelitian Kualitatif\",\"Praktik Berkarya/Penerjemahan\"]",
+    "careers": "[\"Penulis/Editor\",\"Penerjemah (Translator/Interpreter)\",\"Kurator/Pekerja Seni\",\"Dosen/Peneliti\",\"Desainer Kreatif\",\"Diplomat (Kemenlu)\"]",
+    "campuses": "[\"Universitas Indonesia (UI)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Padjadjaran (Unpad)\",\"Institut Seni Indonesia (ISI)\",\"Universitas Udayana (Unud)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-83",
+    "programName": "TATA BOGA",
+    "overview": "Program studi TATA BOGA mempelajari ilmu, teori, dan praktik terkait bidang ini secara komprehensif. Mahasiswa akan dilatih untuk memiliki kemampuan analitis, manajerial, dan teknis yang dibutuhkan di dunia kerja modern.",
+    "courses": "[\"Pengantar Ilmu Dasar\",\"Metodologi Penelitian\",\"Manajemen Proyek\",\"Etika Profesi\",\"Seminar Nasional\",\"Tugas Akhir/Skripsi\"]",
+    "careers": "[\"Spesialis di Bidang Terkait\",\"Konsultan Independen\",\"Akademisi/Dosen\",\"Pegawai Negeri Sipil (PNS)\",\"Peneliti\",\"Pengusaha\"]",
+    "campuses": "[\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Universitas Brawijaya (UB)\",\"Universitas Diponegoro (Undip)\",\"Universitas Hasanuddin (Unhas)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-84",
+    "programName": "TEKNIK FISIKA",
+    "overview": "Program studi TEKNIK FISIKA fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-85",
+    "programName": "TEKNIK GEODESI",
+    "overview": "Program studi TEKNIK GEODESI fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-86",
+    "programName": "TEKNIK GEOFISIKA",
+    "overview": "Program studi TEKNIK GEOFISIKA fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-87",
+    "programName": "TEKNIK INDUSTRI PERTANIAN",
+    "overview": "Program studi TEKNIK INDUSTRI PERTANIAN fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-88",
+    "programName": "TEKNIK KOMPUTER",
+    "overview": "Program studi TEKNIK KOMPUTER fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-89",
+    "programName": "TEKNIK PERTANIAN",
+    "overview": "Program studi TEKNIK PERTANIAN fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-90",
+    "programName": "TEKNIK PERTANIAN DAN BIOSISTEM",
+    "overview": "Program studi TEKNIK PERTANIAN DAN BIOSISTEM fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-91",
+    "programName": "TEKNOLOGI BIOPROSES",
+    "overview": "Program studi TEKNOLOGI BIOPROSES fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-92",
+    "programName": "TEKNOLOGI HASIL PERIKANAN",
+    "overview": "Program studi TEKNOLOGI HASIL PERIKANAN fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-93",
+    "programName": "TEKNOLOGI INDUSTRI PERTANIAN",
+    "overview": "Program studi TEKNOLOGI INDUSTRI PERTANIAN fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-94",
+    "programName": "TEKNOLOGI PENDIDIKAN",
+    "overview": "Program studi TEKNOLOGI PENDIDIKAN mencetak tenaga pendidik yang profesional dan kompeten di bidangnya. Lulusannya dipersiapkan untuk menjadi pengajar yang inovatif serta memahami perkembangan psikologi peserta didik dan kurikulum modern.",
+    "courses": "[\"Psikologi Pendidikan\",\"Strategi Pembelajaran\",\"Evaluasi Pendidikan\",\"Perkembangan Peserta Didik\",\"Microteaching\",\"Manajemen Pendidikan\"]",
+    "careers": "[\"Guru/Pendidik\",\"Dosen\",\"Peneliti Pendidikan\",\"Konsultan Kurikulum\",\"Kepala Sekolah/Manajemen Sekolah\",\"Instruktur Pelatihan\"]",
+    "campuses": "[\"Universitas Pendidikan Indonesia (UPI)\",\"Universitas Negeri Yogyakarta (UNY)\",\"Universitas Negeri Malang (UM)\",\"Universitas Negeri Jakarta (UNJ)\",\"Universitas Negeri Semarang (UNNES)\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-95",
+    "programName": "TEKNOLOGI REKAYASA INSTRUMENTASI DAN KONTROL",
+    "overview": "Program studi TEKNOLOGI REKAYASA INSTRUMENTASI DAN KONTROL fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-96",
+    "programName": "TEKNOLOGI REKAYASA PERANGKAT LUNAK",
+    "overview": "Program studi TEKNOLOGI REKAYASA PERANGKAT LUNAK fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  },
+  {
+    "id": "mp-auto-1779377263371-97",
+    "programName": "TEKNOLOGI VETERINER",
+    "overview": "Program studi TEKNOLOGI VETERINER fokus pada penerapan ilmu sains dan matematika untuk merancang, memelihara, dan menyelesaikan masalah teknis yang ada di masyarakat. Mahasiswa akan dilatih untuk berpikir logis dan menciptakan solusi berbasis rekayasa teknologi.",
+    "courses": "[\"Matematika Rekayasa\",\"Fisika Dasar\",\"Algoritma dan Pemrograman\",\"Mekanika Teknik\",\"Sistem Informasi\",\"Rekayasa Desain\"]",
+    "careers": "[\"Insinyur (Engineer)\",\"Konsultan Teknik\",\"Analis Sistem\",\"Peneliti Teknologi\",\"Manajer Proyek IT/Teknik\",\"Spesialis R&D\"]",
+    "campuses": "[\"Institut Teknologi Bandung (ITB)\",\"Institut Teknologi Sepuluh Nopember (ITS)\",\"Universitas Gadjah Mada (UGM)\",\"Universitas Indonesia (UI)\",\"Telkom University\"]",
+    "dateCreated": "2026-05-21T15:27:43.371Z"
+  }
+]

@@ -1,0 +1,9 @@
+name = "konselingsmandak"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "star_prestasi_db"
+database_id = "63d94036-5fe7-47cd-9675-ad728ac38170"
+migrations_dir = "migrations"

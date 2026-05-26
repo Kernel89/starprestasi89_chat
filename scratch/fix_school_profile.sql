@@ -1,0 +1,23 @@
+UPDATE star_schoolProfile 
+SET 
+  name = 'SMA NEGERI CONTOH', 
+  agencyName = 'PEMERINTAH PROVINSI', 
+  subAgencyName = 'DINAS PENDIDIKAN', 
+  branchAgencyName = 'CABANG DINAS WILAYAH', 
+  npsn = '12345678', 
+  accreditation = 'A (Unggul)', 
+  address = 'Jl. Pendidikan No. 1', 
+  city = 'Kota Pendidikan', 
+  phone = '(021) 1234567', 
+  fax = '(021) 1234567', 
+  email = 'info@smancontoh.sch.id', 
+  website = 'www.smancontoh.sch.id', 
+  vision = 'Terwujudnya peserta didik yang beriman, cerdas, terampil, mandiri, dan berwawasan lingkungan.', 
+  mission = '["Meningkatkan keimanan dan ketaqwaan.", "Mengembangkan potensi peserta didik."]', 
+  logo = '', 
+  loginBackground = '', 
+  alumniCardBackground = '', 
+  counselorCardBackground = '', 
+  counselorName = '', 
+  counselorNip = '' 
+WHERE id = 1;

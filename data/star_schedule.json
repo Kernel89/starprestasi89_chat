@@ -1,0 +1,11 @@
+[
+  {
+    "id": "sch1",
+    "teacherId": "t1",
+    "rombelId": "r1",
+    "day": "Senin",
+    "startTime": "08:00",
+    "endTime": "09:30",
+    "room": "Ruang XII MIPA 1"
+  }
+]

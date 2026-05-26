@@ -1,0 +1,604 @@
+[
+  {
+    "id": "mat-mbti-01",
+    "title": "Modul Tes Kepribadian MBTI (80 Soal)",
+    "category": "Pribadi",
+    "description": "Instrumen untuk mengetahui tipe kepribadian siswa guna memetakan gaya belajar dan potensi karir. Menggunakan skala pilihan ganda (Forced Choice) untuk akurasi tinggi.",
+    "discussion": "Myers-Briggs Type Indicator (MBTI) adalah psikotes yang dirancang untuk mengukur preferensi psikologis seseorang dalam melihat dunia dan membuat keputusan.",
+    "task": "Pilihlah salah satu dari dua pernyataan (A atau B) yang paling menggambarkan diri Anda secara alami.",
+    "linkUrl": "",
+    "dateCreated": "2026-05-25T01:27:03.987Z",
+    "isQuestionnaire": true,
+    "isInstrumentActive": true,
+    "qTitle": "Inventori Kepribadian",
+    "qType": "MBTI",
+    "qItemCount": 80,
+    "qOptionCount": 2,
+    "qCalculation": "Kalkulasi Otomatis Dimensi (E/I, S/N, T/F, J/P) berdasarkan skor dominan.",
+    "qMbtiOptions": [
+      {
+        "a": "Saya lebih suka menghabiskan waktu dengan banyak orang",
+        "b": "Saya lebih suka menghabiskan waktu sendirian atau dengan sedikit orang",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya merasa berenergi setelah bersosialisasi",
+        "b": "Saya butuh waktu sendiri untuk mengisi kembali energi",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya cenderung berbicara dulu baru berpikir",
+        "b": "Saya cenderung berpikir dulu baru berbicara",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya mudah bergaul dan terbuka dengan orang baru",
+        "b": "Saya butuh waktu untuk merasa nyaman dengan orang baru",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya lebih suka aktivitas yang melibatkan banyak interaksi",
+        "b": "Saya lebih suka aktivitas yang tenang dan mandiri",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya sering menjadi pusat perhatian di keramaian",
+        "b": "Saya lebih suka mengamati dari pinggir",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya merasa kesepian jika terlalu lama sendirian",
+        "b": "Saya merasa lelah jika terlalu lama berada di keramaian",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya lebih suka berdiskusi secara langsung",
+        "b": "Saya lebih suka berkomunikasi lewat tulisan",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya memiliki lingkaran pertemanan yang luas",
+        "b": "Saya memiliki sedikit teman tetapi sangat dekat",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya antusias memperkenalkan diri pada orang asing",
+        "b": "Saya menunggu orang lain memperkenalkan diri terlebih dahulu",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya lebih suka bekerja dalam tim",
+        "b": "Saya lebih suka bekerja sendirian",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya cenderung spontan dalam berbicara",
+        "b": "Saya sangat hati-hati dalam memilih kata-kata",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya merasa bosan jika suasana terlalu sepi",
+        "b": "Saya menikmati ketenangan dan kesunyian",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya lebih suka berbagi masalah dengan orang lain",
+        "b": "Saya lebih suka memendam dan menyelesaikan masalah sendiri",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya dikenal sebagai orang yang ramah dan superexpresif",
+        "b": "Saya dikenal sebagai orang yang tenang dan pendiam",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya mendapatkan ide saat berbicara dengan orang lain",
+        "b": "Saya mendapatkan ide saat merenung sendirian",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya lebih fokus pada dunia luar dan aktivitas",
+        "b": "Saya lebih fokus pada dunia dalam pikiran dan perasaan",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya mudah memulai percakapan",
+        "b": "Saya sering bingung harus bicara apa dengan orang baru",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya merasa nyaman di pesta besar",
+        "b": "Saya lebih memilih pertemuan kecil yang intim",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya bertindak cepat tanpa ragu",
+        "b": "Saya mempertimbangkan banyak hal sebelum bertindak",
+        "dimension": "EI"
+      },
+      {
+        "a": "Saya lebih suka fakta dan data konkret",
+        "b": "Saya lebih suka teori dan konsep abstrak",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya fokus pada apa yang terjadi saat ini (realitas)",
+        "b": "Saya fokus pada apa yang mungkin terjadi (potensi)",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya lebih suka instruksi yang jelas dan bertahap",
+        "b": "Saya lebih suka gambaran besar dan kebebasan cara",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya menghargai pengalaman dan tradisi",
+        "b": "Saya menghargai inovasi dan hal-hal baru",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya memperhatikan detail-detail kecil",
+        "b": "Saya melihat pola dan hubungan antar hal",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya lebih suka solusi praktis yang sudah teruji",
+        "b": "Saya lebih suka solusi kreatif yang unik",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya mendeskripsikan sesuatu secara harfiah",
+        "b": "Saya mendeskripsikan sesuatu dengan metafora/kiasan",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya percaya pada apa yang bisa dilihat dan disentuh",
+        "b": "Saya percaya pada firasat dan inspirasi",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya lebih suka mengerjakan hal yang rutin dan pasti",
+        "b": "Saya bosan dengan rutinitas dan suka variasi",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya fokus pada kegunaan (utilitas) suatu benda",
+        "b": "Saya fokus pada makna dan simbol suatu benda",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya mengingat kejadian secara presisi",
+        "b": "Saya mengingat kesan umum dari suatu kejadian",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya lebih suka belajar keterampilan teknis",
+        "b": "Saya lebih suka belajar ide-ide filosofis",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya realistis dan membumi",
+        "b": "Saya imajinatif dan pemimpi",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya lebih suka kepastian",
+        "b": "Saya lebih suka kemungkinan",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya mengamati lingkungan sekitar dengan teliti",
+        "b": "Saya sering melamun dan kurang sadar lingkungan sekitar",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya menyelesaikan masalah dengan cara standar",
+        "b": "Saya mencoba cara baru dalam menyelesaikan masalah",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya lebih tertarik pada 'apa' (what)",
+        "b": "Saya lebih tertarik pada 'mengapa' (why)",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya menyukai hal-hal yang bersifat fisik/indrawi",
+        "b": "Saya menyukai hal-hal yang bersifat mental/intuitif",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya lebih suka cerita non-fiksi/sejarah",
+        "b": "Saya lebih suka cerita fiksi/fantasi",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya hidup di masa sekarang",
+        "b": "Saya hidup untuk masa depan",
+        "dimension": "SN"
+      },
+      {
+        "a": "Saya membuat keputusan berdasarkan logika",
+        "b": "Saya membuat keputusan berdasarkan perasaan",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya lebih mengutamakan kebenaran dan keadilan",
+        "b": "Saya lebih mengutamakan harmoni dan kedamaian",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya cenderung objektif dan kritis",
+        "b": "Saya cenderung subjektif dan empatik",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya bisa bersikap tegas meski menyakiti perasaan orang",
+        "b": "Saya menghindari konflik agar tidak menyakiti orang lain",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya menilai sesuatu berdasarkan standar/aturan",
+        "b": "Saya menilai sesuatu berdasarkan dampak pada orang lain",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya lebih yakin dengan analisis akal sehat",
+        "b": "Saya lebih yakin dengan kata hati",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya terlihat dingin dan tidak emosional",
+        "b": "Saya terlihat hangat dan penuh perasaan",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya mengkritik kesalahan secara langsung",
+        "b": "Saya memberi kritik dengan sangat halus/sungkan",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya lebih menghargai kecerdasan dan kompetensi",
+        "b": "Saya lebih menghargai kebaikan dan ketulusan",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya menganalisis masalah untuk mencari solusi",
+        "b": "Saya mendengarkan masalah untuk memberi dukungan",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya berdebat untuk mencari kebenaran",
+        "b": "Saya berdebat hanya jika prinsip saya dilanggar",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya konsisten dengan prinsip meski situasi berbeda",
+        "b": "Saya fleksibel menyesuaikan dengan situasi orang lain",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya lebih suka kejujuran yang brutal",
+        "b": "Saya lebih suka kebohongan demi kebaikan",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya merasa tidak nyaman dengan orang yang terlalu emosional",
+        "b": "Saya merasa tidak nyaman dengan orang yang terlalu kaku",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya fokus pada tugas dan pencapaian",
+        "b": "Saya fokus pada hubungan dan kerjasama",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya memutuskan berdasarkan pro dan kontra",
+        "b": "Saya memutuskan berdasarkan nilai pribadi",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya ingin orang lain bersikap logis",
+        "b": "Saya ingin orang lain bersikap pengertian",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya memandang dunia sebagai sistem yang perlu diatur",
+        "b": "Saya memandang dunia sebagai tempat berinteraksi manusia",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya sering dianggap keras kepala",
+        "b": "Saya sering dianggap terlalu sensitif",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya memisahkan emosi dari pekerjaan",
+        "b": "Saya melibatkan emosi dalam pekerjaan",
+        "dimension": "TF"
+      },
+      {
+        "a": "Saya suka membuat rencana dan jadwal",
+        "b": "Saya suka bersikap spontan dan fleksibel",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya merasa tenang jika tugas selesai jauh sebelum deadline",
+        "b": "Saya merasa terpacu mengerjakan tugas di detik-detik terakhir",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya lebih suka aturan yang jelas dan terstruktur",
+        "b": "Saya lebih suka kebebasan tanpa banyak aturan",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya fokus menyelesaikan satu tugas sampai tuntas",
+        "b": "Saya sering mengerjakan beberapa hal sekaligus (multitasking)",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya tidak suka kejutan atau perubahan mendadak",
+        "b": "Saya menyukai kejutan dan perubahan suasana",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya membuat daftar to-do list setiap hari",
+        "b": "Saya menjalani hari sesuai mood dan situasi",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya mengambil keputusan dengan cepat",
+        "b": "Saya menunda keputusan untuk mencari info lebih lanjut",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya bekerja dulu, baru bermain",
+        "b": "Saya bisa bermain di sela-sela waktu kerja",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya ingin segala sesuatu tertata rapi",
+        "b": "Saya tidak masalah dengan sedikit ketidakteraturan",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya menetapkan tujuan yang spesifik",
+        "b": "Saya membiarkan hidup mengalir apa adanya",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya merasa gelisah jika ada hal yang belum pasti",
+        "b": "Saya menikmati ketidakpastian sebagai peluang",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya disiplin waktu dan selalu tepat waktu",
+        "b": "Saya santai soal waktu dan kadang terlambat",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya menyelesaikan apa yang saya mulai",
+        "b": "Saya sering memulai proyek baru tanpa menyelesaikan yang lama",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya mempersiapkan segala sesuatu dengan matang",
+        "b": "Saya berimprovisasi saat menghadapi situasi",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya merasa puas setelah mengambil keputusan",
+        "b": "Saya sering ragu apakah keputusan saya sudah tepat",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya menyukai rutinitas yang terprediksi",
+        "b": "Saya menghindari rutinitas yang membosankan",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya mengendalikan kehidupan saya",
+        "b": "Saya beradaptasi dengan kehidupan saya",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya tegas pada pendirian",
+        "b": "Saya terbuka pada opsi-opsi baru",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya lebih suka menutup masalah (closure)",
+        "b": "Saya lebih suka membiarkan opsi tetap terbuka",
+        "dimension": "JP"
+      },
+      {
+        "a": "Saya terorganisir dan sistematis",
+        "b": "Saya santai dan fleksibel",
+        "dimension": "JP"
+      }
+    ],
+    "qItems": [],
+    "qReverseItems": [],
+    "qAdjectives": []
+  },
+  {
+    "id": "mat-sq-01",
+    "title": "Tes Kecerdasan Spiritual (SQ) - 40 Soal",
+    "category": "Pribadi",
+    "description": "Instrumen untuk mengukur tingkat kecerdasan spiritual siswa, mencakup makna hidup, ketenangan batin, dan hubungan transendental.",
+    "discussion": "Kecerdasan Spiritual (SQ) adalah kemampuan untuk memberi makna pada kehidupan, menemukan tujuan hidup, dan merasakan keterhubungan dengan semesta.",
+    "task": "Berikan penilaian pada setiap pernyataan berdasarkan seberapa sesuai pernyataan tersebut dengan kondisi Anda (1: Sangat Tidak Sesuai, 5: Sangat Sesuai).",
+    "dateCreated": "2026-05-25T01:27:03.990Z",
+    "isQuestionnaire": true,
+    "isInstrumentActive": true,
+    "qTitle": "Inventori Kecerdasan Spiritual (SQ)",
+    "qType": "SQ",
+    "qItemCount": 40,
+    "qOptionCount": 5,
+    "qCalculation": "Total Skor = Jumlah skor semua butir. Rendah (40-93), Sedang (94-147), Tinggi (148-200).",
+    "qItems": [
+      "Saya sering merenungkan tujuan hidup saya.",
+      "Saya merasa hidup saya memiliki makna yang mendalam.",
+      "Saya merasa terhubung dengan sesuatu yang lebih besar dari diri saya sendiri.",
+      "Saya percaya ada alasan di balik setiap peristiwa dalam hidup saya.",
+      "Saya meluangkan waktu untuk meditasi, doa, atau refleksi setiap hari.",
+      "Saya merasa damai dengan diri saya sendiri.",
+      "Saya berusaha untuk hidup sesuai dengan nilai-nilai moral saya.",
+      "Saya merasa memiliki tanggung jawab terhadap kesejahteraan dunia.",
+      "Saya bisa merasakan keindahan dalam hal-hal kecil di sekitar saya.",
+      "Saya sering merasa kagum dengan keajaiban alam semesta.",
+      "Saya merasa tenang meskipun sedang menghadapi tantangan berat.",
+      "Saya percaya bahwa setiap orang memiliki potensi kebaikan di dalamnya.",
+      "Saya merasa bahagia ketika bisa membantu orang lain tanpa pamrih.",
+      "Saya mudah memaafkan kesalahan orang lain.",
+      "Saya tidak mudah merasa dendam.",
+      "Saya berusaha untuk selalu jujur pada diri sendiri dan orang lain.",
+      "Saya merasa memiliki kekuatan batin yang membimbing saya.",
+      "Saya sering merasa bersyukur atas apa yang saya miliki.",
+      "Saya merasa hidup saya adalah bagian dari rencana yang lebih besar.",
+      "Saya merasa terhubung secara emosional dengan penderitaan orang lain.",
+      "Saya sering mencari hikmah di balik kegagalan.",
+      "Saya merasa puas dengan hidup saya secara keseluruhan.",
+      "Saya menghargai keberagaman keyakinan dan cara pandang orang lain.",
+      "Saya merasa memiliki visi jangka panjang untuk hidup saya.",
+      "Saya tidak merasa takut menghadapi kematian.",
+      "Saya merasa batin saya terisi ketika melakukan kegiatan spiritual.",
+      "Saya percaya bahwa cinta adalah kekuatan yang paling besar.",
+      "Saya berusaha untuk tidak menghakimi orang lain.",
+      "Saya merasa memiliki integritas dalam bertindak.",
+      "Saya sering merasa rendah hati di hadapan kebesaran Tuhan/Semesta.",
+      "Saya merasa hidup saya memberikan kontribusi positif bagi sesama.",
+      "Saya mampu melepaskan keterikatan pada hal-hal materi.",
+      "Saya merasa bijaksana dalam mengambil keputusan penting.",
+      "Saya selalu mencari cara untuk bertumbuh secara spiritual.",
+      "Saya merasa terinspirasi oleh tokoh-tokoh yang memiliki jiwa besar.",
+      "Saya merasa bahwa kesulitan adalah cara untuk memperkuat jiwa.",
+      "Saya memiliki rasa ingin tahu yang besar tentang misteri kehidupan.",
+      "Saya merasa nyaman dalam kesendirian dan keheningan.",
+      "Saya percaya bahwa kebaikan akan selalu menemukan jalannya.",
+      "Saya merasa utuh sebagai seorang manusia."
+    ],
+    "qReverseItems": [],
+    "qAdjectives": []
+  },
+  {
+    "id": "mat-eq-01",
+    "title": "Tes Kecerdasan Emosional (EQ) - 40 Soal",
+    "category": "Sosial",
+    "description": "Instrumen untuk mengukur kemampuan mengenali, memahami, dan mengelola emosi diri sendiri serta orang lain.",
+    "discussion": "Kecerdasan Emosional (EQ) mencakup kesadaran diri, pengendalian diri, motivasi, empati, dan keterampilan sosial.",
+    "task": "Pilihlah jawaban yang paling menggambarkan diri Anda pada setiap butir pernyataan.",
+    "dateCreated": "2026-05-25T01:27:03.990Z",
+    "isQuestionnaire": true,
+    "isInstrumentActive": true,
+    "qTitle": "Inventori Kecerdasan Emosional (EQ)",
+    "qType": "EQ",
+    "qItemCount": 40,
+    "qOptionCount": 5,
+    "qCalculation": "Total Skor = Jumlah skor semua butir. Rendah (40-93), Sedang (94-147), Tinggi (148-200).",
+    "qItems": [
+      "Saya menyadari perasaan saya saat perasaan itu muncul.",
+      "Saya mengerti mengapa saya merasakan emosi tertentu.",
+      "Saya tahu bagaimana emosi saya mempengaruhi perilaku saya.",
+      "Saya mengenali tanda-tanda fisik saat saya sedang stres.",
+      "Saya tahu kelebihan dan kelemahan emosional saya.",
+      "Saya percaya diri dengan kemampuan saya mengelola perasaan.",
+      "Saya bisa mendeskripsikan perasaan saya dengan kata-kata yang tepat.",
+      "Saya menyadari dampak perkataan saya terhadap perasaan orang lain.",
+      "Saya mampu mengendalikan dorongan hati yang tiba-tiba.",
+      "Saya tetap tenang saat berada di bawah tekanan besar.",
+      "Saya tidak mudah tersinggung oleh kritik orang lain.",
+      "Saya bisa menenangkan diri dengan cepat setelah merasa marah.",
+      "Saya berpikir jernih sebelum mengambil keputusan saat sedang emosi.",
+      "Saya mampu menunda kesenangan demi tujuan jangka panjang.",
+      "Saya bisa menyesuaikan diri dengan perubahan situasi yang cepat.",
+      "Saya bertanggung jawab atas tindakan saya sendiri.",
+      "Saya selalu berusaha memberikan yang terbaik dalam setiap pekerjaan.",
+      "Saya tetap optimis meskipun menghadapi kegagalan.",
+      "Saya memiliki semangat yang tinggi untuk mencapai cita-cita.",
+      "Saya tidak mudah menyerah saat menghadapi rintangan.",
+      "Saya mengambil inisiatif untuk memulai sesuatu yang baru.",
+      "Saya merasa senang saat melihat orang lain sukses.",
+      "Saya memiliki motivasi internal yang kuat untuk belajar.",
+      "Saya fokus pada solusi daripada meratapi masalah.",
+      "Saya peka terhadap suasana hati orang-orang di sekitar saya.",
+      "Saya pendengar yang baik bagi teman-teman saya.",
+      "Saya mengerti perspektif orang lain meskipun berbeda dengan saya.",
+      "Saya mudah berempati terhadap penderitaan orang lain.",
+      "Saya tahu kapan harus memberikan dukungan kepada orang lain.",
+      "Saya menghargai perasaan dan pendapat orang lain.",
+      "Saya mudah membangun hubungan baik dengan orang baru.",
+      "Saya mampu bekerja sama dalam tim dengan efektif.",
+      "Saya bisa berkomunikasi dengan jelas dan meyakinkan.",
+      "Saya mampu menyelesaikan konflik dengan cara yang damai.",
+      "Saya sering memberikan inspirasi bagi teman-teman saya.",
+      "Saya tahu cara membangun kepercayaan dalam sebuah hubungan.",
+      "Saya menghormati batasan-batasan pribadi orang lain.",
+      "Saya mampu memberikan kritik yang membangun tanpa menyakiti.",
+      "Saya merasa nyaman berbicara di depan orang banyak.",
+      "Saya peduli dengan keharmonisan kelompok saya."
+    ],
+    "qReverseItems": [],
+    "qAdjectives": []
+  },
+  {
+    "id": "mat-aq-01",
+    "title": "Tes Kecerdasan Adversitas (AQ) - 40 Soal",
+    "category": "Pribadi",
+    "description": "Instrumen untuk mengukur daya tahan dan kemampuan siswa dalam menghadapi serta mengatasi kesulitan atau tantangan.",
+    "discussion": "Adversity Quotient (AQ) adalah kemampuan seseorang dalam menghadapi rintangan dan mengubah tantangan menjadi peluang.",
+    "task": "Berikan respon yang jujur pada setiap butir untuk mengetahui daya tahan mental Anda.",
+    "dateCreated": "2026-05-25T01:27:03.990Z",
+    "isQuestionnaire": true,
+    "isInstrumentActive": true,
+    "qTitle": "Inventori Kecerdasan Adversitas (AQ)",
+    "qType": "AQ",
+    "qItemCount": 40,
+    "qOptionCount": 5,
+    "qCalculation": "Total Skor = Jumlah skor semua butir. Rendah (40-93), Sedang (94-147), Tinggi (148-200).",
+    "qItems": [
+      "Saya merasa mampu mengendalikan arah hidup saya.",
+      "Saya tidak merasa sebagai korban dari keadaan.",
+      "Saya percaya saya bisa memperbaiki situasi yang buruk.",
+      "Saya merasa memiliki pengaruh terhadap hasil pekerjaan saya.",
+      "Saya tidak mudah merasa tidak berdaya saat ada masalah.",
+      "Saya yakin setiap masalah ada jalan keluarnya.",
+      "Saya mengambil tanggung jawab untuk mengatasi kesulitan.",
+      "Saya tidak menyalahkan orang lain atas masalah saya.",
+      "Saya fokus pada apa yang bisa saya lakukan sekarang.",
+      "Saya yakin usaha saya akan membuahkan hasil.",
+      "Saya merasa bertanggung jawab untuk memperbaiki keadaan.",
+      "Saya belajar dari setiap kesalahan yang saya buat.",
+      "Saya tidak lari dari tanggung jawab yang berat.",
+      "Saya yakin saya bisa mengatasi rintangan apapun.",
+      "Saya tidak membiarkan kegagalan membuat saya berhenti mencoba.",
+      "Saya selalu mencari cara untuk menjadi lebih baik.",
+      "Saya bersedia menanggung risiko demi mencapai tujuan.",
+      "Saya tidak mudah menyerah saat tekanan meningkat.",
+      "Saya melihat kesulitan sebagai tantangan untuk ditaklukkan.",
+      "Saya mandiri dalam menyelesaikan masalah pribadi.",
+      "Saya tidak membiarkan satu masalah merusak seluruh hari saya.",
+      "Saya bisa memisahkan masalah sekolah dengan kehidupan pribadi.",
+      "Saya tetap fokus pada tugas meskipun sedang ada masalah lain.",
+      "Saya tidak membesar-besarkan masalah yang kecil.",
+      "Saya yakin masalah ini tidak akan mengganggu masa depan saya.",
+      "Saya tetap bersikap positif meskipun dalam situasi sulit.",
+      "Saya mampu mengelola stres dengan baik agar tidak meluas.",
+      "Saya tidak merasa hidup saya hancur karena satu kegagalan.",
+      "Saya tetap produktif meskipun sedang menghadapi rintangan.",
+      "Saya yakin kemampuan saya tidak berkurang karena masalah ini.",
+      "Saya yakin kesulitan ini hanya bersifat sementara.",
+      "Saya tahu bahwa masa-masa sulit pasti akan berlalu.",
+      "Saya sabar dalam menghadapi proses yang lama.",
+      "Saya percaya ada hari esok yang lebih baik.",
+      "Saya tidak merasa putus asa saat masalah terasa panjang.",
+      "Saya yakin saya memiliki daya tahan mental yang kuat.",
+      "Saya terus maju meskipun hasilnya belum terlihat.",
+      "Saya yakin setiap kesulitan memiliki batas waktunya.",
+      "Saya tidak membiarkan masalah masa lalu menghambat saya.",
+      "Saya optimis menyongsong masa depan."
+    ],
+    "qReverseItems": [],
+    "qAdjectives": []
+  }
+]

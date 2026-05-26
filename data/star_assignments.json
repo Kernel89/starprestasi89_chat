@@ -1,0 +1,54 @@
+[
+  {
+    "id": "assign-mbti-01",
+    "title": "Asesmen Kepribadian (MBTI)",
+    "category": "Pribadi",
+    "type": "MBTI",
+    "instructions": "Silakan kerjakan tes kepribadian ini untuk mengetahui potensi diri Anda.",
+    "dueDate": "2026-06-24",
+    "targetType": "Rombel",
+    "targetId": "r1",
+    "materialId": "mat-mbti-01",
+    "status": "Aktif",
+    "dateCreated": "2026-05-25T01:27:03.991Z"
+  },
+  {
+    "id": "assign-sq-01",
+    "title": "Asesmen Kecerdasan Spiritual (SQ)",
+    "category": "Pribadi",
+    "type": "SQ",
+    "instructions": "Kerjakan instrumen SQ ini untuk memetakan kematangan spiritual Anda.",
+    "dueDate": "2026-06-24",
+    "targetType": "Rombel",
+    "targetId": "r1",
+    "materialId": "mat-sq-01",
+    "status": "Aktif",
+    "dateCreated": "2026-05-25T01:27:03.991Z"
+  },
+  {
+    "id": "assign-eq-01",
+    "title": "Asesmen Kecerdasan Emosional (EQ)",
+    "category": "Sosial",
+    "type": "EQ",
+    "instructions": "Kerjakan instrumen EQ ini untuk memetakan kecerdasan emosional Anda.",
+    "dueDate": "2026-06-24",
+    "targetType": "Rombel",
+    "targetId": "r1",
+    "materialId": "mat-eq-01",
+    "status": "Aktif",
+    "dateCreated": "2026-05-25T01:27:03.991Z"
+  },
+  {
+    "id": "assign-aq-01",
+    "title": "Asesmen Kecerdasan Adversitas (AQ)",
+    "category": "Pribadi",
+    "type": "AQ",
+    "instructions": "Kerjakan instrumen AQ ini untuk mengetahui daya tahan Anda terhadap hambatan.",
+    "dueDate": "2026-06-24",
+    "targetType": "Rombel",
+    "targetId": "r1",
+    "materialId": "mat-aq-01",
+    "status": "Aktif",
+    "dateCreated": "2026-05-25T01:27:03.991Z"
+  }
+]

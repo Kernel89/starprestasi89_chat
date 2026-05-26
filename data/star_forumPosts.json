@@ -1,0 +1,24 @@
+[
+  {
+    "id": "p2",
+    "grade": "X",
+    "userId": "s3",
+    "userName": "Citra Dewi",
+    "userRole": "student",
+    "content": "Bingung milih ekskul nih, ada saran?",
+    "timestamp": "2026-05-22T04:01:28.708Z",
+    "likes": 2,
+    "comments": []
+  },
+  {
+    "id": "p3",
+    "grade": "XI",
+    "userId": "s4",
+    "userName": "Dedi Kurniawan",
+    "userRole": "student",
+    "content": "Tugas Sejarah banyak banget ya minggu ini...",
+    "timestamp": "2026-05-24T03:01:28.708Z",
+    "likes": 10,
+    "comments": []
+  }
+]
