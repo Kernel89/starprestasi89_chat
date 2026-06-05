@@ -1865,6 +1865,7 @@ const App: React.FC = () => {
               <Route path="/" element={user.role === 'humas' ? <Navigate to="/alumni" replace /> : <Dashboard
                 schoolName={safeSchoolProfile.name}
                 schoolLogo={safeSchoolProfile.logo}
+                activeAcademicYear={safeSchoolProfile.activeAcademicYear}
                 students={students}
                 alumni={alumni}
                 rombels={rombels}

@@ -47,6 +47,7 @@ interface DashboardProps {
   classReports: ClassReport[];
   setClassReports: React.Dispatch<React.SetStateAction<ClassReport[]>>;
   gradesConfig?: any[];
+  activeAcademicYear?: string;
 }
 
 const Dashboard: React.FC<DashboardProps> = ({
@@ -61,9 +62,9 @@ const Dashboard: React.FC<DashboardProps> = ({
   appointments, sociometrySessions: rawSociometrySessions, universities, studyPrograms,
   feedbacks, setFeedbacks, notify, quotes, questionnaireSubmissions,
   attendanceLogs: rawAttendanceLogs, setAttendanceLogs, classReports: rawClassReports, setClassReports,
-  gradesConfig = []
+  gradesConfig = [], activeAcademicYear
 }) => {
-  const activeYear = currentUser.sessionAcademicYear;
+  const activeYear = activeAcademicYear || currentUser.sessionAcademicYear;
 
   const sessions = useMemo(() => rawSessions.filter(s => !s.tahun_pelajaran || s.tahun_pelajaran === activeYear), [rawSessions, activeYear]);
   const homeVisits = useMemo(() => rawHomeVisits.filter(h => !h.tahun_pelajaran || h.tahun_pelajaran === activeYear), [rawHomeVisits, activeYear]);
