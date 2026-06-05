@@ -61,12 +61,12 @@ const AlumniList: React.FC<AlumniListProps> = ({ students, setStudents, schoolPr
       if (total === 0) return [];
       
       const kuliah = dataAlumni.filter(a => a && a.alumniStatus === 'Kuliah').length;
-      const kerja = dataAlumni.filter(a => a && a.alumniStatus === 'Kerja').length;
+      const kerja = dataAlumni.filter(a => a && a.alumniStatus === 'Bekerja').length;
       const lain = Math.max(0, total - (kuliah + kerja));
       
       return [
         { name: 'Kuliah', value: kuliah, color: '#06b6d4' },
-        { name: 'Kerja', value: kerja, color: '#10b981' },
+        { name: 'Bekerja', value: kerja, color: '#10b981' },
         { name: 'Lainnya', value: lain, color: '#94a3b8' }
       ].filter(d => d.value > 0);
     } catch (e) {
@@ -87,7 +87,7 @@ const AlumniList: React.FC<AlumniListProps> = ({ students, setStudents, schoolPr
 
   const [form, setForm] = useState({
     name: '', nisn: '', graduationYear: new Date().getFullYear(), graduationClass: '',
-    phone: '', instagram: '', linkedin: '', alumniStatus: 'Lain-lain' as 'Kerja' | 'Kuliah' | 'Lain-lain',
+    phone: '', instagram: '', linkedin: '', alumniStatus: 'Lain-lain' as 'Bekerja' | 'Kuliah' | 'Lain-lain',
     universityName: '', degreeLevel: 'S-1' as 'D-3' | 'D-4' | 'S-1' | 'S-2' | 'S-3' | 'D3' | 'D4' | 'S1' as any, studyProgram: '',
     companyName: '', workUnit: '', photo: '',
     gender: '' as any, birthPlace: '', birthDate: '', religion: '', address: '',
@@ -135,8 +135,8 @@ const AlumniList: React.FC<AlumniListProps> = ({ students, setStudents, schoolPr
       index + 1, a.name, a.graduationYear || "-", 
       `${a.phone || '-'}\n${a.instagram || '-'}`, 
       a.alumniStatus || "Belum Isi",
-      a.alumniStatus === 'Kuliah' ? (a.universityName || '-') : a.alumniStatus === 'Kerja' ? (a.companyName || '-') : "-",
-      a.alumniStatus === 'Kuliah' ? (a.studyProgram || '-') : a.alumniStatus === 'Kerja' ? (a.workUnit || '-') : "-"
+      a.alumniStatus === 'Kuliah' ? (a.universityName || '-') : a.alumniStatus === 'Bekerja' ? (a.companyName || '-') : "-",
+      a.alumniStatus === 'Kuliah' ? (a.studyProgram || '-') : a.alumniStatus === 'Bekerja' ? (a.workUnit || '-') : "-"
     ]);
 
     autoTable(doc, {
@@ -261,7 +261,7 @@ const AlumniList: React.FC<AlumniListProps> = ({ students, setStudents, schoolPr
             </div>
             <div className="mt-6">
               <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-1">Kerja</p>
-              <h4 className="text-4xl font-black text-emerald-600">{alumni.filter(a => a.alumniStatus === 'Kerja').length}</h4>
+              <h4 className="text-4xl font-black text-emerald-600">{alumni.filter(a => a.alumniStatus === 'Bekerja').length}</h4>
               <p className="text-[10px] text-emerald-400 font-bold mt-2">Karir & Wirausaha</p>
             </div>
           </div>
@@ -292,7 +292,7 @@ const AlumniList: React.FC<AlumniListProps> = ({ students, setStudents, schoolPr
           <input type="text" placeholder="Cari nama, NISN, atau ID Alumni..." className="w-full pl-12 pr-6 py-4 bg-slate-50 border-none rounded-2xl text-sm font-bold outline-none focus:ring-4 focus:ring-slate-100 transition-all" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
         </div>
         <div className="flex flex-wrap gap-2 justify-center">
-          {['Semua', 'Kuliah', 'Kerja', 'Lainnya'].map(s => (
+          {['Semua', 'Kuliah', 'Bekerja', 'Lainnya'].map(s => (
             <button key={s} onClick={() => setStatusFilter(s === 'Lainnya' ? 'Lain-lain' : s)} className={`px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${((statusFilter === 'Lain-lain' && s === 'Lainnya') || statusFilter === s) ? 'bg-slate-900 text-white shadow-lg' : 'bg-slate-50 text-slate-400 hover:text-slate-600'}`}>{s}</button>
           ))}
         </div>
@@ -314,10 +314,10 @@ const AlumniList: React.FC<AlumniListProps> = ({ students, setStudents, schoolPr
           if (!a) return null;
           return (
             <div key={a.id} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden group flex flex-col">
-            <div className={`h-3 w-full ${a.alumniStatus === 'Kuliah' ? 'bg-cyan-500' : a.alumniStatus === 'Kerja' ? 'bg-emerald-500' : 'bg-slate-200'}`} />
+            <div className={`h-3 w-full ${a.alumniStatus === 'Kuliah' ? 'bg-cyan-500' : a.alumniStatus === 'Bekerja' ? 'bg-emerald-500' : 'bg-slate-200'}`} />
             <div className="p-8 flex-1 space-y-6">
               <div className="flex items-center gap-4">
-                <div className={`w-16 h-16 rounded-2xl overflow-hidden flex items-center justify-center font-black text-2xl border-4 ${a.alumniStatus === 'Kuliah' ? 'bg-cyan-50 border-cyan-100 text-cyan-600' : a.alumniStatus === 'Kerja' ? 'bg-emerald-50 border-emerald-100 text-emerald-600' : 'bg-slate-50 border-slate-100 text-slate-400'}`}>
+                <div className={`w-16 h-16 rounded-2xl overflow-hidden flex items-center justify-center font-black text-2xl border-4 ${a.alumniStatus === 'Kuliah' ? 'bg-cyan-50 border-cyan-100 text-cyan-600' : a.alumniStatus === 'Bekerja' ? 'bg-emerald-50 border-emerald-100 text-emerald-600' : 'bg-slate-50 border-slate-100 text-slate-400'}`}>
                   {a.photo ? (
                     <img src={a.photo} alt={a.name} className="w-full h-full object-cover" />
                   ) : (
@@ -342,7 +342,7 @@ const AlumniList: React.FC<AlumniListProps> = ({ students, setStudents, schoolPr
                     <p className="text-xs font-black text-slate-800 leading-snug">{a.universityName || '-'}</p>
                     <p className="text-[10px] text-cyan-600 font-bold">{a.studyProgram || '-'} ({a.degreeLevel || 'S-1'})</p>
                   </div>
-                ) : a.alumniStatus === 'Kerja' ? (
+                ) : a.alumniStatus === 'Bekerja' ? (
                   <div className="space-y-1 relative z-10">
                     <p className="text-xs font-black text-slate-800 leading-snug">{a.companyName || '-'}</p>
                     <p className="text-[10px] text-emerald-600 font-bold">{a.workUnit || '-'}</p>
@@ -520,7 +520,7 @@ const AlumniList: React.FC<AlumniListProps> = ({ students, setStudents, schoolPr
               <div className="space-y-1">
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Status Tracer Terkini</label>
                 <div className="grid grid-cols-3 gap-2">
-                  {(['Kuliah', 'Kerja', 'Lain-lain'] as const).map(s => (
+                  {(['Kuliah', 'Bekerja', 'Lain-lain'] as const).map(s => (
                     <button key={s} type="button" onClick={() => setForm({ ...form, alumniStatus: s })} className={`py-3 rounded-xl text-[10px] font-black uppercase tracking-widest border transition-all ${form.alumniStatus === s ? 'bg-slate-900 text-white border-slate-900 shadow-lg' : 'bg-white text-slate-400 border-slate-100 hover:border-slate-300'}`}>{s}</button>
                   ))}
                 </div>
@@ -542,7 +542,7 @@ const AlumniList: React.FC<AlumniListProps> = ({ students, setStudents, schoolPr
                 </div>
               )}
 
-              {form.alumniStatus === 'Kerja' && (
+              {form.alumniStatus === 'Bekerja' && (
                 <div className="p-6 bg-emerald-50 rounded-3xl space-y-4 animate-in slide-in-from-top-4">
                   <input placeholder="Nama Perusahaan" className="w-full bg-white border-none rounded-xl p-3 text-sm font-bold" value={form.companyName || ''} onChange={e => setForm({ ...form, companyName: e.target.value })} />
                   <input placeholder="Jabatan / Unit" className="w-full bg-white border-none rounded-xl p-3 text-sm font-bold" value={form.workUnit || ''} onChange={e => setForm({ ...form, workUnit: e.target.value })} />

@@ -21,11 +21,6 @@ interface SatisfactionReportProps {
 const SatisfactionReport: React.FC<SatisfactionReportProps & { schoolProfile: SchoolProfile }> = ({ 
   feedbacks, assignments, setAssignments, rombels, students, notify, userRole, schoolProfile 
 }) => {
-  const getInitials = (name: string) => {
-    if (!name) return '-';
-    return name.trim().split(/\s+/).map(w => w[0].toUpperCase()).join('.') + '.';
-  };
-
   const isSuperAdmin = userRole === 'super_admin';
   const isPrincipal = userRole === 'principal';
   const isCounselor = userRole === 'counselor';
@@ -186,10 +181,10 @@ const SatisfactionReport: React.FC<SatisfactionReportProps & { schoolProfile: Sc
 
     autoTable(doc, {
       startY: startY + 25,
-      head: [['No', 'Nama Siswa (Inisial)', 'Layanan', 'Rating', 'Komentar']],
+      head: [['No', 'Nama Siswa', 'Layanan', 'Rating', 'Komentar']],
       body: filteredData.map((f, idx) => [
         idx + 1,
-        getInitials(f.studentName),
+        f.studentName,
         f.serviceSource,
         f.rating,
         f.comment || '-'
@@ -345,10 +340,11 @@ const SatisfactionReport: React.FC<SatisfactionReportProps & { schoolProfile: Sc
                      <div key={f.id} className={`p-6 rounded-2xl border space-y-3 transition-colors ${f.serviceSource === 'Sekolah' ? 'bg-emerald-50/20 border-emerald-50' : 'bg-indigo-50/20 border-indigo-50'}`}>
                         <div className="flex justify-between items-start">
                            <div className="flex items-center gap-3">
-                              <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-black text-[10px] ${f.serviceSource === 'Sekolah' ? 'bg-emerald-100 text-emerald-600' : 'bg-indigo-100 text-indigo-600'}`}>{getInitials(f.studentName).charAt(0)}</div>
+                              <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-black text-[10px] ${f.serviceSource === 'Sekolah' ? 'bg-emerald-100 text-emerald-600' : 'bg-indigo-100 text-indigo-600'}`}>{f.studentName.charAt(0).toUpperCase()}</div>
                               <div>
-                                 <p className="text-xs font-black text-slate-800">{getInitials(f.studentName)}</p>
-                                 <span className={`text-[8px] font-black px-1.5 py-0.5 rounded uppercase ${f.serviceSource === 'Sekolah' ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-100 text-indigo-700'}`}>{f.serviceSource}</span>
+                                 <p className="text-xs font-black text-slate-800">{f.studentName}</p>
+                                 <p className="text-[10px] text-slate-400 font-medium">{f.studentClass} • {new Date(f.date).toLocaleDateString('id-ID')}</p>
+                                 <span className={`text-[8px] font-black px-1.5 py-0.5 rounded uppercase inline-block mt-1 ${f.serviceSource === 'Sekolah' ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-100 text-indigo-700'}`}>{f.serviceSource}</span>
                               </div>
                            </div>
                            <div className="flex gap-0.5 text-amber-400">

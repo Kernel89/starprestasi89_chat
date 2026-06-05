@@ -6,6 +6,7 @@ import { jsPDF } from 'jspdf';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, Legend } from 'recharts';
 import autoTable from 'jspdf-autotable';
 import { drawLetterhead } from '../utils/pdfHelper';
+import { generateLetterNumber } from '../utils/letterGenerator';
 
 interface HomeVisitListProps {
   students: Student[];
@@ -26,6 +27,7 @@ const HomeVisitList: React.FC<HomeVisitListProps> = ({ students, rombels, teache
   const [editingId, setEditingId] = useState<string | null>(null);
   const [selectedVisit, setSelectedVisit] = useState<HomeVisit | null>(null);
   const [selectedClassString, setSelectedClassString] = useState(''); // NEW: State untuk filter kelas
+  const [currentNoSurat, setCurrentNoSurat] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 50;
   
@@ -97,6 +99,14 @@ const HomeVisitList: React.FC<HomeVisitListProps> = ({ students, rombels, teache
   }, [students, selectedClassString]);
 
   const getStudent = (id: string) => (students || []).find(s => s.id === id);
+
+  const handleOpenPreview = async (visit: HomeVisit) => {
+    setSelectedVisit(visit);
+    setCurrentNoSurat('Sedang membuat nomor surat...');
+    const noSurat = await generateLetterNumber('HomeVisit', visit.id, schoolProfile);
+    setCurrentNoSurat(noSurat);
+  };
+
 
   const getInitials = (name: string) => {
     if (!name) return '-';
@@ -171,7 +181,7 @@ const HomeVisitList: React.FC<HomeVisitListProps> = ({ students, rombels, teache
 
     doc.setFontSize(12); doc.setFont("times", "bold");
     doc.text("BERITA ACARA KUNJUNGAN RUMAH (HOME VISIT)", 105, startY + 5, { align: 'center' });
-    doc.setFontSize(10); doc.text(`Nomor: BK/HV/${new Date(v.date).getFullYear()}/${v.id.split('-')[1]}`, 105, startY + 10, { align: 'center' });
+    doc.setFontSize(10); doc.text(`Nomor: ${currentNoSurat}`, 105, startY + 10, { align: 'center' });
     
     autoTable(doc, {
       startY: startY + 18, theme: 'plain', styles: { font: 'times', fontSize: 11, cellPadding: 1 },
@@ -235,7 +245,7 @@ const HomeVisitList: React.FC<HomeVisitListProps> = ({ students, rombels, teache
     syncToAgenda(savedVisit);
     setIsAddMode(false);
     setEditingId(null);
-    setSelectedVisit(savedVisit);
+    handleOpenPreview(savedVisit);
     setSelectedClassString(''); 
   };
 
@@ -387,7 +397,7 @@ const HomeVisitList: React.FC<HomeVisitListProps> = ({ students, rombels, teache
               const student = getStudent(visit.studentId);
               const sanitized = visit.findings === '[DATA TEMUAN DIHAPUS]';
               return (
-                <div key={visit.id} className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all cursor-pointer group flex flex-col min-h-[280px]" onClick={() => setSelectedVisit(visit)}>
+                <div key={visit.id} className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all cursor-pointer group flex flex-col min-h-[280px]" onClick={() => handleOpenPreview(visit)}>
                   <div className="flex justify-between items-start mb-6">
                       <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-black border ${sanitized ? 'bg-slate-50 text-slate-400 border-slate-200' : 'bg-teal-50 text-teal-600 border-teal-100'}`}>
                         {student?.name.charAt(0) || 'S'}
@@ -495,7 +505,7 @@ const HomeVisitList: React.FC<HomeVisitListProps> = ({ students, rombels, teache
                 <div id="print-area" className="bg-white shadow-xl mx-auto w-full max-w-[800px] border border-slate-100 p-12 min-h-[1000px]">
                    <Letterhead profile={schoolProfile} />
                    <div className="p-8 space-y-8 font-serif text-slate-900 leading-relaxed text-sm text-justify">
-                      <div className="text-center space-y-1"><h2 className="text-lg font-bold uppercase underline">BERITA ACARA KUNJUNGAN RUMAH</h2><p>Nomor: BK/HV/{new Date(selectedVisit.date).getFullYear()}/{selectedVisit.id.split('-')[1]}</p></div>
+                      <div className="text-center space-y-1"><h2 className="text-lg font-bold uppercase underline">BERITA ACARA KUNJUNGAN RUMAH</h2><p>Nomor: {currentNoSurat}</p></div>
                       <div className="space-y-4 pt-4">
                          <p>Telah dilaksanakan kunjungan rumah (home visit) pada hari ini:</p>
                          <table className="w-full ml-4">

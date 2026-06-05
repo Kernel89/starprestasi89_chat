@@ -10,6 +10,7 @@ type PagesFunction<T = any> = (context: any) => Promise<Response>;
  
 interface Env {
   DB: D1Database;
+  KURIKULUM_DB: D1Database;
 }
 
 export const onRequest: PagesFunction<Env> = async (context: { request: Request; env: Env }) => {
@@ -20,6 +21,12 @@ export const onRequest: PagesFunction<Env> = async (context: { request: Request;
   if (!table) {
     return new Response("Table name required", { status: 400 });
   }
+
+  const kurikulumTables = ['star_gradesConfig', 'star_km_subjects', 'star_class_subjects', 'star_student_grades', 'star_graduation_info', 'star_letter_records', 'star_us1_records'];
+  const targetDB = kurikulumTables.includes(table) ? env.KURIKULUM_DB : env.DB;
+  
+  const tp = url.searchParams.get("tp");
+  const smt = url.searchParams.get("smt");
 
   // Handle GET - Pull Data from Cloud
   if (request.method === "GET") {
@@ -59,7 +66,17 @@ export const onRequest: PagesFunction<Env> = async (context: { request: Request;
         }
       }
 
-      const { results } = await env.DB.prepare(query).all();
+      let bindArgs: any[] = [];
+      if (kurikulumTables.includes(table) && tp && smt) {
+        if (query.includes('WHERE')) {
+          query += ` AND tahun_pelajaran = ? AND semester = ?`;
+        } else {
+          query += ` WHERE tahun_pelajaran = ? AND semester = ?`;
+        }
+        bindArgs.push(tp, smt);
+      }
+
+      const { results } = await targetDB.prepare(query).bind(...bindArgs).all();
       return new Response(JSON.stringify(results), {
         headers: { "Content-Type": "application/json" },
       });
@@ -99,7 +116,7 @@ export const onRequest: PagesFunction<Env> = async (context: { request: Request;
               for (let i = 0; i < incomingIds.length; i += CHUNK_SIZE) {
                   const chunkIds = incomingIds.slice(i, i + CHUNK_SIZE);
                   const placeholders = chunkIds.map(() => '?').join(',');
-                  const existingRows = await env.DB.prepare(`SELECT id, comments, likes FROM star_forumPosts WHERE id IN (${placeholders})`).bind(...chunkIds).all();
+                  const existingRows = await targetDB.prepare(`SELECT id, comments, likes FROM star_forumPosts WHERE id IN (${placeholders})`).bind(...chunkIds).all();
                   
                   if (existingRows && existingRows.results) {
                       for (const row of existingRows.results) {
@@ -153,6 +170,11 @@ export const onRequest: PagesFunction<Env> = async (context: { request: Request;
           data.forEach((item: any) => {
               if (!item || typeof item !== 'object') return; // Skip invalid items
               
+              if (kurikulumTables.includes(table) && tp && smt) {
+                  item.tahun_pelajaran = tp;
+                  item.semester = smt;
+              }
+              
               const keys: string[] = Object.keys(item);
               const values: any[] = Object.values(item).map((v: any) => typeof v === 'object' ? JSON.stringify(v) : v);
               const placeholders: string = keys.map(() => "?").join(",");
@@ -181,7 +203,7 @@ export const onRequest: PagesFunction<Env> = async (context: { request: Request;
                   }
               }
 
-              queries.push(env.DB.prepare(query).bind(...values));
+              queries.push(targetDB.prepare(query).bind(...values));
           });
       }
 
@@ -189,7 +211,7 @@ export const onRequest: PagesFunction<Env> = async (context: { request: Request;
           const CHUNK_SIZE = 50;
           for (let i = 0; i < queries.length; i += CHUNK_SIZE) {
               const chunk = queries.slice(i, i + CHUNK_SIZE);
-              await env.DB.batch(chunk);
+              await targetDB.batch(chunk);
           }
       }
 
@@ -233,7 +255,12 @@ export const onRequest: PagesFunction<Env> = async (context: { request: Request;
           bindArgs.push(userId);
       }
 
-      const result = await env.DB.prepare(query).bind(...bindArgs).run();
+      if (kurikulumTables.includes(table) && tp && smt) {
+          query += ` AND tahun_pelajaran = ? AND semester = ?`;
+          bindArgs.push(tp, smt);
+      }
+
+      const result = await targetDB.prepare(query).bind(...bindArgs).run();
       
       return new Response(JSON.stringify({ success: true, changes: result.meta?.changes || 0 }), {
         headers: { "Content-Type": "application/json" },

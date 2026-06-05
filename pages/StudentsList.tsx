@@ -1,12 +1,15 @@
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Student, Mood, Teacher, Rombel, Appointment, GuidanceSession, HomeVisit, Advocacy, CaseConference, Referral, StarPrestasi, UserRole, Assignment } from '../types';
+import { Student, Mood, Teacher, Rombel, Appointment, GuidanceSession, HomeVisit, Advocacy, CaseConference, Referral, StarPrestasi, UserRole, Assignment, KMSubjectRecord } from '../types';
 import * as XLSX from 'xlsx';
+import GradeInputModal from '../components/GradeInputModal';
 
 interface StudentsListProps {
   students: Student[];
   setStudents: React.Dispatch<React.SetStateAction<Student[]>>;
+  kmSubjects?: KMSubjectRecord[];
+  setKmSubjects?: React.Dispatch<React.SetStateAction<KMSubjectRecord[]>>;
   rombels: Rombel[];
   teachers: Teacher[];
   notify: (msg: string, type?: 'success' | 'error' | 'info') => void;
@@ -43,7 +46,9 @@ const StudentsList: React.FC<StudentsListProps> = ({
   currentUser,
   handleDeleteStudent,
   handleCleanup,
-  setAlumni
+  setAlumni,
+  kmSubjects,
+  setKmSubjects
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState<'Aktif' | 'Pindah'>('Aktif');
@@ -56,6 +61,9 @@ const StudentsList: React.FC<StudentsListProps> = ({
 
   const [studentToProcess, setStudentToProcess] = useState<Student | null>(null);
   const [editingStudentId, setEditingStudentId] = useState<string | null>(null);
+
+  const [isGradeModalOpen, setIsGradeModalOpen] = useState(false);
+  const [studentForGrade, setStudentForGrade] = useState<Student | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const isPrincipal = userRole === 'principal' || userRole === 'supervisor';
@@ -107,8 +115,8 @@ const StudentsList: React.FC<StudentsListProps> = ({
     // Filter active students only
     let targetStudents = students.filter(s => s.status === 'Aktif');
 
-    // If counselor, restrict to counselor's assigned students only!
-    if (userRole === 'counselor' && counselorStudentIds) {
+    // If counselor or curriculum, restrict to assigned students only!
+    if ((userRole === 'counselor' || userRole === 'curriculum') && counselorStudentIds) {
       targetStudents = targetStudents.filter(s => counselorStudentIds.has(s.id));
     }
 
@@ -149,6 +157,71 @@ const StudentsList: React.FC<StudentsListProps> = ({
 
     XLSX.writeFile(wb, fileName);
     notify(`Berhasil mengunduh ${sortedStudents.length} akun siswa.`);
+  };
+
+  const exportBiodataExcel = () => {
+    let targetStudents = students.filter(s => s.status === 'Aktif');
+    
+    // Konselor hanya mengekspor siswa asuhnya, Kurikulum mengekspor SELURUH siswa
+    if (userRole === 'counselor' && counselorStudentIds) {
+      targetStudents = targetStudents.filter(s => counselorStudentIds.has(s.id));
+    }
+
+    if (targetStudents.length === 0) {
+      notify("Tidak ada data siswa untuk diekspor.");
+      return;
+    }
+
+    const wb = XLSX.utils.book_new();
+    const grades = ['X', 'XI', 'XII'];
+    let totalExported = 0;
+
+    grades.forEach(grade => {
+      const gradeStudents = targetStudents.filter(s => s.grade === grade).sort((a, b) => {
+        const classDiff = (a.class || '').localeCompare(b.class || '', undefined, { numeric: true, sensitivity: 'base' });
+        if (classDiff !== 0) return classDiff;
+        return (a.name || '').localeCompare(b.name || '');
+      });
+
+      if (gradeStudents.length > 0) {
+        totalExported += gradeStudents.length;
+        const exportData = gradeStudents.map((s, index) => ({
+          "No": index + 1,
+          "Nama Lengkap": s.name || '-',
+          "NIS": s.nis || '-',
+          "NISN": s.nisn || '-',
+          "Tempat Lahir": s.birthPlace || '-',
+          "Tanggal Lahir": s.birthDate || '-',
+          "Kelas": `${s.grade} ${s.class}`,
+          "Jenis Kelamin": s.gender || '-',
+          "Agama": s.religion || '-',
+          "Status dalam Keluarga": s.familyStatus || '-',
+          "Asal Siswa": s.juniorHighOrigin || '-',
+          "Telepon / HP": s.phone || '-',
+          "Email": s.email || '-',
+          "Alamat Lengkap": s.address || '-',
+          "Nama Ayah Kandung": s.fatherName || '-',
+          "Pekerjaan Ayah Kandung": s.fatherJob || '-',
+          "Nama Ibu Kandung": s.motherName || '-',
+          "Pekerjaan Ibu Kandung": s.motherJob || '-'
+        }));
+        
+        const ws = XLSX.utils.json_to_sheet(exportData);
+        XLSX.utils.book_append_sheet(wb, ws, `Kelas ${grade}`);
+      }
+    });
+
+    if (wb.SheetNames.length === 0) {
+      notify("Tidak ada data siswa untuk diekspor.");
+      return;
+    }
+
+    const fileName = userRole === 'curriculum' 
+      ? "Biodata_Seluruh_Siswa_Aktif.xlsx" 
+      : `Biodata_Siswa_Asuh_${currentUser?.name || 'Konselor'}.xlsx`;
+
+    XLSX.writeFile(wb, fileName);
+    notify(`Berhasil mengunduh biodata per angkatan (${totalExported} siswa).`);
   };
 
 
@@ -314,7 +387,7 @@ const StudentsList: React.FC<StudentsListProps> = ({
     notify("Mutasi berhasil.");
   };
 
-  // Find counselor's assigned student IDs ("Siswa Asuh")
+  // Find assigned student IDs ("Siswa Asuh")
   const counselorStudentIds = useMemo(() => {
     if (userRole !== 'counselor') return null;
     const myTeacherProfile = teachers.find(t => t.name === currentUser?.name);
@@ -412,15 +485,24 @@ const StudentsList: React.FC<StudentsListProps> = ({
     <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500 pb-10">
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Database Siswa</h2>
+          <h2 className="text-2xl font-bold text-slate-900">
+            {userRole === 'curriculum' ? 'Biodata Siswa' : (userRole === 'counselor' ? 'Data Siswa Asuh' : 'Database Siswa')}
+          </h2>
           <p className="text-slate-500 text-sm">Kelola profil dan mutasi kelulusan siswa.</p>
         </div>
         {!isPrincipal && (
           <div className="flex gap-2">
-            <button onClick={downloadAccounts} className="bg-violet-600 text-white px-4 py-2.5 rounded-xl text-xs font-black uppercase hover:bg-violet-700 transition-all flex items-center gap-2" title="Unduh Akun Siswa (Username & Password)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
-              Unduh Akun
-            </button>
+            {userRole === 'curriculum' ? (
+              <button onClick={exportBiodataExcel} className="bg-blue-600 text-white px-4 py-2.5 rounded-xl text-xs font-black uppercase hover:bg-blue-700 transition-all flex items-center gap-2" title="Unduh Excel Per Angkatan">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
+                Ekspor Excel
+              </button>
+            ) : (
+              <button onClick={downloadAccounts} className="bg-violet-600 text-white px-4 py-2.5 rounded-xl text-xs font-black uppercase hover:bg-violet-700 transition-all flex items-center gap-2" title="Unduh Akun Siswa (Username & Password)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></svg>
+                Unduh Akun
+              </button>
+            )}
             {userRole === 'super_admin' && (
               <>
                 <button onClick={() => setIsImportModalOpen(true)} className="bg-emerald-600 text-white px-4 py-2.5 rounded-xl text-xs font-black uppercase hover:bg-emerald-700 transition-all flex items-center gap-2">
@@ -452,7 +534,23 @@ const StudentsList: React.FC<StudentsListProps> = ({
               <tr>
                 <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase">Siswa</th>
                 <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase">Kelas</th>
-                <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase">Akses Akun</th>
+                {userRole === 'curriculum' ? (
+                  <>
+                    <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase">Tempat, Tgl Lahir</th>
+                    <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase">Jenis Kelamin</th>
+                    <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase">Agama</th>
+                    <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase">Status dlm Keluarga</th>
+                    <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase">Asal Siswa</th>
+                    <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase">Kontak Siswa</th>
+                    <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase">Alamat Lengkap</th>
+                    <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase">Ayah Kandung</th>
+                    <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase">Pekerjaan Ayah</th>
+                    <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase">Ibu Kandung</th>
+                    <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase">Pekerjaan Ibu</th>
+                  </>
+                ) : (
+                  <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase">Akses Akun</th>
+                )}
                 <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase text-right">Aksi</th>
               </tr>
             </thead>
@@ -461,12 +559,33 @@ const StudentsList: React.FC<StudentsListProps> = ({
                 <tr key={s.id} className="hover:bg-slate-50 transition-colors">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">{s.name.charAt(0)}</div>
-                      <div><p className="font-bold text-slate-800">{s.name}</p><p className="text-[10px] text-slate-400 font-mono">NIS: {s.nis}</p></div>
+                      <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold flex-shrink-0">{s.name.charAt(0)}</div>
+                      <div className="min-w-[150px]">
+                        <p className="font-bold text-slate-800 truncate">{s.name}</p>
+                        <p className="text-[10px] text-slate-400 font-mono">NIS: {s.nis} {s.nisn ? `| NISN: ${s.nisn}` : ''}</p>
+                      </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4"><span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-black">{s.grade} {s.class}</span></td>
-                  <td className="px-6 py-4 text-[10px] font-mono"><span className="text-indigo-600">{s.username}</span><br /><span className="text-slate-400">{s.password}</span></td>
+                  <td className="px-6 py-4 whitespace-nowrap"><span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-lg text-[10px] font-black">{s.grade} {s.class}</span></td>
+                  
+                  {userRole === 'curriculum' ? (
+                    <>
+                      <td className="px-6 py-4 whitespace-nowrap text-xs text-slate-600">{(s.birthPlace || s.birthDate) ? `${s.birthPlace || '-'}, ${s.birthDate || '-'}` : '-'}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-xs text-slate-600">{s.gender || '-'}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-xs text-slate-600">{s.religion || '-'}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-xs text-slate-600">{s.familyStatus || '-'}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-xs text-slate-600">{s.juniorHighOrigin || '-'}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-xs text-slate-600">{s.phone || '-'} {s.email && s.email !== '-' ? `| ${s.email}` : ''}</td>
+                      <td className="px-6 py-4 min-w-[200px] text-xs text-slate-600 truncate max-w-xs" title={s.address}>{s.address || '-'}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-xs text-slate-600">{s.fatherName || '-'}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-xs text-slate-600">{s.fatherJob || '-'}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-xs text-slate-600">{s.motherName || '-'}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-xs text-slate-600">{s.motherJob || '-'}</td>
+                    </>
+                  ) : (
+                    <td className="px-6 py-4 text-[10px] font-mono"><span className="text-indigo-600">{s.username}</span><br /><span className="text-slate-400">{s.password}</span></td>
+                  )}
+                  
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end gap-2">
                       {userRole === 'super_admin' && (
@@ -476,6 +595,7 @@ const StudentsList: React.FC<StudentsListProps> = ({
                           <button onClick={() => handleDeleteStudent(s.id)} className="p-2 text-rose-600 hover:bg-rose-50 rounded-lg"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 6h18" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg></button>
                         </>
                       )}
+
                       <Link to={`/students/${s.id}`} className="p-2 text-slate-400 hover:bg-slate-50 rounded-lg"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" /></svg></Link>
                     </div>
                   </td>
@@ -689,6 +809,22 @@ const StudentsList: React.FC<StudentsListProps> = ({
           </div>
         </div>
       )}
+
+      {/* Modal Input Nilai */}
+      {isGradeModalOpen && studentForGrade && (
+        <GradeInputModal
+          isOpen={isGradeModalOpen}
+          student={studentForGrade}
+          kmSubjects={kmSubjects || []}
+          setKmSubjects={setKmSubjects}
+          onClose={() => { setIsGradeModalOpen(false); setStudentForGrade(null); }}
+          onSave={(studentId, grades) => {
+            setStudents(prev => prev.map(s => s.id === studentId ? { ...s, semesterGrades: grades } : s));
+            notify("Data nilai raport berhasil disimpan.");
+          }}
+        />
+      )}
+
     </div>
   );
 };

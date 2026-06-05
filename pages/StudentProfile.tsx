@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ICONS } from '../constants';
 import { Student, Mood, QuestionnaireSubmission, AttendanceLog, GuidanceSession, HomeVisit, Advocacy, CaseConference, Referral } from '../types';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, PieChart, Pie } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, LineChart, Line, Legend } from 'recharts';
 
 interface StudentProfileProps {
   students: Student[];
@@ -100,10 +100,38 @@ const StudentProfile: React.FC<StudentProfileProps> = ({
       { name: 'Sakit', value: counts.Sakit, color: '#f59e0b' },
       { name: 'Izin', value: counts.Izin, color: '#06b6d4' },
       { name: 'Alfa', value: counts.Alfa, color: '#f43f5e' },
-    ];
+    ].filter(d => d.value > 0);
   }, [attendanceLogs, id]);
 
   const hasAbsenceData = useMemo(() => absenceData.some(d => d.value > 0), [absenceData]);
+
+  const gradeTrendData = useMemo(() => {
+    if (!student || !student.semesterGrades) return [];
+    
+    const semesters = ['1', '2', '3', '4', '5', '6'];
+    const data: any[] = [];
+    
+    // We want to chart the average grade per semester, or maybe the specific subjects
+    // Let's chart the Average, and the top 3 core subjects (MTK, B.Indo, B.Inggris) if they exist
+    semesters.forEach(sem => {
+      const grades = student.semesterGrades![sem];
+      if (grades && Object.keys(grades).length > 0) {
+        const vals = Object.values(grades);
+        const avg = vals.reduce((a, b) => a + b, 0) / vals.length;
+        data.push({
+          name: `Sem ${sem}`,
+          RataRata: parseFloat(avg.toFixed(2)),
+          Matematika: grades['Matematika'] || null,
+          'Bahasa Indonesia': grades['Bahasa Indonesia'] || null,
+          'Bahasa Inggris': grades['Bahasa Inggris'] || null
+        });
+      }
+    });
+    
+    return data;
+  }, [student]);
+
+  const hasGradeData = gradeTrendData.length > 0;
 
   // --- RIWAYAT LAYANAN BK ---
   const serviceHistory = useMemo(() => {
@@ -434,6 +462,49 @@ const StudentProfile: React.FC<StudentProfileProps> = ({
                   <p className="text-xl font-black" style={{ color: item.color }}>{item.value}</p>
                 </div>
               ))}
+            </div>
+          </div>
+
+          <div className="bg-white p-6 md:p-8 rounded-3xl border border-slate-100 shadow-sm col-span-1 md:col-span-2">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-3 bg-teal-50 text-teal-600 rounded-xl"><ICONS.Star /></div>
+              <h3 className="text-lg md:text-xl font-bold text-slate-800">Tren Nilai Akademik (SNBP)</h3>
+            </div>
+            
+            <div className="h-[300px] w-full">
+              {hasGradeData ? (
+                <ResponsiveContainer width="100%" height="100%" minWidth={1} minHeight={1}>
+                  <LineChart data={gradeTrendData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                    <XAxis 
+                      dataKey="name" 
+                      axisLine={false} 
+                      tickLine={false} 
+                      tick={{ fill: '#64748b', fontSize: 12, fontWeight: 600 }}
+                    />
+                    <YAxis 
+                      axisLine={false} 
+                      tickLine={false} 
+                      tick={{ fill: '#64748b', fontSize: 12 }}
+                      domain={['dataMin - 5', 100]}
+                    />
+                    <Tooltip 
+                      cursor={{ fill: '#f8fafc' }}
+                      contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 15px rgba(0,0,0,0.1)', fontWeight: 600 }}
+                    />
+                    <Legend iconType="circle" wrapperStyle={{ fontSize: '12px', fontWeight: 600 }} />
+                    <Line type="monotone" dataKey="RataRata" name="Rata-rata Keseluruhan" stroke="#14b8a6" strokeWidth={4} dot={{ r: 5, strokeWidth: 2 }} activeDot={{ r: 7 }} />
+                    <Line type="monotone" dataKey="Matematika" stroke="#3b82f6" strokeWidth={2} dot={{ r: 3 }} strokeDasharray="5 5" />
+                    <Line type="monotone" dataKey="Bahasa Indonesia" stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} strokeDasharray="5 5" />
+                    <Line type="monotone" dataKey="Bahasa Inggris" stroke="#ec4899" strokeWidth={2} dot={{ r: 3 }} strokeDasharray="5 5" />
+                  </LineChart>
+                </ResponsiveContainer>
+              ) : (
+                <div className="h-full flex flex-col items-center justify-center text-slate-300 italic border-2 border-dashed border-slate-50 rounded-2xl">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="mb-2 opacity-20"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  <p className="text-sm">Belum ada data nilai raport</p>
+                </div>
+              )}
             </div>
           </div>
 

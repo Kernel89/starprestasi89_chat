@@ -6,6 +6,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { drawLetterhead } from '../utils/pdfHelper';
+import { generateLetterNumber } from '../utils/letterGenerator';
 
 interface ReferralListProps {
   students: Student[];
@@ -26,6 +27,7 @@ const ReferralList: React.FC<ReferralListProps> = ({ students, rombels, teachers
   const [editingId, setEditingId] = useState<string | null>(null);
   const [selectedReferral, setSelectedReferral] = useState<Referral | null>(null);
   const [selectedClassString, setSelectedClassString] = useState(''); // NEW: Filter Kelas
+  const [currentNoSurat, setCurrentNoSurat] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 50;
   
@@ -93,6 +95,14 @@ const ReferralList: React.FC<ReferralListProps> = ({ students, rombels, teachers
   }, [students, selectedClassString]);
 
   const getStudent = (id: string) => students.find(s => s.id === id);
+
+  const handleOpenPreview = async (ref: Referral) => {
+    setSelectedReferral(ref);
+    setCurrentNoSurat('Sedang membuat nomor surat...');
+    const noSurat = await generateLetterNumber('Referral', ref.id, schoolProfile);
+    setCurrentNoSurat(noSurat);
+  };
+
 
   const getInitials = (name: string) => {
     if (!name) return '-';
@@ -166,7 +176,7 @@ const ReferralList: React.FC<ReferralListProps> = ({ students, rombels, teachers
 
     doc.setFontSize(12); doc.setFont("times", "bold");
     doc.text("SURAT RUJUKAN (ALIH TANGAN KASUS)", 105, startY + 5, { align: 'center' });
-    doc.setFontSize(10); doc.text(`Nomor: BK/REF/${new Date(r.date).getFullYear()}/${r.id.split('-')[1]}`, 105, startY + 10, { align: 'center' });
+    doc.setFontSize(10); doc.text(`Nomor: ${currentNoSurat}`, 105, startY + 10, { align: 'center' });
 
     doc.setFont("times", "normal"); doc.setFontSize(11);
     doc.text(`Yth. ${r.targetAgency}`, 20, startY + 25);
@@ -237,7 +247,7 @@ const ReferralList: React.FC<ReferralListProps> = ({ students, rombels, teachers
     }
     syncToAgenda(savedRef);
     setIsAddMode(false);
-    setSelectedReferral(savedRef);
+    handleOpenPreview(savedRef);
     setSelectedClassString(''); 
   };
 
@@ -377,7 +387,7 @@ const ReferralList: React.FC<ReferralListProps> = ({ students, rombels, teachers
               const student = getStudent(ref.studentId);
               const sanitized = ref.summary === '[DATA PRIBADI DIHAPUS]';
               return (
-                <div key={ref.id} className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all cursor-pointer group" onClick={() => setSelectedReferral(ref)}>
+                <div key={ref.id} className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all cursor-pointer group" onClick={() => handleOpenPreview(ref)}>
                   <div className="flex justify-between items-start mb-6">
                       <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-black border ${sanitized ? 'bg-slate-50 text-slate-400 border-slate-200' : 'bg-rose-50 text-rose-600 border-rose-100'}`}>
                         {student?.name.charAt(0) || 'S'}
@@ -482,7 +492,7 @@ const ReferralList: React.FC<ReferralListProps> = ({ students, rombels, teachers
                 <div id="print-letter" className="bg-white shadow-xl mx-auto w-full max-w-[800px] border border-slate-100 p-12 min-h-[1000px]">
                    <Letterhead profile={schoolProfile} />
                    <div className="p-8 space-y-8 font-serif text-slate-900 leading-relaxed text-sm text-justify">
-                      <div className="text-center space-y-1"><h2 className="text-lg font-bold uppercase underline">SURAT RUJUKAN (ALIH TANGAN KASUS)</h2><p>Nomor: BK/REF/{new Date(selectedReferral.date).getFullYear()}/{selectedReferral.id.split('-')[1]}</p></div>
+                      <div className="text-center space-y-1"><h2 className="text-lg font-bold uppercase underline">SURAT RUJUKAN (ALIH TANGAN KASUS)</h2><p>Nomor: {currentNoSurat}</p></div>
                       <div className="space-y-4 pt-4">
                          <p>Yth. <strong>{selectedReferral.targetAgency}</strong><br/>Di Tempat</p>
                          <p>Dengan hormat,<br/>Bersama ini kami kirimkan rujukan atas siswa kami dengan identitas:</p>

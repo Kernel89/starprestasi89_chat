@@ -7,3 +7,9 @@ binding = "DB"
 database_name = "star_prestasi_db"
 database_id = "63d94036-5fe7-47cd-9675-ad728ac38170"
 migrations_dir = "migrations"
+
+[[d1_databases]]
+binding = "KURIKULUM_DB"
+database_name = "star_kurikulum_db"
+database_id = "6caa37be-c084-4ed4-bb8c-79e1464c5751"
+migrations_dir = "migrations_kurikulum"

@@ -21,6 +21,8 @@ export interface AttendanceLog {
   timestamp: string;
   status: 'Hadir' | 'Sakit' | 'Izin' | 'Alfa';
   gradeAtTime?: string;
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
 export interface ClassReport {
@@ -36,6 +38,43 @@ export interface ClassReport {
   notes: string; // Permasalahan Kelas
   timestamp: string;
   status: 'Pending' | 'Approved' | 'Rejected';
+  tahun_pelajaran?: string;
+  semester?: string;
+}
+
+export interface GradeConfig {
+  id: string;
+  name: string;
+  minScore: number;
+  maxScore: number;
+}
+
+export interface GraduationInfo {
+  tanggalKelulusan?: string;
+  tanggalRapatPleno?: string;
+  noTranskripNilai?: string;
+  noSkl?: string;
+  noSkkb?: string;
+}
+
+export interface StudentGradeRecord {
+  id?: string;
+  studentId: string;
+  semester: string;
+  grades: Record<string, number>;
+}
+
+export interface KMSubjectRecord {
+  studentId: string;
+  subjects: string[];
+}
+
+export interface ClassSubjectRecord {
+  id: string; // e.g., `${rombelId}_${semester}`
+  rombelId: string;
+  semester: '1' | '3' | '5';
+  subjects: string[];
+  eligibleSubjects?: string[];
 }
 
 export interface Student {
@@ -62,10 +101,15 @@ export interface Student {
   photo?: string;
   isLocked?: boolean;
   role?: UserRole;
+  // US-1 specific fields
+  us1ParentType?: 'ayah' | 'ibu' | 'wali';
+  us1DiplomaNumber?: string;
+  us1TranscriptNumber?: string;
+  us1ElectiveSubject?: string;
   // Alumni specific
   graduationYear?: number;
   graduationClass?: string;
-  alumniStatus?: 'Kuliah' | 'Kerja' | 'Lain-lain';
+  alumniStatus?: 'Kuliah' | 'Bekerja' | 'Wirausaha' | 'Mencari Kerja' | 'Lain-lain';
   universityName?: string;
   degreeLevel?: 'D3' | 'D4' | 'S1' | 'S2' | 'S3' | 'D-3' | 'D-4' | 'S-1' | 'S-2' | 'S-3';
   studyProgram?: string;
@@ -120,6 +164,7 @@ export interface Student {
   addressProvince?: string;
   isKM?: boolean;
   alumniNumber?: string;
+  semesterGrades?: Record<string, Record<string, number>>;
 }
 
 export interface Teacher {
@@ -141,6 +186,8 @@ export interface Rombel {
   averageAttendance: number;
   classPresidentId?: string; // ID Ketua Murid
   kmId?: string;
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
 export interface TeachingSlot {
@@ -161,6 +208,8 @@ export interface Appointment {
   time: string;
   reason: string;
   status: 'Mendatang' | 'Selesai' | 'Dibatalkan';
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
 export interface GuidanceSession {
@@ -175,6 +224,8 @@ export interface GuidanceSession {
   urgency: 'Rendah' | 'Menengah' | 'Tinggi';
   counselorName?: string;
   gradeAtTime?: string;
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
 export interface HomeVisit {
@@ -190,6 +241,8 @@ export interface HomeVisit {
   counselorName?: string;
   documentation?: string;
   gradeAtTime?: string;
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
 export interface Referral {
@@ -202,6 +255,8 @@ export interface Referral {
   status: 'Terkirim' | 'Proses' | 'Selesai';
   counselorName?: string;
   gradeAtTime?: string;
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
 export interface Advocacy {
@@ -215,6 +270,8 @@ export interface Advocacy {
   status: string;
   counselorName?: string;
   gradeAtTime?: string;
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
 export interface CaseConference {
@@ -228,6 +285,8 @@ export interface CaseConference {
   decisions: string;
   counselorName?: string;
   gradeAtTime?: string;
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
 export interface SociometrySession {
@@ -239,6 +298,8 @@ export interface SociometrySession {
   criterion: string;
   choices: Record<string, string[]>; // voterId -> [chosenId1, chosenId2]
   reasons: Record<string, string[]>; // voterId -> [reason1, reason2]
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
 export interface MbtiOption {
@@ -282,6 +343,8 @@ export interface Assignment {
   materialId?: string;
   status: 'Aktif' | 'Selesai';
   dateCreated: string;
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
 export interface QuestionnaireSubmission {
@@ -296,6 +359,8 @@ export interface QuestionnaireSubmission {
   eqScore?: number;
   aqScore?: number;
   gradeAtTime?: string;
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
 export interface DCMQuestion {
@@ -311,6 +376,8 @@ export interface DCMSubmission {
   date: string;
   selectedIssues: string[]; // IDs of questions
   gradeAtTime?: string;
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
 export interface SatisfactionFeedback {
@@ -324,6 +391,8 @@ export interface SatisfactionFeedback {
   serviceSource: 'BK' | 'Sekolah';
   date: string;
   gradeAtTime?: string;
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
 export interface ImplementationItem {
@@ -399,6 +468,8 @@ export interface SchoolProfile {
   website: string;
   principalName: string;
   principalNip: string;
+  principalRank?: string;
+  principalGrade?: string;
   counselorName: string;
   counselorNip: string;
   vision: string;
@@ -430,10 +501,12 @@ export interface CounselorProfileData {
 }
 
 export interface UserSession {
-  id?: string;
+  id: string;
   username: string;
   role: UserRole;
   name: string;
+  sessionAcademicYear?: string;
+  sessionSemester?: string;
 }
 
 export interface AppUser {
@@ -506,6 +579,8 @@ export interface ForumPost {
   likes: number;
   comments: ForumComment[];
   isPrivate?: boolean;
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
 export interface DevBioData {
@@ -570,6 +645,8 @@ export interface PrivateCounselingSession {
   followUp?: string;
   dateCreated: string;
   messages: PrivateCounselingMessage[];
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
 export interface MengenalProdi {
@@ -590,8 +667,32 @@ export interface StudentJournal {
   notes: string;
   counselorId: string;
   createdAt: string;
+  tahun_pelajaran?: string;
+  semester?: string;
 }
 
+
+export interface LetterRecord {
+  id: string;
+  documentType: 'HomeVisit' | 'Referral' | 'SKKB' | 'SKL';
+  documentId: string;
+  noSurat: string;
+  tahun_pelajaran?: string;
+  semester?: string;
+  updated_at?: string;
+}
+
+export interface US1Record {
+  id: string;
+  studentId: string;
+  us1ParentType?: 'ayah' | 'ibu' | 'wali';
+  us1DiplomaNumber?: string;
+  us1TranscriptNumber?: string;
+  us1ElectiveSubject?: string;
+  tahun_pelajaran?: string;
+  semester?: string;
+  updated_at?: string;
+}
 
 // Global Cloudflare Types for Sync
 declare global {
@@ -601,3 +702,4 @@ declare global {
   }
   type PagesFunction<T = any> = (context: { env: T; request: Request }) => Promise<Response>;
 }
+

@@ -3,6 +3,19 @@
 
 import { idbGet, idbSet } from './useLocalStorage';
 
+function getPeriodQuery(): string {
+  try {
+    const p = localStorage.getItem('star_academic_period');
+    if (p) {
+      const parsed = JSON.parse(p);
+      if (parsed && parsed.tahun_pelajaran && parsed.semester) {
+        return `&tp=${encodeURIComponent(parsed.tahun_pelajaran)}&smt=${encodeURIComponent(parsed.semester)}`;
+      }
+    }
+  } catch (e) {}
+  return '';
+}
+
 export const TABLES_MAP: Record<string, string> = {
   'star_students': 'star_students',
   'star_teachers': 'star_teachers',
@@ -37,7 +50,13 @@ export const TABLES_MAP: Record<string, string> = {
   'star_messages': 'star_messages',
   'star_privateCounseling': 'star_privateCounseling',
   'star_mengenalProdi': 'star_mengenalProdi',
-  'star_devBioData': 'star_devBioData'
+  'star_devBioData': 'star_devBioData',
+  'star_studentJournals': 'star_studentJournals',
+  'star_km_subjects': 'star_km_subjects',
+  'star_class_subjects': 'star_class_subjects',
+  'star_student_grades': 'star_student_grades',
+  'star_graduation_info': 'star_graduation_info',
+  'star_gradesConfig': 'star_gradesConfig'
 };
 
 export async function pushToCloud(notify: (msg: string, type?: any) => void) {
@@ -61,14 +80,14 @@ export async function pushToCloud(notify: (msg: string, type?: any) => void) {
 
       let payload = localDataStr;
       
-      // Special handling for Counselor Profiles Map -> Array conversion
-      if (lsKey === 'star_counselorProfiles') {
+      // Special handling for Counselor Profiles and Graduation Info Map -> Array conversion
+      if (lsKey === 'star_counselorProfiles' || lsKey === 'star_graduation_info') {
           const map = JSON.parse(localDataStr);
           const array = Object.keys(map).map(key => ({ id: key, ...map[key] }));
           payload = JSON.stringify(array);
       }
 
-      const response = await fetch(`/api/sync?table=${dbTable}`, {
+      const response = await fetch(`/api/sync?table=${dbTable}${getPeriodQuery()}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: payload
@@ -116,7 +135,7 @@ export async function pullFromCloud(notify: (msg: string, type?: any) => void) {
 
   for (const [lsKey, dbTable] of Object.entries(TABLES_MAP)) {
     try {
-      const response = await fetch(`/api/sync?table=${dbTable}${userQuery}&_t=${Date.now()}`);
+      const response = await fetch(`/api/sync?table=${dbTable}${userQuery}${getPeriodQuery()}&_t=${Date.now()}`);
       if (response.ok) {
         const cloudData = await response.json();
         
@@ -140,7 +159,7 @@ export async function pullFromCloud(notify: (msg: string, type?: any) => void) {
         });
 
         // School Profile and other single objects might need special handling if they are returned as an array of 1
-        if (lsKey === 'star_schoolProfile' || lsKey === 'star_counselorProfiles' || lsKey === 'star_devBioData') {
+        if (lsKey === 'star_schoolProfile' || lsKey === 'star_counselorProfiles' || lsKey === 'star_devBioData' || lsKey === 'star_graduation_info') {
             if (lsKey === 'star_schoolProfile' || lsKey === 'star_devBioData') {
                 const val = parsedData[0] || {};
                 await idbSet(lsKey, val);
@@ -186,14 +205,14 @@ export async function syncTableToCloud(lsKey: string, data: any) {
 
   let payload = JSON.stringify(data);
   
-  // Special handling for Counselor Profiles Map -> Array conversion
-  if (lsKey === 'star_counselorProfiles') {
+  // Special handling for Counselor Profiles and Graduation Info Map -> Array conversion
+  if (lsKey === 'star_counselorProfiles' || lsKey === 'star_graduation_info') {
       const array = Object.keys(data).map(key => ({ id: key, ...data[key] }));
       payload = JSON.stringify(array);
   }
 
   try {
-    const response = await fetch(`/api/sync?table=${dbTable}`, {
+    const response = await fetch(`/api/sync?table=${dbTable}${getPeriodQuery()}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: payload
@@ -232,7 +251,7 @@ export async function deleteFromCloud(lsKey: string, id: string) {
     } catch (e) {}
 
     try {
-        const response = await fetch(`/api/sync?table=${dbTable}&id=${id}${userQuery}`, {
+        const response = await fetch(`/api/sync?table=${dbTable}&id=${id}${userQuery}${getPeriodQuery()}`, {
             method: 'DELETE'
         });
         if (!response.ok) {
@@ -263,7 +282,7 @@ export async function pullTableFromCloud(lsKey: string) {
   
   try {
     // Add custom polling param
-    const response = await fetch(`/api/sync?table=${dbTable}${userParam}&_t=${Date.now()}`);
+    const response = await fetch(`/api/sync?table=${dbTable}${userParam}${getPeriodQuery()}&_t=${Date.now()}`);
     if (response.ok) {
       const cloudData = await response.json();
       

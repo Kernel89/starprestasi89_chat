@@ -1,0 +1,71 @@
+Created At: 2026-05-27T10:25:42Z
+Completed At: 2026-05-27T10:25:43Z
+File Path: `file:///d:/star%20prestasi/Evaluasi%20Stars%20Prestasi/stars-prestasi-k8.95-7%20Backup%20data7%2011%20%2828%29%20ok/project/pages/GradeManagement.tsx`
+Total Lines: 769
+Total Bytes: 38099
+Showing lines 520 to 640
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+520:             <ul className="text-xs text-blue-700 space-y-1 list-disc pl-4">
+521:               <li>Pilih Jurusan dan Semester terlebih dahulu.</li>
+522:               <li>Klik <strong>Download Template Excel</strong> untuk mendapatkan format yang sesuai dengan pengaturan mata pelajaran kelas.</li>
+523:               <li>Isi nilai siswa di Excel pada kolom yang disediakan. Jangan merubah kolom NISN, Nama, dan Kelas.</li>
+524:               <li>Setelah selesai diisi, klik <strong>Upload & Import Nilai</strong> untuk memasukkan nilai secara massal.</li>
+525:             </ul>
+526:           </div>
+527:         </div>
+528:       )}
+529: 
+530:       {activeTab === 'view-grades' && (
+531:         <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+532:           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+533:             <div>
+534:               <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Pilih Kelas</label>
+535:               <select
+536:                 value={viewRombelId}
+537:                 onChange={e => setViewRombelId(e.target.value)}
+538:                 className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+539:               >
+540:                 <option value="">-- Pilih Kelas --</option>
+541:                 {rombels.filter(r => r.grade === 'XII' || r.grade === '12').map(r => (
+542:                   <option key
+<truncated 4129 bytes>
+                             );
+603:                                 })}
+604:                                 <td className="p-4 text-sm font-bold text-blue-700 bg-blue-50/30">
+605:                                   {(() => {
+606:                                     if (!gradeRecord) return <span className="text-slate-300">-</span>;
+607:                                     let total = 0;
+608:                                     let hasGrade = false;
+609:                                     subjects.forEach(sub => {
+610:                                       const score = gradeRecord.grades[sub];
+611:                                       if (score !== undefined && !isNaN(Number(score))) {
+612:                                         total += Number(score);
+613:                                         hasGrade = true;
+614:                                       }
+615:                                     });
+616:                                     return hasGrade ? total : <span className="text-slate-300">-</span>;
+617:                                   })()}
+618:                                 </td>
+619:                               </tr>
+620:                             );
+621:                           })}
+622:                         </tbody>
+623:                       </table>
+624:                     </div>
+625:                   );
+626:                 });
+627:               })()}
+628:             </div>
+629:           )}
+630:         </div>
+631:       )}
+632: 
+633:       {activeTab === 'report-psaj' && (
+634:         <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6 printable-report">
+635:           <style>{`
+636:             @media print {
+637:               body * {
+638:                 visibility: hidden;
+639:               }
+640:               .printable-report, .printable-report * {
+The above content does NOT show the entire file contents. If you need to view any lines of the file which were not shown to complete your task, call this tool again to view those lines.

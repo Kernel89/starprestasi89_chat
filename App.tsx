@@ -3,7 +3,7 @@ import { HashRouter as Router, Routes, Route, Link, useLocation, Navigate } from
 import { pushToCloud, pullFromCloud, syncTableToCloud, deleteFromCloud, TABLES_MAP } from './syncService';
 import useLocalStorage from './useLocalStorage';
 import { ICONS, MOCK_STUDENTS, MOCK_TEACHERS, MOCK_ROMBELS, MOCK_SCHEDULE, MOCK_APPOINTMENTS, DCM_QUESTIONS, SNPMB_UNIVERSITIES, SNPMB_PROGRAMS, MBTI_TEMPLATE, SQ_TEMPLATE, EQ_TEMPLATE, AQ_TEMPLATE, DEFAULT_QUOTES } from './constants';
-import { UserRole, Student, Teacher, Rombel, TeachingSlot, DCMSubmission, GuidanceSession, SchoolProfile, Referral, HomeVisit, Advocacy, CaseConference, SociometrySession, GuidanceMaterial, Assignment, Appointment, DCMQuestion, University, StudyProgram, UserSession, AppUser, CounselorProfileData, StarPrestasi, Scholarship, TrackGuidanceData, CareerVisibility, ChatMessage, SatisfactionFeedback, Quote, QuestionnaireSubmission, AttendanceLog, ClassReport, ForumPost, BKAdministration, PrivateCounselingSession, PrivateCounselingMessage, MengenalProdi, StudentJournal } from './types';
+import { UserRole, Student, Teacher, Rombel, TeachingSlot, DCMSubmission, GuidanceSession, SchoolProfile, Referral, HomeVisit, Advocacy, CaseConference, SociometrySession, GuidanceMaterial, Assignment, Appointment, DCMQuestion, University, StudyProgram, UserSession, AppUser, CounselorProfileData, StarPrestasi, Scholarship, TrackGuidanceData, CareerVisibility, ChatMessage, SatisfactionFeedback, Quote, QuestionnaireSubmission, AttendanceLog, ClassReport, ForumPost, BKAdministration, PrivateCounselingSession, PrivateCounselingMessage, MengenalProdi, StudentJournal, ClassSubjectRecord, StudentGradeRecord } from './types';
 import Dashboard from './pages/Dashboard';
 import StudentsList from './pages/StudentsList';
 import StudentProfile from './pages/StudentProfile';
@@ -50,12 +50,15 @@ import ValidateReportPage from './pages/ValidateReportPage';
 import SuperAdminPage from './pages/SuperAdminPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
 import BKAdministrationPage from './pages/BKAdministration';
+import GradeManagement from './pages/GradeManagement';
+import GradeReports from './pages/GradeReports';
 
 export interface GradeConfig {
   id: string;
   name: string;
   classCount: number;
   prefixes: string[];
+  electivesByMajor?: Record<string, string[]>;
 }
 
 export interface StarMethodStep {
@@ -427,7 +430,7 @@ const LoginPage: React.FC<{ onLogin: (u: UserSession) => void, appUsers: AppUser
         <div className="hidden sm:flex flex-col w-full lg:w-1/2 text-white text-center lg:text-left space-y-3 md:space-y-6 animate-in fade-in slide-in-from-left-10 duration-1000 max-h-full">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/10 w-fit mx-auto lg:mx-0 group cursor-default">
             <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse group-hover:animate-none" />
-            <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] group-hover:text-indigo-300 transition-colors">STAR PRESTASI K8.9</span>
+            <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] group-hover:text-indigo-300 transition-colors print-hide">STAR PRESTASI K8.9</span>
           </div>
 
           <div className="space-y-3 lg:space-y-5">
@@ -928,10 +931,26 @@ const App: React.FC = () => {
   const [quotes, setQuotes] = useLocalStorage<Quote[]>('star_quotes', DEFAULT_QUOTES);
 
   const [schoolProfile, setSchoolProfile] = useLocalStorage<SchoolProfile>('star_schoolProfile', DEFAULT_SCHOOL_PROFILE);
+  const [kurikulumDb, setKurikulumDb] = useLocalStorage<Record<string, GraduationInfo>>('star_kurikulum_db', {});
 
   const safeSchoolProfile = useMemo((): SchoolProfile => {
-    return sanitizeProfile(schoolProfile);
-  }, [schoolProfile]);
+    const profile = sanitizeProfile(schoolProfile);
+    if (user && user.sessionAcademicYear) {
+      profile.activeAcademicYear = user.sessionAcademicYear;
+    }
+    if (user && user.sessionSemester) {
+      profile.activeSemester = user.sessionSemester;
+    }
+
+    // Override principal from teachers database
+    const principal = teachers.find(t => t.role === 'Kepala Sekolah');
+    if (principal) {
+      profile.principalName = principal.name;
+      profile.principalNip = principal.nip;
+    }
+
+    return profile;
+  }, [schoolProfile, user, teachers]);
 
   // Migration: Ensure schoolProfile has academicYears and activeAcademicYear
   useEffect(() => {
@@ -1162,6 +1181,10 @@ const App: React.FC = () => {
     { id: 'g3', name: 'XII', classCount: 5, prefixes: ['MIPA', 'IPS'] }
   ]);
 
+  const [classSubjects, setClassSubjects] = useLocalStorage<ClassSubjectRecord[]>('star_classSubjects', []);
+  const [studentGrades, setStudentGrades] = useLocalStorage<StudentGradeRecord[]>('star_studentGrades', []);
+  const [us1Records, setUs1Records] = useLocalStorage<US1Record[]>('star_us1Records', []);
+
   const [bkAdmin, setBkAdmin] = useLocalStorage<BKAdministration>('star_bkAdmin', {
     visionMission: '',
     annualPrograms: [],
@@ -1317,6 +1340,9 @@ const App: React.FC = () => {
   useAutoSync('star_privateCounseling', privateSessions);
   useAutoSync('star_mengenalProdi', mengenalProdiList);
   useAutoSync('star_studentJournals', studentJournals);
+  useAutoSync('star_classSubjects', classSubjects);
+  useAutoSync('star_studentGrades', studentGrades);
+  useAutoSync('star_us1Records', us1Records);
   useAutoSync('star_devBioData', devBioData);
   // 1. Pull on mount (ensure latest data)
   useEffect(() => {
@@ -1420,7 +1446,7 @@ const App: React.FC = () => {
           }));
 
           const existingCommentIds = new Set((post.comments || []).map(c => c.id));
-          const commentsToAppend = newComments.filter(nc => !existingCommentIds.has(nc.id));
+          const commentsToAppend = newComments.map(nc => ({ ...nc, id: nc.id })).filter(nc => !existingCommentIds.has(nc.id));
 
           if (commentsToAppend.length > 0) {
             updatedPosts[pIdx] = {
@@ -1596,6 +1622,55 @@ const App: React.FC = () => {
     return <LoginPage onLogin={handleLogin} appUsers={appUsers} students={students} schoolProfile={safeSchoolProfile} quotes={quotes} />;
   }
 
+  // Session context prompt for non-students
+  const isStudentRole = ['student', 'ketua_murid', 'siswa', '-'].includes(user.role as any);
+  if (!isStudentRole && (!user.sessionAcademicYear || !user.sessionSemester)) {
+    return (
+      <div className="min-h-[100dvh] bg-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-tr from-indigo-900/50 to-slate-900/80 z-0" />
+        <div className="bg-white rounded-[2rem] w-full max-w-md p-8 shadow-2xl relative z-10 animate-in zoom-in-95 fade-in duration-300">
+          <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 text-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h2 className="text-2xl font-black text-slate-800 tracking-tight">Konteks Sesi</h2>
+          <p className="text-slate-500 mb-8 text-sm font-medium leading-relaxed">Silakan tentukan Tahun Pelajaran dan Semester untuk sesi Anda saat ini.</p>
+          
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            const formData = new FormData(e.currentTarget);
+            const academicYear = formData.get('academicYear') as string;
+            const semester = formData.get('semester') as string;
+            const updatedUser = { ...user, sessionAcademicYear: academicYear, sessionSemester: semester };
+            setUser(updatedUser);
+            localStorage.setItem('star_auth_user', JSON.stringify(updatedUser));
+          }} className="space-y-5">
+            <div>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Tahun Pelajaran</label>
+              <select name="academicYear" defaultValue={safeSchoolProfile.activeAcademicYear} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all cursor-pointer appearance-none" required>
+                {(safeSchoolProfile.academicYears || ['2023/2024']).map(y => (
+                  <option key={y} value={y}>{y}</option>
+                ))}
+                {!(safeSchoolProfile.academicYears || []).includes('2024/2025') && <option value="2024/2025">2024/2025</option>}
+                {!(safeSchoolProfile.academicYears || []).includes('2025/2026') && <option value="2025/2026">2025/2026</option>}
+              </select>
+            </div>
+            <div>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Semester</label>
+              <select name="semester" defaultValue={safeSchoolProfile.activeSemester} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all cursor-pointer appearance-none" required>
+                <option value="Ganjil">Ganjil</option>
+                <option value="Genap">Genap</option>
+              </select>
+            </div>
+            <button type="submit" className="w-full h-14 bg-indigo-600 text-white rounded-xl text-xs font-black uppercase tracking-[0.2em] shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:-translate-y-1 transition-all active:scale-95 flex items-center justify-center gap-2 mt-4">
+              Masuk Dashboard
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
   const activeCounselorProfile = getCurrentCounselorProfile();
 
@@ -1604,12 +1679,12 @@ const App: React.FC = () => {
       <div className="flex bg-slate-50 min-h-screen font-sans text-slate-900 selection:bg-indigo-100 selection:text-indigo-900">
 
         {/* Mobile Header */}
-        <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-100 z-40 flex items-center justify-between px-4 shadow-sm">
-          <div className="flex items-center gap-3">
+        <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-100 z-40 flex items-center justify-between px-4 shadow-sm print-hide">
+          <div className="flex items-center gap-3 print-hide">
             <div className={`h-8 rounded-lg flex items-center justify-center font-black italic shadow-lg shadow-indigo-200 overflow-hidden ${safeSchoolProfile.logo ? 'bg-white w-auto px-1' : 'bg-indigo-600 text-white w-8'}`}>
               {safeSchoolProfile.logo ? <img src={safeSchoolProfile.logo} alt="Logo" className="h-full w-auto object-contain" /> : 'S'}
             </div>
-            <h1 className="text-lg font-black text-slate-800 tracking-tight">STAR PRESTASI K8.9</h1>
+            <h1 className="text-lg font-black text-slate-800 tracking-tight print-hide">STAR PRESTASI K8.9</h1>
           </div>
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-slate-500 hover:bg-slate-100 rounded-xl transition-colors">
             {isMobileMenuOpen ? (
@@ -1628,13 +1703,13 @@ const App: React.FC = () => {
           />
         )}
 
-        <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-100 flex flex-col transition-transform duration-300 transform lg:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-100 flex flex-col transition-transform duration-300 transform lg:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} print-hide`}>
           <div className="p-6 hidden lg:block">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 print-hide">
               <div className={`h-10 rounded-xl flex items-center justify-center font-black italic shadow-lg shadow-indigo-200 overflow-hidden ${safeSchoolProfile.logo ? 'bg-white w-auto px-1' : 'bg-indigo-600 text-white w-10'}`}>
                 {safeSchoolProfile.logo ? <img src={safeSchoolProfile.logo} alt="Logo" className="h-full w-auto object-contain" /> : 'S'}
               </div>
-              <h1 className="text-xl font-black text-slate-800 tracking-tight">STAR PRESTASI K8.9</h1>
+              <h1 className="text-xl font-black text-slate-800 tracking-tight print-hide">STAR PRESTASI K8.9</h1>
             </div>
           </div>
 
@@ -1652,7 +1727,7 @@ const App: React.FC = () => {
           </div>
 
           <nav className="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-1">
-            {user.role !== 'humas' && <SidebarItem to="/" icon={<ICONS.Dashboard />} label={(user.role === 'student' || user.role === 'ketua_murid' || (user.role as any) === 'siswa' || (user.role as any) === '-') ? "Dashboard Siswa" : "Dashboard"} onClick={closeMobileMenu} />}
+            {user.role !== 'humas' && user.role !== 'curriculum' && <SidebarItem to="/" icon={<ICONS.Dashboard />} label={(user.role === 'student' || user.role === 'ketua_murid' || (user.role as any) === 'siswa' || (user.role as any) === '-') ? "Dashboard Siswa" : "Dashboard"} onClick={closeMobileMenu} />}
             {user.role === 'humas' && <SidebarItem to="/alumni" icon={<ICONS.Alumni />} label="Tracer Alumni" onClick={closeMobileMenu} />}
             {['super_admin', 'counselor', 'principal', 'supervisor'].includes(user.role) && (
               <>
@@ -1705,7 +1780,9 @@ const App: React.FC = () => {
                 {user.role !== 'principal' && user.role !== 'supervisor' && (
                   <SidebarItem to="/care-book" icon={<ICONS.Book />} label="Siswa Asuh" onClick={closeMobileMenu} />
                 )}
-                <SidebarItem to="/satisfaction-report" icon={<ICONS.Star />} label="Kepuasan Layanan" onClick={closeMobileMenu} />
+                {(user.role === 'super_admin' || user.role === 'counselor' || user.role === 'principal' || user.role === 'supervisor') && (
+                  <SidebarItem to="/satisfaction-report" icon={<ICONS.Star />} label="Kepuasan Layanan" onClick={closeMobileMenu} />
+                )}
                 {user.role !== 'principal' && user.role !== 'supervisor' && (
                   <SidebarItem to="/report/mbti" icon={<ICONS.Profile />} label="Laporan MBTI" onClick={closeMobileMenu} />
                 )}
@@ -1739,6 +1816,14 @@ const App: React.FC = () => {
                 <SidebarItem to="/change-password" icon={<ICONS.Settings />} label="Ganti Kata Sandi" onClick={closeMobileMenu} />
               </>
             )}
+            {user.role === 'curriculum' && (
+              <>
+                <SidebarItem to="/" icon={<ICONS.Dashboard />} label="Dashboard Kurikulum" onClick={closeMobileMenu} />
+                <SidebarItem to="/grade-management" icon={<ICONS.Book />} label="Manajemen Nilai" onClick={closeMobileMenu} />
+                <SidebarItem to="/grade-reports" icon={<ICONS.Book />} label="Laporan Manajemen Nilai" onClick={closeMobileMenu} />
+                <SidebarItem to="/change-password" icon={<ICONS.Settings />} label="Ganti Kata Sandi" onClick={closeMobileMenu} />
+              </>
+            )}
             {(user.role === 'student' || user.role === 'ketua_murid' || (user.role as any) === 'siswa' || (user.role as any) === '-') && (
               <>
                 <SidebarItem to="/my-profile" icon={<ICONS.Profile />} label="Biodata Saya" onClick={closeMobileMenu} />
@@ -1761,12 +1846,12 @@ const App: React.FC = () => {
             </button>
           </nav>
 
-          <div className="p-4 border-t border-slate-100 bg-slate-50/50">
-            <p className="text-[10px] font-black text-slate-400 text-center uppercase tracking-widest">STAR PRESTASI K8.9 • Licensed</p>
+          <div className="p-4 border-t border-slate-100 bg-slate-50/50 print-hide">
+            <p className="text-[10px] font-black text-slate-400 text-center uppercase tracking-widest print-hide">STAR PRESTASI K8.9 • Licensed</p>
           </div>
         </aside>
 
-        <main className="flex-1 lg:ml-64 p-4 md:p-8 overflow-x-hidden pt-20 lg:pt-8 transition-all duration-300 flex flex-col min-h-screen">
+        <main className="flex-1 lg:ml-64 p-4 md:p-8 overflow-x-hidden pt-20 lg:pt-8 transition-all duration-300 flex flex-col min-h-screen print:pt-0 print:ml-0 print:p-0">
           <div className="flex-1">
             <Routes>
               <Route path="/" element={user.role === 'humas' ? <Navigate to="/alumni" replace /> : <Dashboard
@@ -1799,6 +1884,8 @@ const App: React.FC = () => {
                 questionnaireSubmissions={allQuestionnaireSubmissions}
                 attendanceLogs={attendanceLogs}
                 setAttendanceLogs={setAttendanceLogs}
+                classSubjects={classSubjects}
+                studentGrades={studentGrades}
                 classReports={classReports}
                 setClassReports={setClassReports}
               />} />
@@ -1844,7 +1931,7 @@ const App: React.FC = () => {
               <Route path="/bimbingan-klasikal" element={<BimbinganKlasikal rombels={rombels} sessions={sessions} setSessions={setSessions} setAppointments={setAppointments} schoolProfile={safeSchoolProfile} notify={notify} userRole={user.role} counselorProfile={activeCounselorProfile} currentUser={user} teachers={teachers} />} />
               <Route path="/materials" element={(user.role !== 'principal' && user.role !== 'supervisor') ? <GuidanceMaterials materials={materials} setMaterials={setMaterials} notify={notify} userRole={user.role} /> : <Navigate to="/" replace />} />
               <Route path="/assignments" element={user.role !== 'supervisor' ? <AssignmentManagement assignments={assignments} setAssignments={setAssignments} materials={materials} rombels={rombels} students={students} notify={notify} userRole={user.role} currentUserId={user.id} dcmSubmissions={submissions} setDcmSubmissions={setSubmissions} questionnaireSubmissions={allQuestionnaireSubmissions} setQuestionnaireSubmissions={setQuestionnaireSubmissions} eqSubmissions={eqSubmissions} setEqSubmissions={setEqSubmissions} aqSubmissions={aqSubmissions} setAqSubmissions={setAqSubmissions} sqSubmissions={sqSubmissions} setSqSubmissions={setSqSubmissions} sociometrySessions={sociometrySessions} setSociometrySessions={setSociometrySessions} satisfactionFeedbacks={feedbacks} setSatisfactionFeedbacks={setFeedbacks} teachers={teachers} schoolProfile={safeSchoolProfile} /> : <Navigate to="/" replace />} />
-              <Route path="/school-profile" element={<SchoolProfilePage profile={safeSchoolProfile} setProfile={setSchoolProfile} notify={notify} userRole={user.role} />} />
+              <Route path="/school-profile" element={<SchoolProfilePage profile={safeSchoolProfile} setProfile={setSchoolProfile} notify={notify} userRole={user.role} graduationInfo={kurikulumDb} setGraduationInfo={setKurikulumDb} activeAcademicYear={safeSchoolProfile.activeAcademicYear} teachers={teachers} />} />
               <Route path="/referrals" element={<ReferralList students={students} rombels={rombels} teachers={teachers} referrals={referrals} setReferrals={setReferrals} setAppointments={setAppointments} schoolProfile={safeSchoolProfile} notify={notify} userRole={user.role} counselorProfile={activeCounselorProfile} currentUser={user} />} />
               <Route path="/home-visits" element={<HomeVisitList students={students} rombels={rombels} teachers={teachers} homeVisits={homeVisits} setHomeVisits={setHomeVisits} setAppointments={setAppointments} schoolProfile={safeSchoolProfile} notify={notify} userRole={user.role} counselorProfile={activeCounselorProfile} currentUser={user} />} />
               <Route path="/advocacy" element={<AdvocacyList students={students} rombels={rombels} teachers={teachers} advocacyCases={advocacies} setAdvocacyCases={setAdvocacies} setAppointments={setAppointments} schoolProfile={safeSchoolProfile} notify={notify} userRole={user.role} counselorProfile={activeCounselorProfile} currentUser={user} />} />
@@ -1896,7 +1983,7 @@ const App: React.FC = () => {
               <Route path="/grade-forum" element={user.role !== 'supervisor' ? <GradeForum userRole={user.role} userGrade={students.find(s => s.id === user.id)?.grade} userName={user.name} userId={user.id} posts={forumPosts} setPosts={setForumPosts} /> : <Navigate to="/" replace />} />
               <Route path="/class-report" element={(user.role === 'student' || user.role === 'ketua_murid') ? <ClassReportPage user={user} students={students} rombels={rombels} classReports={classReports} attendanceLogs={attendanceLogs} setClassReports={setClassReports} setAttendanceLogs={setAttendanceLogs} notify={notify} /> : <Navigate to="/" replace />} />
               <Route path="/validate-reports" element={user.role === 'counselor' || user.role === 'super_admin' ? <ValidateReportPage user={user} students={students} rombels={rombels} classReports={classReports} setClassReports={setClassReports} setAttendanceLogs={setAttendanceLogs} notify={notify} teachers={teachers} /> : <Navigate to="/" replace />} />
-              <Route path="/satisfaction-report" element={<SatisfactionReport feedbacks={feedbacks} assignments={assignments} setAssignments={setAssignments} rombels={rombels} students={students} notify={notify} userRole={user.role} schoolProfile={safeSchoolProfile} />} />
+              <Route path="/satisfaction-report" element={(user.role === 'super_admin' || user.role === 'counselor' || user.role === 'principal' || user.role === 'supervisor') ? <SatisfactionReport feedbacks={feedbacks} assignments={assignments} setAssignments={setAssignments} rombels={rombels} students={students} notify={notify} userRole={user.role} schoolProfile={safeSchoolProfile} /> : <Navigate to="/" replace />} />
               <Route path="/satisfaction-input" element={<StudentSatisfaction currentUser={user} students={students} rombels={rombels} feedbacks={feedbacks} setFeedbacks={setFeedbacks} notify={notify} assignments={assignments} />} />
               <Route path="/report/mbti" element={user.role !== 'principal' && user.role !== 'supervisor' ? <MbtiReport submissions={allQuestionnaireSubmissions} setSubmissions={setQuestionnaireSubmissions} students={students} rombels={rombels} assignments={assignments} schoolProfile={safeSchoolProfile} counselorProfile={activeCounselorProfile} notify={notify} userRole={user.role} /> : <Navigate to="/" replace />} />
               <Route path="/report/sq" element={<SqReport submissions={sqSubmissions} setSubmissions={setSqSubmissions} students={students} rombels={rombels} assignments={assignments} schoolProfile={safeSchoolProfile} counselorProfile={activeCounselorProfile} notify={notify} userRole={user.role} />} />
@@ -1939,12 +2026,14 @@ const App: React.FC = () => {
               /> : <Navigate to="/" replace />} />
               <Route path="/administration" element={(user.role === 'super_admin' || user.role === 'counselor') ? <BKAdministrationPage data={bkAdmin} setData={setBkAdmin} notify={notify} schoolProfile={safeSchoolProfile} gradesConfig={gradesConfig} counselorProfile={counselorProfiles[user.id] || counselorProfiles['u2']} /> : <Navigate to="/" replace />} />
               <Route path="/change-password" element={<ChangePasswordPage notify={notify} currentUser={user} appUsers={appUsers} setAppUsers={setAppUsers} />} />
+              <Route path="/grade-management" element={(user.role === 'super_admin' || user.role === 'principal' || user.role === 'curriculum') ? <GradeManagement students={students} setStudents={setStudents} alumni={alumni} setAlumni={setAlumni} rombels={rombels} classSubjects={classSubjects} setClassSubjects={setClassSubjects} studentGrades={studentGrades} setStudentGrades={setStudentGrades} notify={notify} schoolProfile={safeSchoolProfile} gradesConfig={gradesConfig} /> : <Navigate to="/" replace />} />
+              <Route path="/grade-reports" element={(user.role === 'super_admin' || user.role === 'principal' || user.role === 'curriculum') ? <GradeReports students={students} setStudents={setStudents} alumni={alumni} setAlumni={setAlumni} rombels={rombels} classSubjects={classSubjects} schoolProfile={safeSchoolProfile} studentGrades={studentGrades} gradesConfig={gradesConfig} graduationInfo={kurikulumDb} activeAcademicYear={safeSchoolProfile.activeAcademicYear} activeSemester={safeSchoolProfile.activeSemester} us1Records={us1Records} setUs1Records={setUs1Records} /> : <Navigate to="/" replace />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </div>
 
-          <footer className="mt-12 py-6 text-center border-t border-slate-200">
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest select-none">
+          <footer className="mt-12 py-6 text-center border-t border-slate-200 print-hide">
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest select-none print-hide">
               © {new Date().getFullYear()} STAR PRESTASI K8.9 • Hak Cipta Dilindungi Undang-Undang
             </p>
           </footer>

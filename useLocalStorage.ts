@@ -70,6 +70,8 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, React.Dispatch<Re
   const [storedValue, setStoredValueState] = useState<T>(readValue);
   const [isInitialized, setIsInitialized] = useState(false);
   const isManuallySet = React.useRef(false);
+  const isExternalUpdate = React.useRef(false);
+  const instanceId = React.useRef(Math.random().toString(36).substring(7));
 
   const setStoredValue = useCallback((value: React.SetStateAction<T>) => {
     isManuallySet.current = true;
@@ -105,30 +107,51 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, React.Dispatch<Re
 
   useEffect(() => {
     if (!isInitialized) return;
-    if (USE_LS_KEYS.has(key)) {
-      try {
-        window.localStorage.setItem(key, JSON.stringify(storedValue));
-      } catch (error) {
-        console.warn(`Error setting localStorage key "${key}":`, error);
+      if (isExternalUpdate.current) {
+          isExternalUpdate.current = false;
+          return;
       }
-    }
-    idbSet(key, storedValue);
-    
-    // Auto-sync trigger
-    window.dispatchEvent(new CustomEvent('sync-to-cloud', { detail: { key, value: storedValue } }));
-  }, [key, storedValue, isInitialized]);
+      if (USE_LS_KEYS.has(key)) {
+        try {
+          window.localStorage.setItem(key, JSON.stringify(storedValue));
+        } catch (error) {
+          console.warn(`Error setting localStorage key "${key}":`, error);
+        }
+      }
+      
+      // Await idbSet to prevent race condition where idbGet reads old value
+      idbSet(key, storedValue).then(() => {
+        // Notify other components using the same key
+        window.dispatchEvent(new CustomEvent('local-storage-update', { detail: { key, value: storedValue, sourceId: instanceId.current } }));
+        
+        // Auto-sync trigger
+        window.dispatchEvent(new CustomEvent('sync-to-cloud', { detail: { key, value: storedValue } }));
+      });
+    }, [key, storedValue, isInitialized]);
 
   useEffect(() => {
     const handleStorageChange = async (e: StorageEvent | CustomEvent) => {
       if (e instanceof StorageEvent && e.key !== key) return;
       if (e instanceof CustomEvent && e.detail?.key && e.detail.key !== key) return;
+      if (e instanceof CustomEvent && e.detail?.sourceId === instanceId.current) return;
       
-      const idbVal = await idbGet(key);
-      if (idbVal !== null && idbVal !== undefined) {
-        setStoredValue(idbVal);
+      let newValue: any = null;
+      if (e instanceof CustomEvent && e.detail && 'value' in e.detail) {
+          newValue = e.detail.value;
       } else {
-        setStoredValue(readValue());
+          const idbVal = await idbGet(key);
+          if (idbVal !== null && idbVal !== undefined) {
+              newValue = idbVal;
+          } else {
+              newValue = readValue();
+          }
       }
+      
+      setStoredValueState((prev) => {
+          if (prev === newValue) return prev;
+          isExternalUpdate.current = true;
+          return newValue;
+      });
     };
 
     window.addEventListener('storage', handleStorageChange);

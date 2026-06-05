@@ -1,0 +1,911 @@
+
+--- NEW CHUNK ---
+The following is a <SYSTEM_MESSAGE> not actually sent by the user. It is provided by the system as important information to pay attention to.
+
+<SYSTEM_MESSAGE>
+[Message] timestamp=2026-05-26T05:11:52Z sender=cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-4996 priority=MESSAGE_PRIORITY_HIGH content=Task id "cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-4996" finished with result:
+
+				The command failed with exit code: 1
+				Output:
+				<truncated 351 lines>
+pages\TeachersList.tsx:333:      // Dapatkan data user yang terkait dengan guru ini sebelum dihapus
+pages\TeachersList.tsx:339:      // Hapus juga akses akun jika ada (untuk Konselor)
+pages\TeachersList.tsx:347:      notify(`Data guru ${name} telah dihapus.`, "info");
+pages\TeachersList.tsx:355:          <h2 className="text-2xl font-bold text-slate-900">Database Guru</h2>
+pages\TeachersList.tsx:368:              placeholder="Cari guru..."
+pages\TeachersList.tsx:390:                Tambah Guru
+pages\TeachersList.tsx:399:        <button onClick={() => setActiveTab('Konselor')} className={`px-5 py-2 rounded-xl 
+text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'Konselor' ? 'bg-white text-blue-600 
+shadow-sm' : 'text-slate-500'}`}>Konselor</button>
+pages\TeachersList.tsx:402:        <button onClick={() => setActiveTab('Guru Mapel')} className={`px-5 py-2 rounded-xl 
+text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'Guru Mapel' ? 'bg-white text-slate-600 
+shadow-sm' : 'text-slate-500'}`}>Guru Mapel</button>
+pages\TeachersList.tsx:403:        <button onClick={() => setActiveTab('Kepala Sekolah')} className={`px-5 py-2 
+rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'Kepala Sekolah' ? 'bg-white 
+text-rose-600 shadow-sm' : 'text-slate-500'}`}>Kepala Sekolah</button>
+pages\TeachersList.tsx:411:                <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase 
+tracking-widest">Informasi Guru</th>
+pages\TeachersList.tsx:435:                        <spa
+<truncated 4602 bytes>
+=> setActiveTab('counselor')} className={`px-5 py-2 
+rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'counselor' ? 'bg-white 
+text-emerald-600 shadow-sm' : 'text-slate-500'}`}>Konselor</button>
+pages\UserManagement.tsx:227:        <button onClick={() => setActiveTab('teacher')} className={`px-5 py-2 rounded-xl 
+text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'teacher' ? 'bg-white text-slate-600 
+shadow-sm' : 'text-slate-500'}`}>Guru Mapel</button>
+pages\UserManagement.tsx:247:                // Cari data guru untuk mendapatkan NIP
+pages\UserManagement.tsx:353:                  <option value="counselor">Konselor (Guru BK)</option>
+pages\UserManagement.tsx:354:                  <option value="principal">Kepala Sekolah</option>
+pages\UserManagement.tsx:357:                  <option value="teacher">Guru Mata Pelajaran</option>
+pages\UserManagement.tsx:373:                  <option value="">-- Pilih Guru / Staf --</option>
+pages\UserManagement.tsx:374:                  {/* Pastikan nama user yang sedang diedit tetap muncul walaupun rolenya 
+tidak cocok di database guru saat ini (edge case) */}
+pages\UserManagement.tsx:385:                  <p className="text-[10px] text-rose-500 font-bold mt-1">Tidak ada data 
+guru dengan role ini.</p>
+Get-ChildItem : Cannot find path 'D:\star prestasi\Evaluasi Stars Prestasi\stars-prestasi-k8.95-7 Backup data7 11 (28) 
+ok\project\src' because it does not exist.
+At line:1 char:1
++ Get-ChildItem -Path pages, src, components -Recurse -File -Include *. ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (D:\star prestas... ok\project\src:String) [Get-ChildItem], ItemNotFound 
+   Exception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetChildItemCommand
+ 
+
+
+
+
+Log: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_generated/tasks/task-4996.log
+</SYSTEM_MESSAGE>
+
+--- NEW CHUNK ---
+The following is a <SYSTEM_MESSAGE> not actually sent by the user. It is provided by the system as important information to pay attention to.
+
+<SYSTEM_MESSAGE>
+[Message] timestamp=2026-05-26T05:12:25Z sender=cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-4987 priority=MESSAGE_PRIORITY_HIGH content=Task id "cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-4987" finished with result:
+
+				The command completed successfully.
+				Output:
+				
+pages\AdvocacyList.tsx:214:    doc.text("Kepala Sekolah", 40, currentY + 5);
+pages\AdvocacyList.tsx:560:                          <p className="font-sans text-[10px] uppercase font-bold 
+tracking-widest text-slate-400">Mengetahui,<br/><span className="text-slate-900 text-sm font-serif font-normal">Kepala 
+Sekolah</span></p>
+pages\AqReport.tsx:122:    doc.text("Kepala Sekolah,", 40, signY + 5);
+pages\AssignmentManagement.tsx:518:    doc.text("Kepala Sekolah,", 40, signY + 5);
+pages\BimbinganKelompok.tsx:233:    doc.text("Kepala Sekolah", 40, currentY + 5);
+pages\BimbinganKelompok.tsx:613:                      <div><p className="font-sans text-[10px] uppercase font-bold 
+tracking-widest text-slate-400 mb-2">Mengetahui,</p><p>Kepala Sekolah</p></div>
+pages\BimbinganKlasikal.tsx:115:    doc.text("Kepala Sekolah", 40, currentY + 5);
+pages\BimbinganKlasikal.tsx:447:                    <div><p>Mengetahui,<br />Kepala Sekolah</p></div>
+pages\BimbinganPribadi.tsx:247:    doc.text("Kepala Sekolah", 40, currentY + 5);
+pages\BimbinganPribadi.tsx:650:                          <p>Mengetahui,<br/>Kepala Sekolah</p>
+pages\BKAdministration.tsx:414:    pdf.text("Kepala Sekolah,", 15, yPos + 5);
+pages\BKAdministration.tsx:416:    pdf.text(schoolProfile.principalName || 'Nama Kepala Sekolah', 15, yPos + 30);
+pages\Calendar.tsx:244:    doc.text("Kepala Sekolah,", 30, signY + 5);
+pages\CaseConferenceList.tsx:37:    participants: ['Kepala Sekolah', 'Guru BK'],
+pages\CaseConferenceList.tsx:223:    doc.text("Kepala Sekolah", 40, currentY + 5);
+pages\CaseConferenceList.tsx:317:                part
+<truncated 1579 bytes>
+             <label className="text-[9px] font-black text-slate-300 
+uppercase">NIP Kepala Sekolah</label>
+pages\SchoolProfile.tsx:772:                        *Otomatis sinkron dari Daftar Guru (Peran: Kepala Sekolah).
+pages\SchoolProfile.tsx:773:                        Akan muncul di tanda tangan Kepala Sekolah pada laporan PDF.
+pages\SociometryManagement.tsx:318:    doc.text("Kepala Sekolah,", 30, signY + 5);
+pages\SqReport.tsx:121:    doc.text("Kepala Sekolah,", 40, signY + 5);
+pages\StudentBioReport.tsx:205:    doc.text("Kepala Sekolah,", 30, signY + 5);
+pages\TeachersList.tsx:28:  const [activeTab, setActiveTab] = useState<'Semua' | 'Konselor' | 'Wali Kelas' | 'Guru 
+Mapel' | 'Humas' | 'Kepala Sekolah'>('Semua');
+pages\TeachersList.tsx:105:    if (teacher.role === 'Kepala Sekolah') appRole = 'principal';
+pages\TeachersList.tsx:403:        <button onClick={() => setActiveTab('Kepala Sekolah')} className={`px-5 py-2 
+rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'Kepala Sekolah' ? 'bg-white 
+text-rose-600 shadow-sm' : 'text-slate-500'}`}>Kepala Sekolah</button>
+pages\TeachersList.tsx:643:                  <option value="Kepala Sekolah">Kepala Sekolah</option>
+pages\TeachersList.tsx:733:                  <option value="Kepala Sekolah">Kepala Sekolah</option>
+pages\UserManagement.tsx:182:      case 'principal': return 'Kepala Sekolah';
+pages\UserManagement.tsx:210:          <p className="text-slate-500 text-sm">Kelola akses akun Konselor, Kepala 
+Sekolah, Guru, dan Pengawas.</p>
+pages\UserManagement.tsx:354:                  <option value="principal">Kepala Sekolah</option>
+App.tsx:125:  principalName: 'Dr. Kepala Sekolah, M.Pd',
+App.tsx:953:    const principal = teachers.find(t => t.role === 'Kepala Sekolah');
+types.ts:129:  role: 'Konselor' | 'Wali Kelas' | 'Guru Mapel' | 'Humas' | 'Kepala Sekolah';
+
+
+
+
+Log: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_generated/tasks/task-4987.log
+</SYSTEM_MESSAGE>
+
+--- NEW CHUNK ---
+The following is a <SYSTEM_MESSAGE> not actually sent by the user. It is provided by the system as important information to pay attention to.
+
+<SYSTEM_MESSAGE>
+[Message] timestamp=2026-05-26T08:54:34Z sender=cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-5767 priority=MESSAGE_PRIORITY_HIGH content=Task id "cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-5767" finished with result:
+
+				The command completed successfully.
+				Output:
+				
+pages\Dashboard.tsx:13:import CurriculumDashboardView from '../components/CurriculumDashboardView';
+pages\Dashboard.tsx:730:      {(userRole === 'curriculum' || userRole === 'super_admin') && (
+pages\Dashboard.tsx:732:          <CurriculumDashboardView students={students} rombels={rombels} />
+pages\Dashboard.tsx:736:      {!isStudent && userRole !== 'humas' && userRole !== 'curriculum' && (
+pages\StudentsList.tsx:487:                      {(userRole === 'super_admin' || userRole === 'counselor' || userRole 
+=== 'curriculum') && (
+pages\UserManagement.tsx:84:      case 'curriculum':
+pages\UserManagement.tsx:190:      case 'curriculum': return 'Kurikulum';
+pages\UserManagement.tsx:204:      case 'curriculum': return 'bg-pink-100 text-pink-700';
+pages\UserManagement.tsx:233:        <button onClick={() => setActiveTab('curriculum')} className={`px-5 py-2 
+rounded-xl text-xs font-black uppercase tracking-tight transition-all ${activeTab === 'curriculum' ? 'bg-white 
+text-pink-600 shadow-sm' : 'text-slate-500'}`}>Kurikulum</button>
+pages\UserManagement.tsx:362:                  <option value="curriculum">Kurikulum</option>
+components\CurriculumDashboardView.tsx:6:interface CurriculumDashboardViewProps {
+components\CurriculumDashboardView.tsx:11:const CurriculumDashboardView: React.FC<CurriculumDashboardViewProps> = ({ 
+students, rombels }) => {
+components\CurriculumDashboardView.tsx:145:export default CurriculumDashboardView;
+App.tsx:1658:            {user.role === 'curriculum' && <SidebarItem to="/students" icon={<ICONS.Students />} 
+label="Database Siswa" onClick={closeMobileMenu} />}
+App.tsx:1807:              <Route path="/students" element={(user.role === 'super_admin' || user.role === 'counselor' 
+|| user.role === 'curriculum') ? <StudentsList
+
+
+
+
+Log: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_generated/tasks/task-5767.log
+</SYSTEM_MESSAGE>
+
+--- NEW CHUNK ---
+The following is a <SYSTEM_MESSAGE> not actually sent by the user. It is provided by the system as important information to pay attention to.
+
+<SYSTEM_MESSAGE>
+[Message] timestamp=2026-05-27T08:07:23Z sender=cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-7869 priority=MESSAGE_PRIORITY_HIGH content=Task id "cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-7869" finished with result:
+
+				The command completed successfully.
+				Output:
+				
+    studentGrades,
+    setStudentGrades
+  }: GradeManagementProps) {
+>   const [activeTab, setActiveTab] = useState<'subject-selection' | 'import-grades' | 
+'view-grades'>('subject-selection');
+    
+    // Curriculum State
+    const [curriculum, setCurriculum] = useState<'Merdeka' | 'K13'>(() => {
+  
+        <div className="flex gap-4 border-b border-slate-200">
+            <button
+>             onClick={() => setActiveTab('subject-selection')}
+>             className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 ${activeTab 
+=== 'subject-selection' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-400 
+hover:text-slate-600'}`}
+            >
+            Penentuan Mata Pelajaran
+          </button>
+            <button
+>             onClick={() => setActiveTab('import-grades')}
+>             className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 ${activeTab 
+=== 'import-grades' ? 'border-teal-500 text-teal-600' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+            >
+            Import Nilai Massal
+          </button>
+          <button
+>             onClick={() => setActiveTab('view-grades')}
+>             className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 ${activeTab 
+=== 'view-grades' ? 'border-blue-500 text-blue-600' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+            >
+            Nilai Raport
+          </button>
+        </div>
+  
+>       {activeTab === 'subject-selection' && (
+          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+          </div>
+        )}
+  
+>       {activeTab === 'import-grades' && (
+          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+          </div>
+        )}
+  
+>       {activeTab === 'view-grades' && (
+          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+
+
+
+
+Log: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_generated/tasks/task-7869.log
+</SYSTEM_MESSAGE>
+
+--- NEW CHUNK ---
+The following is a <SYSTEM_MESSAGE> not actually sent by the user. It is provided by the system as important information to pay attention to.
+
+<SYSTEM_MESSAGE>
+[Message] timestamp=2026-05-27T08:08:48Z sender=cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-7880 priority=MESSAGE_PRIORITY_HIGH content=Task id "cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-7880" finished with result:
+
+				The command completed successfully.
+				Output:
+				
+    studentGrades,
+    setStudentGrades
+  }: GradeManagementProps) {
+>   const [activeTab, setActiveTab] = useState<'subject-selection' | 'import-grades' | 
+'view-grades'>('subject-selection');
+    
+    // Curriculum State
+    const [curriculum, setCurriculum] = useState<'Merdeka' | 'K13'>(() => {
+  
+        <div className="flex gap-4 border-b border-slate-200">
+            <button
+>             onClick={() => setActiveTab('subject-selection')}
+              className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 ${activeTab 
+=== 'subject-selection' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-400 
+hover:text-slate-600'}`}
+            >
+            Penentuan Mata Pelajaran
+          </button>
+            <button
+>             onClick={() => setActiveTab('import-grades')}
+              className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 ${activeTab 
+=== 'import-grades' ? 'border-teal-500 text-teal-600' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+            >
+            Import Nilai Massal
+          </button>
+          <button
+>             onClick={() => setActiveTab('view-grades')}
+              className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 ${activeTab 
+=== 'view-grades' ? 'border-blue-500 text-blue-600' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+            >
+            Nilai Raport
+
+
+
+
+Log: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_generated/tasks/task-7880.log
+</SYSTEM_MESSAGE>
+
+--- NEW CHUNK ---
+The following is a <SYSTEM_MESSAGE> not actually sent by the user. It is provided by the system as important information to pay attention to.
+
+<SYSTEM_MESSAGE>
+[Message] timestamp=2026-05-27T08:09:54Z sender=cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-7887 priority=MESSAGE_PRIORITY_HIGH content=Task id "cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-7887" finished with result:
+
+				The command completed successfully.
+				Output:
+				
+      <div className="space-y-6 max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+>           <h1 className="text-2xl font-black text-slate-800">Manajemen Nilai Raport</h1>
+            <p className="text-slate-500 text-sm mt-1">Atur mata pelajaran per kelas dan impor nilai secara massal.</p>
+          </div>
+        </div>
+  
+        <div className="flex gap-4 border-b border-slate-200">
+              onClick={() => setActiveTab('view-grades')}
+              className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 ${activeTab 
+=== 'view-grades' ? 'border-blue-500 text-blue-600' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+            >
+>           Nilai Raport
+          </button>
+        </div>
+  
+        {activeTab === 'subject-selection' && (
+          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+
+
+
+
+Log: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_generated/tasks/task-7887.log
+</SYSTEM_MESSAGE>
+
+--- NEW CHUNK ---
+The following is a <SYSTEM_MESSAGE> not actually sent by the user. It is provided by the system as important information to pay attention to.
+
+<SYSTEM_MESSAGE>
+[Message] timestamp=2026-05-27T10:46:50Z sender=cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-8150 priority=MESSAGE_PRIORITY_HIGH content=Task id "cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-8150" finished with result:
+
+				The command completed successfully.
+				Output:
+				
+    classSubjects,
+    setClassSubjects,
+    studentGrades,
+    setStudentGrades
+  }: GradeManagementProps) {
+>   const [activeTab, setActiveTab] = useState<'subject-selection-ijazah' | 'subject-selection-eligible' | 
+'import-grades' | 'view-grades' | 'report-psaj'>('subject-selection-ijazah');
+    
+    const [reportPsajType, setReportPsajType] = useState<'per-kelas' | 'seangkatan'>('seangkatan');
+    const [reportPsajClass, setReportPsajClass] = useState<string>('');
+    
+    // Curriculum State
+    const [curriculum, setCurriculum] = useState<'Merdeka' | 'K13'>(() => {
+      return (localStorage.getItem('star_curriculum') as 'Merdeka' | 'K13') || 'Merdeka';
+    });
+    
+    React.useEffect(() => {
+      localStorage.setItem('star_curriculum', curriculum);
+    }, [curriculum]);
+  
+    // Subject Selection State
+    const [subjectMajor, setSubjectMajor] = useState<string>('');
+              className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'subject-selection-ijazah' ? 'border-indigo-500 text-indigo-600' : 
+'border-transparent text-slate-400 hover:text-slate-600'}`}
+            >
+            Penentuan Mata Pelajaran Ijazah
+          </button>
+            <button
+>             onClick={() => setActiveTab('subject-selection-eligible')}
+>             className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'subject-selection-eligible' ? 'border-indigo-500 text-indigo-600' : 
+'border-transparent text-slate-400 hover:text
+<truncated 1608 bytes>
+te-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 
+focus:ring-teal-500 outline-none"
+                >
+                  <option value="Merdeka">Kurikulum Merdeka</option>
+                  <option value="K13">Kurikulum KTSP / K13</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Pilih 
+Jurusan</label>
+                  </button>
+                </div>
+              </div>
+            )}
+  
+>           {subjectMajor && activeTab === 'subject-selection-eligible' && (
+              <div className="pt-4 border-t border-slate-100">
+                <h3 className="text-sm font-bold text-slate-700 mb-2">Pilih Mata Pelajaran Eligible (SNBP)</h3>
+                <p className="text-xs text-slate-500 mb-6">Tandai mata pelajaran yang nilainya akan digunakan untuk 
+pemeringkatan Eligible SNBP secara online. (Harus dikonfigurasi di Ijazah terlebih dahulu)</p>
+                
+                {selectedSubjects.length === 0 ? (
+                  <div className="p-4 bg-yellow-50 text-yellow-800 rounded-xl text-sm font-medium">
+                    Belum ada mata pelajaran ijazah/raport yang dikonfigurasi untuk jurusan ini. Silakan atur di tab 
+<strong>Penentuan Mata Pelajaran Ijazah</strong> terlebih dahulu.
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {selectedSubjects.map(sub => (
+                      <label key={sub} className="flex items-center gap-3 p-3 rounded-xl border border-blue-100 
+hover:bg-blue-50 cursor-pointer transition-colors">
+                        <input
+                          type="checkbox"
+                          checked={selectedEligibleSubjects.includes(sub)}
+
+
+
+
+Log: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_generated/tasks/task-8150.log
+</SYSTEM_MESSAGE>
+
+--- NEW CHUNK ---
+The following is a <SYSTEM_MESSAGE> not actually sent by the user. It is provided by the system as important information to pay attention to.
+
+<SYSTEM_MESSAGE>
+[Message] timestamp=2026-05-27T12:21:54Z sender=cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-8363 priority=MESSAGE_PRIORITY_HIGH content=Task id "cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-8363" finished with result:
+
+				The command completed successfully.
+				Output:
+				
+    setStudentGrades,
+    schoolProfile
+  }: GradeManagementProps) {
+>   const [activeTab, setActiveTab] = useState<'subject-selection-ijazah' | 'subject-selection-eligible' | 
+'import-grades' | 'view-grades' | 'report-psaj' | 'report-eligible'>('subject-selection-ijazah');
+    
+    const [reportPsajType, setReportPsajType] = useState<'per-kelas' | 'seangkatan'>('seangkatan');
+    const [reportPsajClass, setReportPsajClass] = useState<string>('');
+  
+        <div className="flex gap-4 border-b border-slate-200 overflow-x-auto">
+            <button
+>             onClick={() => setActiveTab('subject-selection-ijazah')}
+>             className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'subject-selection-ijazah' ? 'border-indigo-500 text-indigo-600' : 
+'border-transparent text-slate-400 hover:text-slate-600'}`}
+            >
+            Penentuan Mata Pelajaran Ijazah
+          </button>
+            <button
+>             onClick={() => setActiveTab('subject-selection-eligible')}
+>             className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'subject-selection-eligible' ? 'border-indigo-500 text-indigo-600' : 
+'border-transparent text-slate-400 hover:text-slate-600'}`}
+            >
+            Penentuan Mata Pelajaran Eligible
+          </button>
+            <button
+>             onClick={() => setActiveTab('import-grades')}
+>             className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-ce
+<truncated 1552 bytes>
+t-selection-eligible') && (
+          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+              </div>
+            </div>
+  
+>           {subjectMajor && activeTab === 'subject-selection-ijazah' && (
+              <div className="pt-4 border-t border-slate-100">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-sm font-bold text-slate-700">Daftar Mata Pelajaran Ijazah / Raport</h3>
+              </div>
+            )}
+  
+>           {subjectMajor && activeTab === 'subject-selection-eligible' && (
+              <div className="pt-4 border-t border-slate-100">
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+          </div>
+        )}
+  
+>       {activeTab === 'import-grades' && (
+          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+          </div>
+        )}
+  
+>       {activeTab === 'view-grades' && (
+          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+          </div>
+        )}
+  
+>       {activeTab === 'report-psaj' && (
+          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6 printable-report">
+            <style>{`
+              @media print {
+          </div>
+        )}
+  
+>       {activeTab === 'report-eligible' && (
+          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6 printable-report">
+            <style>{`
+              @media print {
+
+
+
+
+Log: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_generated/tasks/task-8363.log
+</SYSTEM_MESSAGE>
+
+--- NEW CHUNK ---
+The following is a <SYSTEM_MESSAGE> not actually sent by the user. It is provided by the system as important information to pay attention to.
+
+<SYSTEM_MESSAGE>
+[Message] timestamp=2026-05-27T13:25:33Z sender=cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-8521 priority=MESSAGE_PRIORITY_HIGH content=Task id "cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-8521" finished with result:
+
+				The command completed successfully.
+				Output:
+				
+    setStudentGrades,
+    schoolProfile
+  }: GradeManagementProps) {
+>   const [activeTab, setActiveTab] = useState<'subject-selection-ijazah' | 'subject-selection-eligible' | 
+'import-grades' | 'view-grades' | 'report-psaj' | 'report-eligible'>('subject-selection-ijazah');
+    
+    const [reportPsajType, setReportPsajType] = useState<'per-kelas' | 'seangkatan'>('seangkatan');
+    const [reportPsajClass, setReportPsajClass] = useState<string>('');
+    
+    // Eligible Ranking State
+    const [eligibleMajor, setEligibleMajor] = useState<string>('');
+    const [eligibleQuotaStr, setEligibleQuotaStr] = useState<string>('40');
+    
+    // Curriculum State
+    const [curriculum, setCurriculum] = useState<'Merdeka' | 'K13'>(() => {
+              Nilai Raport
+            </button>
+            <button
+>             onClick={() => setActiveTab('report-psaj')}
+>             className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'report-psaj' ? 'border-purple-500 text-purple-600' : 'border-transparent 
+text-slate-400 hover:text-slate-600'}`}
+            >
+              Laporan PSAJ
+            </button>
+            <button
+              onClick={() => setActiveTab('report-eligible')}
+              className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'report-eligible' ? 'border-amber-500 text-amber-600' : 'border-transparent 
+text-slate-400 hover:text-slate-600'}`}
+            >
+              Pemeringkatan Eligible
+            </button>
+          </div>
+          </div>
+        )}
+  
+>       {activeTab === 'report-psaj' && (
+          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6 printable-report">
+            <style>{`
+              @media print {
+                body * {
+                  visibility: hidden;
+                }
+                .printable-report, .printable-report * {
+                  visibility: visible;
+                }
+                .printable-report {
+
+
+
+
+Log: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_generated/tasks/task-8521.log
+</SYSTEM_MESSAGE>
+
+--- NEW CHUNK ---
+The following is a <SYSTEM_MESSAGE> not actually sent by the user. It is provided by the system as important information to pay attention to.
+
+<SYSTEM_MESSAGE>
+[Message] timestamp=2026-05-27T13:29:23Z sender=cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-8539 priority=MESSAGE_PRIORITY_HIGH content=Task id "cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-8539" finished with result:
+
+				The command completed successfully.
+				Output:
+				
+            </button>
+            <button
+              onClick={() => setActiveTab('report-eligible')}
+              className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'report-eligible' ? 'border-amber-500 text-amber-600' : 'border-transparent 
+text-slate-400 hover:text-slate-600'}`}
+            >
+>             Pemeringkatan Eligible
+            </button>
+          </div>
+  
+        {(activeTab === 'subject-selection-ijazah' || activeTab === 'subject-selection-eligible') && (
+          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+            {subjectMajor && activeTab === 'subject-selection-eligible' && (
+              <div className="pt-4 border-t border-slate-100">
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-700 mb-2">Pilih Mata Pelajaran Eligible (SNBP)</h3>
+>                   <p className="text-xs text-slate-500">Tandai mata pelajaran yang nilainya akan digunakan untuk 
+pemeringkatan Eligible SNBP secara online. (Harus dikonfigurasi di Ijazah terlebih dahulu)</p>
+                  </div>
+                  {selectedSubjects.length > 0 && (
+                    <button
+                      onClick={() => {
+                        const isAllSelected = selectedSubjects.every(sub => selectedEligibleSubjects.includes(sub));
+                 displayQuotaText = `Semua Jurusan • Hanya Siswa Eligible (${displayStudents.length} Siswa)`;
+              } else {
+                 displayStudents = processMajor(eligibleMajor, false);
+                 const majorStudentCount = students.filter(s => rombels.find(r => r.id === s.class)?.major === 
+eligibleMajor && (rombels.find(r => r.id === s.class)?.grade === 'XII' || rombels.find(r => r.id === s.class)?.grade 
+=== '12')).length;
+                 const quotaCount = Math.ceil((majorStudentCount * quota) / 100);
+>                displayTitle = 'Pemeringkatan Eligible SNBP';
+                 displayQuotaText = `Jurusan ${eligibleMajor} • Kuota ${quota}% (${quotaCount} dari 
+${displayStudents.length} Siswa)`;
+              }
+              
+              return (
+                <div className="space-y-6">
+
+
+
+
+Log: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_generated/tasks/task-8539.log
+</SYSTEM_MESSAGE>
+
+--- NEW CHUNK ---
+The following is a <SYSTEM_MESSAGE> not actually sent by the user. It is provided by the system as important information to pay attention to.
+
+<SYSTEM_MESSAGE>
+[Message] timestamp=2026-05-27T13:31:17Z sender=cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-8547 priority=MESSAGE_PRIORITY_HIGH content=Task id "cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-8547" finished with result:
+
+				The command completed successfully.
+				Output:
+				
+              onClick={() => setActiveTab('report-eligible')}
+              className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'report-eligible' ? 'border-amber-500 text-amber-600' : 'border-transparent 
+text-slate-400 hover:text-slate-600'}`}
+            >
+>             Pemeringkatan Eligible
+            </button>
+          </div>
+  
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-700 mb-2">Pilih Mata Pelajaran Eligible (SNBP)</h3>
+>                   <p className="text-xs text-slate-500">Tandai mata pelajaran yang nilainya akan digunakan untuk 
+pemeringkatan Eligible SNBP secara online. (Harus dikonfigurasi di Ijazah terlebih dahulu)</p>
+                  </div>
+                  {selectedSubjects.length > 0 && (
+                    <button
+                 displayStudents = processMajor(eligibleMajor, false);
+                 const majorStudentCount = students.filter(s => rombels.find(r => r.id === s.class)?.major === 
+eligibleMajor && (rombels.find(r => r.id === s.class)?.grade === 'XII' || rombels.find(r => r.id === s.class)?.grade 
+=== '12')).length;
+                 const quotaCount = Math.ceil((majorStudentCount * quota) / 100);
+>                displayTitle = 'Pemeringkatan Eligible SNBP';
+                 displayQuotaText = `Jurusan ${eligibleMajor} • Kuota ${quota}% (${quotaCount} dari 
+${displayStudents.length} Siswa)`;
+              }
+              
+
+
+
+
+Log: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_generated/tasks/task-8547.log
+</SYSTEM_MESSAGE>
+
+--- NEW CHUNK ---
+The following is a <SYSTEM_MESSAGE> not actually sent by the user. It is provided by the system as important information to pay attention to.
+
+<SYSTEM_MESSAGE>
+[Message] timestamp=2026-05-27T17:05:35Z sender=cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-9113 priority=MESSAGE_PRIORITY_HIGH content=Task id "cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-9113" finished with result:
+
+				The command completed successfully.
+				Output:
+				
+              Laporan PSAJ
+            </button>
+            <button
+              onClick={() => setActiveTab('report-eligible')}
+              className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'report-eligible' ? 'border-amber-500 text-amber-600' : 'border-transparent 
+text-slate-400 hover:text-slate-600'}`}
+            >
+              Pemeringkatan Eligible
+            </button>
+            <button
+              onClick={() => setActiveTab('report-us1')}
+>             className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'report-us1' ? 'border-sky-500 text-sky-600' : 'border-transparent text-slate-400 
+hover:text-slate-600'}`}
+            >
+              Laporan US-1
+            </button>
+            <button
+              onClick={() => setActiveTab('report-skkb')}
+              className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'report-skkb' ? 'border-pink-500 text-pink-600' : 'border-transparent text-slate-400 
+hover:text-slate-600'}`}
+            >
+              Surat Kelakuan Baik (SKKB)
+            </button>
+            <button
+              onClick={() => setActiveTab('report-skl')}
+              className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'report-skl' ? 'border-emerald-500 text-emerald-600' : 'border-transparent 
+text-slate-400 hover:text-slate-600'}`
+<truncated 1761 bytes>
+     </div>
+              );
+            })()}
+          </div>
+        )}
+  
+>       {activeTab === 'report-us1' && (
+          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6 printable-report">
+            <style>{`
+              @media print {
+                body * {
+                  visibility: hidden;
+                }
+                .printable-report, .printable-report * {
+                  visibility: visible;
+                }
+                .printable-report {
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  width: 100%;
+                }
+                @page {
+                  size: landscape;
+                  margin: 10mm;
+                }
+                .print-hide {
+                  display: none !important;
+                }
+              }
+            `}</style>
+            
+            <div className="flex justify-between items-center print-hide">
+              <div>
+                <h3 className="text-sm font-bold text-slate-700">Rekap Data Peserta Ujian (US-1)</h3>
+                <p className="text-xs text-slate-500">Merekap data spesifik US-1 untuk siswa tingkat XII.</p>
+              </div>
+              <div className="flex gap-2">
+                <select
+                  className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-bold 
+text-slate-700 outline-none focus:ring-2 focus:ring-sky-200"
+                  value={reportUs1Class}
+                  onChange={e => setReportUs1Class(e.target.value)}
+                >
+                  <option value="semua-xii">Semua Kelas XII</option>
+                  {rombels.filter(r => r.grade === 'XII' || r.grade === '12').map(r => (
+                    <option key={r.id} value={r.id}>{r.name}</option>
+                  ))}
+
+
+
+
+Log: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_generated/tasks/task-9113.log
+</SYSTEM_MESSAGE>
+
+--- NEW CHUNK ---
+The following is a <SYSTEM_MESSAGE> not actually sent by the user. It is provided by the system as important information to pay attention to.
+
+<SYSTEM_MESSAGE>
+[Message] timestamp=2026-05-27T23:43:18Z sender=cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-9388 priority=MESSAGE_PRIORITY_HIGH content=Task id "cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-9388" finished with result:
+
+				The command completed successfully.
+				Output:
+				
+            <button
+              onClick={() => setActiveTab('report-us1')}
+>             className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'report-us1' ? 'border-sky-500 text-sky-600' : 'border-transparent text-slate-400 
+hover:text-slate-600'}`}
+            >
+              Laporan US-1
+            </button>
+            <button
+              onClick={() => setActiveTab('report-skkb')}
+              className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'report-skkb' ? 'border-pink-500 text-pink-600' : 'border-transparent text-slate-400 
+hover:text-slate-600'}`}
+            >
+              Surat Kelakuan Baik (SKKB)
+            </button>
+            <button
+              onClick={() => setActiveTab('report-skl')}
+              className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'report-skl' ? 'border-emerald-500 text-emerald-600' : 'border-transparent 
+text-slate-400 hover:text-slate-600'}`}
+            >
+              Surat Kelulusan (SKL)
+            </button>
+            <button
+              onClick={() => setActiveTab('report-transcript')}
+              className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 
+whitespace-nowrap ${activeTab === 'report-transcript' ? 'border-violet-500 text-violet-600' : 'border-transparent 
+text-slate-400 hover:text-slate-600'}`}
+            >
+              Transkrip Nilai (Smt 1-6)
+            </button>
+          </div>
+  
+        {(activeTab === 'subject-selection-ijazah' || activeTab === 'subject-selection-eligible') && (
+          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+        )}
+  
+>       {activeTab === 'report-us1' && (
+          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6 printable-report">
+            <style>{`
+              @media print {
+                body * {
+                  visibility: hidden;
+                }
+                .printable-report, .printable-report * {
+                  visibility: visible;
+                }
+                .printable-report {
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  width: 100%;
+                }
+                @page {
+                  size: landscape;
+                  margin: 10mm;
+                }
+                .print-hide {
+                  display: none !important;
+                }
+              }
+            `}</style>
+            
+
+
+
+
+Log: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_generated/tasks/task-9388.log
+</SYSTEM_MESSAGE>
+
+--- NEW CHUNK ---
+The following is a <SYSTEM_MESSAGE> not actually sent by the user. It is provided by the system as important information to pay attention to.
+
+<SYSTEM_MESSAGE>
+[Message] timestamp=2026-05-28T02:12:18Z sender=cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-9617 priority=MESSAGE_PRIORITY_HIGH content=Task id "cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-9617" finished with result:
+
+				The command completed successfully.
+				Output:
+				            onClick={() => setActiveTab('report-psaj')}
+            className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex items-center gap-2 whitespace-nowrap $
+      {activeTab === 'report-psaj' && (
+        <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+           <p className="text-center text-slate-500 py-10">Fitur Laporan PSAJ sedang dalam perbaikan.</p>
+        </div>
+      )}
+      {activeTab === 'report-skkb' && (
+        <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+           <p className="text-center text-slate-500 py-10">Fitur Laporan SKKB sedang dalam perbaikan.</p>
+        </div>
+      )}
+      {activeTab === 'report-skl' && (
+        <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+           <p className="text-center text-slate-500 py-10">Fitur Laporan SKL sedang dalam perbaikan.</p>
+        </div>
+      )}
+      {activeTab === 'report-transcript' && (
+        <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+           <p className="text-center text-slate-500 py-10">Fitur Transkrip sedang dalam perbaikan.</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+
+
+
+
+
+
+Log: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_generated/tasks/task-9617.log
+</SYSTEM_MESSAGE>
+
+--- NEW CHUNK ---
+The following is a <SYSTEM_MESSAGE> not actually sent by the user. It is provided by the system as important information to pay attention to.
+
+<SYSTEM_MESSAGE>
+[Message] timestamp=2026-05-28T03:07:34Z sender=cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-9733 priority=MESSAGE_PRIORITY_HIGH content=Task id "cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/task-9733" finished with result:
+
+				The command completed successfully.
+				Output:
+				<truncated 544 lines>
+'border-indigo-500 text-indigo-600' : 'border-transparent \r\ntext-slate-400 hover:text-slate-600'}`}\r\n  
+pages\\GradeManagement.tsx:295:          >\r\n  pages\\GradeManagement.tsx:296:          Penentuan Mata Pelajaran\r\n  
+pages\\GradeManagement.tsx:297:        </button>\r\n  pages\\GradeManagement.tsx:298:          <button\r\n> 
+pages\\GradeManagement.tsx:299:            onClick={() => setActiveTab('import-grades')}\r\n> 
+pages\\GradeManagement.tsx:300:            className={`pb-4 px-4 text-sm font-black transition-all border-b-2 flex 
+\r\nitems-center gap-2 ${activeTab === 'import-grades' ? 'border-teal-500 text-teal-600' : 'border-transparent 
+\r\ntext-slate-400 hover:text-slate-600'}`}\r\n  pages\\GradeManagement.tsx:301:          >\r\n  
+pages\\GradeManagement.tsx:302:          Import Nilai Massal\r\n  pages\\GradeManagement.tsx:303:        </button>\r\n 
+ pages\\GradeManagement.tsx:304:        <button\r\n  pages\\GradeManagement.tsx:305:            onClick={() => 
+setActiveTab('view-grades')}\r\n  pages\\GradeManagement.tsx:306:            className={`pb-4 px-4 text-sm font-black 
+transition-all border-b-2 flex \r\nitems-center gap-2 ${activeTab === 'view-grades' ? 'border-blue-500 text-blue-600' 
+: 'border-transparent \r\ntext-slate-400 hover:text-slate-600'}`}\r\n  pages\\GradeManagement.tsx:307:          >\r\n  
+pages\\GradeManagement.tsx:308:          Lihat Nilai Tersimpan\r\n  pages\\GradeManagement.tsx:309:        
+</button>\r\n  pages\\GradeManagement.tsx:310:      </div>\r\n  pages\\GradeManagement.tsx:435:            </div>\r\n  
+pages\
+<truncated 4619 bytes>
+ gap-4 pt-4\">\r\n            
+<button\r\n              onClick={generateTemplate}\r\n              className=\"flex-1 flex justify-center 
+items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-6 py-4 rounded-xl text-sm font-bold 
+transition-all\"\r\n            >\r\n              <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" 
+height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" 
+strokeLinejoin=\"round\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 
+10\"/><line x1=\"12\" y1=\"15\" x2=\"12\" y2=\"3\"/></svg>\r\n              Download Template Excel\r\n            
+</button>\r\n            <div className=\"flex-1 relative\">\r\n              <input\r\n                
+type=\"file\"\r\n                accept=\".xlsx, .xls\"\r\n                onChange={handleFileUpload}\r\n             
+   ref={fileInputRef}\r\n                className=\"absolute inset-0 w-full h-full opacity-0 cursor-pointer\"\r\n     
+         />\r\n              <div className=\"flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 
+text-white px-6 py-4 rounded-xl text-sm font-bold transition-all pointer-events-none\">\r\n                <svg 
+xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" 
+stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" strokeLinejoin=\"round\"><path d=\"M21 15v4a2 2 0 0 
+1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"17 8 12 3 7 8\"/><line x1=\"12\" y1=\"3\" x2=\"12\" 
+y2=\"15\"/></svg>\r\n                Upload & Import Nilai\r\n              </div>\r\n            </div>\r\n          
+</div>\r\n\n\nLog: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_genera
+ted/tasks/task-7519.log\n</SYSTEM_MESSAGE>"}
+
+
+
+
+Log: file:///C:/Users/asusc/.gemini/antigravity/brain/cc12c6a8-4bbb-41d8-b580-2f2d73bfe6ce/.system_generated/tasks/task-9733.log
+</SYSTEM_MESSAGE>

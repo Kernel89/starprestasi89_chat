@@ -87,7 +87,7 @@ const StarPrestasiPage: React.FC<StarPrestasiPageProps> = ({
       const student = students.find(s => s.id === star.studentId);
       return {
         ...star,
-        studentName: student ? getInitials(student.name) : 'Siswa',
+        studentName: student ? student.name : 'Siswa',
         studentClass: '-',
         rawClassName: student ? `${student.grade} ${student.class}`.toUpperCase() : ''
       };

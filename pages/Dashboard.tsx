@@ -10,6 +10,7 @@ import {
 } from '../types';
 import { ICONS } from '../constants';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, Label, LineChart, Line, AreaChart, Area, Legend } from 'recharts';
+import CurriculumDashboardView from '../components/CurriculumDashboardView';
 
 interface DashboardProps {
   schoolName: string;
@@ -18,6 +19,8 @@ interface DashboardProps {
   alumni?: Student[];
   rombels: Rombel[];
   sessions: GuidanceSession[];
+  classSubjects: any[];
+  studentGrades?: any[];
   homeVisits: HomeVisit[];
   advocacies: Advocacy[];
   conferences: CaseConference[];
@@ -46,7 +49,12 @@ interface DashboardProps {
 }
 
 const Dashboard: React.FC<DashboardProps> = ({
-  schoolName, schoolLogo, students, alumni, rombels, sessions, homeVisits,
+  schoolName, schoolLogo, students, alumni = [],
+  rombels,
+  sessions,
+  classSubjects,
+  studentGrades,
+  homeVisits,
   advocacies, conferences, referrals, userRole, teachers, schedule,
   currentUser, starData, assignments, dcmSubmissions, materials,
   appointments, sociometrySessions, universities, studyPrograms,
@@ -726,7 +734,13 @@ const Dashboard: React.FC<DashboardProps> = ({
       )}
 
       {/* Charts Section */}
-      {!isStudent && userRole !== 'humas' && (
+      {(userRole === 'curriculum' || userRole === 'super_admin' || userRole === 'principal' || userRole === 'supervisor') && (
+        <div className="mb-12">
+          <CurriculumDashboardView students={students} rombels={rombels} classSubjects={classSubjects} studentGrades={studentGrades || []} />
+        </div>
+      )}
+      
+      {!isStudent && userRole !== 'humas' && userRole !== 'curriculum' && (
         <div className="space-y-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 bg-white p-8 rounded-[3rem] border border-slate-100 shadow-sm">

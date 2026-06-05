@@ -1,21 +1,26 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { SchoolProfile } from '../types';
+import { SchoolProfile, GraduationInfo, Teacher, UserRole } from '../types';
 import Letterhead from '../components/Letterhead';
 
 interface SchoolProfileProps {
   profile: SchoolProfile;
-  setProfile: React.Dispatch<React.SetStateAction<SchoolProfile>>;
+  setProfile: (profile: SchoolProfile) => void;
   notify: (msg: string, type?: 'success' | 'error' | 'info') => void;
-  userRole?: string;
+  userRole: UserRole | string;
+  graduationInfo?: Record<string, GraduationInfo>;
+  setGraduationInfo?: (info: Record<string, GraduationInfo>) => void;
+  activeAcademicYear?: string;
+  teachers?: Teacher[];
 }
 
-const SchoolProfilePage: React.FC<SchoolProfileProps> = ({ profile, setProfile, notify, userRole }) => {
+const SchoolProfilePage: React.FC<SchoolProfileProps> = ({ profile, setProfile, notify, userRole, graduationInfo = {}, setGraduationInfo, activeAcademicYear }) => {
   const isEffectivelyLocked = userRole !== 'super_admin';
   const [isEditMode, setIsEditMode] = useState(false);
   const [formData, setFormData] = useState<SchoolProfile>(profile);
   const [newMission, setNewMission] = useState('');
   const [newAcademicYear, setNewAcademicYear] = useState('');
+  const [gradData, setGradData] = useState<Record<string, GraduationInfo>>(graduationInfo);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const bgInputRef = useRef<HTMLInputElement>(null);
   const alumniBgInputRef = useRef<HTMLInputElement>(null);
@@ -38,11 +43,15 @@ const SchoolProfilePage: React.FC<SchoolProfileProps> = ({ profile, setProfile, 
       return;
     }
 
-    const updatedProfile = { 
-        ...formData, 
-        updated_at: new Date().toISOString()
-    };
-    setProfile(updatedProfile);
+    setProfile(formData);
+    if (setGraduationInfo) {
+      const gradData = { ...graduationInfo };
+      const activeYear = activeAcademicYear || '';
+      if (activeYear && !gradData[activeYear]) {
+        gradData[activeYear] = { printDate: '', transcriptPrintDate: '', transcriptNumber: '', sklNumber: '', skkbNumber: '' };
+      }
+      setGraduationInfo(gradData);
+    }
     setIsEditMode(false);
     notify("Profil sekolah berhasil diperbarui.", "success");
   };
@@ -211,7 +220,7 @@ const SchoolProfilePage: React.FC<SchoolProfileProps> = ({ profile, setProfile, 
                 <button
                   onClick={() => {
                     if (!isEditMode) {
-                      setProfile(prev => ({ ...prev, isLocked: !prev.isLocked, updated_at: new Date().toISOString() }));
+                      setProfile({ ...profile, isLocked: !profile.isLocked, updated_at: new Date().toISOString() });
                       notify(profile.isLocked ? "Akses edit profil dibuka." : "Profil sekolah dikunci.", "success");
                     }
                   }}
@@ -626,6 +635,99 @@ const SchoolProfilePage: React.FC<SchoolProfileProps> = ({ profile, setProfile, 
                 )}
               </div>
             </div>
+
+            <div className="space-y-4 border-t border-slate-100 pt-8 mt-8">
+              <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center justify-between">
+                <span>Data Kelulusan ({activeAcademicYear || 'Pilih Tahun Aktif'})</span>
+              </h4>
+
+              {activeAcademicYear ? (
+                <div className="grid grid-cols-1 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Tanggal Kelulusan</label>
+                    {isEditMode ? (
+                      <input
+                        type="date"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm font-bold"
+                        value={gradData[activeAcademicYear]?.tanggalKelulusan || ''}
+                        onChange={e => setGradData({ ...gradData, [activeAcademicYear]: { ...(gradData[activeAcademicYear] || {}), tanggalKelulusan: e.target.value } })}
+                      />
+                    ) : (
+                      <p className="text-sm font-bold text-slate-800 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        {gradData[activeAcademicYear]?.tanggalKelulusan ? new Date(gradData[activeAcademicYear]!.tanggalKelulusan!).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) : '-'}
+                      </p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Tanggal Rapat Pleno</label>
+                    {isEditMode ? (
+                      <input
+                        type="date"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm font-bold"
+                        value={gradData[activeAcademicYear]?.tanggalRapatPleno || ''}
+                        onChange={e => setGradData({ ...gradData, [activeAcademicYear]: { ...(gradData[activeAcademicYear] || {}), tanggalRapatPleno: e.target.value } })}
+                      />
+                    ) : (
+                      <p className="text-sm font-bold text-slate-800 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        {gradData[activeAcademicYear]?.tanggalRapatPleno ? new Date(gradData[activeAcademicYear]!.tanggalRapatPleno!).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) : '-'}
+                      </p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">No Transkrip Nilai</label>
+                    {isEditMode ? (
+                      <input
+                        type="text"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm font-bold"
+                        value={gradData[activeAcademicYear]?.noTranskripNilai || ''}
+                        onChange={e => setGradData({ ...gradData, [activeAcademicYear]: { ...(gradData[activeAcademicYear] || {}), noTranskripNilai: e.target.value } })}
+                        placeholder="Contoh: 421.3/..."
+                      />
+                    ) : (
+                      <p className="text-sm font-bold text-slate-800 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        {gradData[activeAcademicYear]?.noTranskripNilai || '-'}
+                      </p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">No SKL</label>
+                    {isEditMode ? (
+                      <input
+                        type="text"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm font-bold"
+                        value={gradData[activeAcademicYear]?.noSkl || ''}
+                        onChange={e => setGradData({ ...gradData, [activeAcademicYear]: { ...(gradData[activeAcademicYear] || {}), noSkl: e.target.value } })}
+                        placeholder="Contoh: 421.3/..."
+                      />
+                    ) : (
+                      <p className="text-sm font-bold text-slate-800 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        {gradData[activeAcademicYear]?.noSkl || '-'}
+                      </p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">No SKKB</label>
+                    {isEditMode ? (
+                      <input
+                        type="text"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm font-bold"
+                        value={gradData[activeAcademicYear]?.noSkkb || ''}
+                        onChange={e => setGradData({ ...gradData, [activeAcademicYear]: { ...(gradData[activeAcademicYear] || {}), noSkkb: e.target.value } })}
+                        placeholder="Contoh: 421.3/..."
+                      />
+                    ) : (
+                      <p className="text-sm font-bold text-slate-800 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        {gradData[activeAcademicYear]?.noSkkb || '-'}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-sm text-slate-400 font-medium">Tahun pelajaran aktif belum diatur.</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
@@ -753,31 +855,54 @@ const SchoolProfilePage: React.FC<SchoolProfileProps> = ({ profile, setProfile, 
               <div className="space-y-1 w-full text-left">
                 {isEditMode ? (
                   <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">Nama Kepala Sekolah</label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-2 border border-slate-200 rounded-lg bg-slate-50 text-slate-500 cursor-not-allowed"
+                        value={formData.principalName}
+                        readOnly
+                      />
+                      <p className="text-xs text-indigo-500 mt-1 italic">*Sesuai dengan nama Kepala Sekolah di Database Guru</p>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">NIP Kepala Sekolah</label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-2 border border-slate-200 rounded-lg bg-slate-50 text-slate-500 cursor-not-allowed"
+                        value={formData.principalNip}
+                        readOnly
+                      />
+                      <p className="text-xs text-indigo-500 mt-1 italic">*Sesuai dengan NIP Kepala Sekolah di Database Guru</p>
+                    </div>
                     <div className="space-y-1">
-                      <label className="text-[9px] font-black text-slate-300 uppercase">Nama Kepala Sekolah</label>
+                      <label className="text-[9px] font-black text-slate-300 uppercase">Pangkat Kepala Sekolah</label>
                       <input
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-bold"
-                        value={formData.principalName}
-                        onChange={e => setFormData({ ...formData, principalName: e.target.value })}
+                        value={formData.principalRank || ''}
+                        onChange={e => setFormData({ ...formData, principalRank: e.target.value })}
+                        placeholder="Contoh: Pembina Tk. I"
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-[9px] font-black text-slate-300 uppercase">NIP Kepala Sekolah</label>
+                      <label className="text-[9px] font-black text-slate-300 uppercase">Golongan Kepala Sekolah</label>
                       <input
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-mono"
-                        value={formData.principalNip}
-                        onChange={e => setFormData({ ...formData, principalNip: e.target.value })}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-bold"
+                        value={formData.principalGrade || ''}
+                        onChange={e => setFormData({ ...formData, principalGrade: e.target.value })}
+                        placeholder="Contoh: IV/b"
                       />
-                      <p className="text-[8px] text-emerald-600 font-bold italic mt-0.5">
-                        *Otomatis sinkron dari Daftar Guru (Peran: Kepala Sekolah).
-                        Akan muncul di tanda tangan Kepala Sekolah pada laporan PDF.
-                      </p>
                     </div>
                   </div>
                 ) : (
                   <>
                     <h5 className="text-base font-black text-slate-800 text-center">{profile.principalName}</h5>
                     <p className="text-[10px] font-mono text-slate-400 uppercase text-center">NIP. {profile.principalNip}</p>
+                    {(profile.principalRank || profile.principalGrade) && (
+                      <p className="text-[10px] font-bold text-slate-500 uppercase text-center mt-1">
+                        {profile.principalRank} {profile.principalGrade ? `- ${profile.principalGrade}` : ''}
+                      </p>
+                    )}
                   </>
                 )}
               </div>

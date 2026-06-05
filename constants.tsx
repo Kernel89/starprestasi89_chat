@@ -2580,3 +2580,23 @@ export const MOCK_TRYOUTS = [
   },
   // ... (keep existing tryouts)
 ];
+
+export const STANDARD_SUBJECTS = [
+  "Pendidikan Agama dan Budi Pekerti",
+  "Pendidikan Pancasila dan Kewarganegaraan",
+  "Bahasa Indonesia",
+  "Matematika (Wajib)",
+  "Sejarah Indonesia",
+  "Bahasa Inggris",
+  "Seni Budaya",
+  "Pendidikan Jasmani, Olahraga, dan Kesehatan",
+  "Prakarya dan Kewirausahaan",
+  "Matematika (Peminatan)",
+  "Biologi",
+  "Fisika",
+  "Kimia",
+  "Geografi",
+  "Sejarah (Peminatan)",
+  "Sosiologi",
+  "Ekonomi"
+];

@@ -147,6 +147,13 @@ const CareerGuide: React.FC<CareerGuideProps> = ({
 
   const totalUniPages = Math.ceil(filteredUniversities.length / itemsPerPage);
 
+  const paginatedScholarships = useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    return scholarships.slice(start, start + itemsPerPage);
+  }, [scholarships, currentPage]);
+
+  const totalScholarshipPages = Math.ceil(scholarships.length / itemsPerPage);
+
   const paginatedPrograms = useMemo(() => {
     const start = (currentPage - 1) * prodiItemsPerPage;
     return filteredPrograms.slice(start, start + prodiItemsPerPage);
@@ -964,8 +971,10 @@ const CareerGuide: React.FC<CareerGuideProps> = ({
             <div className="flex items-center justify-between bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
               <p className="text-xs text-slate-500 font-medium">Halaman {currentPage} dari {totalUniPages}</p>
               <div className="flex gap-1">
-                <button onClick={() => setCurrentPage(p => Math.max(p - 1, 1))} disabled={currentPage === 1} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
-                <button onClick={() => setCurrentPage(p => Math.min(p + 1, totalUniPages))} disabled={currentPage === totalUniPages} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                <button onClick={() => setCurrentPage(1)} disabled={currentPage === 1} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50" title="Halaman Awal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg></button>
+                <button onClick={() => setCurrentPage(p => Math.max(p - 1, 1))} disabled={currentPage === 1} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50" title="Sebelumnya"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <button onClick={() => setCurrentPage(p => Math.min(p + 1, totalUniPages))} disabled={currentPage === totalUniPages} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50" title="Selanjutnya"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                <button onClick={() => setCurrentPage(totalUniPages)} disabled={currentPage === totalUniPages} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50" title="Halaman Akhir"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg></button>
               </div>
             </div>
           )}
@@ -1085,7 +1094,7 @@ const CareerGuide: React.FC<CareerGuideProps> = ({
             </div>
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {scholarships.map(s => (
+            {paginatedScholarships.map(s => (
               <div key={s.id} className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-6 opacity-5 rotate-12">
                   <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5Z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>
@@ -1129,7 +1138,18 @@ const CareerGuide: React.FC<CareerGuideProps> = ({
             ))}
             {scholarships.length === 0 && (
               <div className="col-span-full py-20 text-center bg-white rounded-[2.5rem] border border-dashed border-slate-200">
-                <p className="text-slate-400 font-black italic uppercase tracking-widest text-xs">Belum ada informasi beasiswa.</p>
+              </div>
+            )}
+            
+            {totalScholarshipPages > 1 && (
+              <div className="col-span-full flex items-center justify-between bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
+                <p className="text-xs text-slate-500 font-medium">Halaman {currentPage} dari {totalScholarshipPages}</p>
+                <div className="flex gap-1">
+                  <button onClick={() => setCurrentPage(1)} disabled={currentPage === 1} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50" title="Halaman Awal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg></button>
+                  <button onClick={() => setCurrentPage(p => Math.max(p - 1, 1))} disabled={currentPage === 1} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50" title="Sebelumnya"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+                  <button onClick={() => setCurrentPage(p => Math.min(p + 1, totalScholarshipPages))} disabled={currentPage === totalScholarshipPages} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50" title="Selanjutnya"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                  <button onClick={() => setCurrentPage(totalScholarshipPages)} disabled={currentPage === totalScholarshipPages} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50" title="Halaman Akhir"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg></button>
+                </div>
               </div>
             )}
           </div>
@@ -1193,8 +1213,10 @@ const CareerGuide: React.FC<CareerGuideProps> = ({
             <div className="flex items-center justify-between bg-white p-6 border-t border-slate-100 shadow-sm">
               <p className="text-xs text-slate-500 font-medium">Halaman {currentPage} dari {totalProdiPages}</p>
               <div className="flex gap-1">
-                <button onClick={() => setCurrentPage(p => Math.max(p - 1, 1))} disabled={currentPage === 1} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
-                <button onClick={() => setCurrentPage(p => Math.min(p + 1, totalProdiPages))} disabled={currentPage === totalProdiPages} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                <button onClick={() => setCurrentPage(1)} disabled={currentPage === 1} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50" title="Halaman Awal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg></button>
+                <button onClick={() => setCurrentPage(p => Math.max(p - 1, 1))} disabled={currentPage === 1} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50" title="Sebelumnya"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <button onClick={() => setCurrentPage(p => Math.min(p + 1, totalProdiPages))} disabled={currentPage === totalProdiPages} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50" title="Selanjutnya"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                <button onClick={() => setCurrentPage(totalProdiPages)} disabled={currentPage === totalProdiPages} className="p-2 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50" title="Halaman Akhir"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg></button>
               </div>
             </div>
           )}
@@ -1275,20 +1297,10 @@ const CareerGuide: React.FC<CareerGuideProps> = ({
                 <div className="flex items-center justify-between pt-4 border-t border-slate-100 mt-6 bg-white sticky bottom-0">
                   <p className="text-[10px] text-slate-500 font-bold">Halaman {currentMengenalPage} dari {totalMengenalPages}</p>
                   <div className="flex gap-1">
-                    <button 
-                      onClick={() => setCurrentMengenalPage(p => Math.max(p - 1, 1))} 
-                      disabled={currentMengenalPage === 1} 
-                      className="p-1.5 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50 text-slate-600 transition-all active:scale-95"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-                    </button>
-                    <button 
-                      onClick={() => setCurrentMengenalPage(p => Math.min(p + 1, totalMengenalPages))} 
-                      disabled={currentMengenalPage === totalMengenalPages} 
-                      className="p-1.5 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50 text-slate-600 transition-all active:scale-95"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-                    </button>
+                    <button onClick={() => setCurrentMengenalPage(1)} disabled={currentMengenalPage === 1} className="p-1.5 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50 text-slate-600 transition-all active:scale-95" title="Halaman Awal"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg></button>
+                    <button onClick={() => setCurrentMengenalPage(p => Math.max(p - 1, 1))} disabled={currentMengenalPage === 1} className="p-1.5 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50 text-slate-600 transition-all active:scale-95" title="Sebelumnya"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+                    <button onClick={() => setCurrentMengenalPage(p => Math.min(p + 1, totalMengenalPages))} disabled={currentMengenalPage === totalMengenalPages} className="p-1.5 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50 text-slate-600 transition-all active:scale-95" title="Selanjutnya"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+                    <button onClick={() => setCurrentMengenalPage(totalMengenalPages)} disabled={currentMengenalPage === totalMengenalPages} className="p-1.5 rounded-lg border bg-white disabled:opacity-50 hover:bg-slate-50 text-slate-600 transition-all active:scale-95" title="Halaman Akhir"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg></button>
                   </div>
                 </div>
               )}

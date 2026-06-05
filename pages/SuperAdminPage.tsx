@@ -379,6 +379,20 @@ const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
       ]
     },
     {
+      title: 'Manajemen Nilai & Kelulusan',
+      color: 'from-amber-600 to-yellow-600',
+      textColor: 'text-amber-600',
+      bgColor: 'bg-amber-50/50',
+      borderColor: 'border-amber-100',
+      tables: [
+        { key: 'star_gradesConfig', dbName: 'star_gradesConfig', label: 'Konfigurasi Nilai', desc: 'Aturan bobot & rentang nilai', icon: '⚙️' },
+        { key: 'star_km_subjects', dbName: 'star_km_subjects', label: 'Mapel Pilihan Jurusan', desc: 'Data mata pelajaran lintas minat', icon: '🎯' },
+        { key: 'star_class_subjects', dbName: 'star_class_subjects', label: 'Mapel Per Kelas', desc: 'Pemetaan mapel kelas', icon: '📚' },
+        { key: 'star_student_grades', dbName: 'star_student_grades', label: 'Transkrip Nilai Siswa', desc: 'Nilai raport siswa', icon: '📊' },
+        { key: 'star_graduation_info', dbName: 'star_graduation_info', label: 'Info Kelulusan', desc: 'SKL, Ijazah, Transkrip', icon: '🎓' },
+      ]
+    },
+    {
       title: 'Log, Sistem & Konfigurasi',
       color: 'from-slate-600 to-slate-800',
       textColor: 'text-slate-600',
@@ -415,7 +429,13 @@ const SuperAdminPage: React.FC<SuperAdminPageProps> = ({
           else if (tbl.key === 'star_submissions') counts[tbl.key] = submissions.length;
           else {
             try {
-              const data = await idbGet(tbl.key);
+              let data = await idbGet(tbl.key);
+              if (!data) {
+                const lsData = localStorage.getItem(tbl.key);
+                if (lsData) {
+                  try { data = JSON.parse(lsData); } catch(e) {}
+                }
+              }
               if (data) {
                 if (Array.isArray(data)) counts[tbl.key] = data.length;
                 else if (typeof data === 'object') counts[tbl.key] = tbl.key === 'star_schoolProfile' ? (data.name ? 1 : 0) : Object.keys(data).length;

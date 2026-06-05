@@ -40,6 +40,7 @@ const RombelList: React.FC<RombelListProps> = ({
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isAddStudentToRombelOpen, setIsAddStudentToRombelOpen] = useState(false);
   const [newMajorInput, setNewMajorInput] = useState('');
+  const [newElectiveInput, setNewElectiveInput] = useState<Record<string, string>>({});
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 50;
@@ -197,9 +198,30 @@ const RombelList: React.FC<RombelListProps> = ({
     return [];
   }, [rombels, userRole, myTeacherProfile]);
 
-  const filteredRombels = activeGrade === 'Semua'
-    ? (accessibleRombels || [])
-    : (accessibleRombels || []).filter(r => r.grade === activeGrade);
+  const filteredRombels = useMemo(() => {
+    const gradeOrder = gradesConfig?.map(g => g.name.trim().toUpperCase()) || [];
+    let result = activeGrade === 'Semua'
+      ? (accessibleRombels || [])
+      : (accessibleRombels || []).filter(r => r.grade === activeGrade);
+      
+    return [...result].sort((a, b) => {
+      const idxA = gradeOrder.indexOf(a.grade.trim().toUpperCase());
+      const idxB = gradeOrder.indexOf(b.grade.trim().toUpperCase());
+      if (idxA !== idxB) return idxA - idxB;
+      
+      const matchA = a.name.match(/\d{1,2}$/);
+      const matchB = b.name.match(/\d{1,2}$/);
+      
+      if (matchA && matchB) {
+        const numA = parseInt(matchA[0], 10);
+        const numB = parseInt(matchB[0], 10);
+        if (numA !== numB) {
+          return numA - numB;
+        }
+      }
+      return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+    });
+  }, [activeGrade, accessibleRombels, gradesConfig]);
 
   const totalPages = Math.ceil(filteredRombels.length / itemsPerPage);
   const paginatedRombels = useMemo(() => {
@@ -369,7 +391,7 @@ const RombelList: React.FC<RombelListProps> = ({
       const movedAlumni: Student[] = [];
 
       const nextStudents = students.map(s => {
-        if (s.status === 'Aktif') {
+        if (s.status === 'Aktif' && promotableGrades.includes(s.grade.trim().toUpperCase())) {
           const currentGradeIdx = gradeOrder.indexOf(s.grade.trim().toUpperCase());
 
           if (currentGradeIdx !== -1) {
@@ -571,6 +593,57 @@ const RombelList: React.FC<RombelListProps> = ({
     setGradesConfig(prev => prev.map(g => {
       if (g.name === gradeName) {
         return { ...g, prefixes: g.prefixes.filter(p => p !== majorToRemove) };
+      }
+      return g;
+    }));
+  };
+
+  const getElectivesForGrade = (gradeName: string, majorName: string): string[] => {
+    const config = (gradesConfig || []).find(g => g.name === gradeName);
+    if (!config) return [];
+    if (config.electivesByMajor && config.electivesByMajor[majorName]) {
+      return config.electivesByMajor[majorName];
+    }
+    // Fallback for legacy
+    return (config as any)?.electives || [];
+  };
+
+  const handleAddElectiveToGrade = (gradeName: string, majorName: string) => {
+    const inputKey = `${gradeName}-${majorName}`;
+    const val = newElectiveInput[inputKey];
+    if (!val || !val.trim()) return;
+    const trimmed = val.trim();
+
+    setGradesConfig(prev => prev.map(g => {
+      if (g.name === gradeName) {
+        const electivesByMajor = g.electivesByMajor || {};
+        const majorElectives = electivesByMajor[majorName] || [];
+        if (majorElectives.includes(trimmed)) return g;
+        return { 
+          ...g, 
+          electivesByMajor: {
+            ...electivesByMajor,
+            [majorName]: [...majorElectives, trimmed]
+          }
+        };
+      }
+      return g;
+    }));
+    setNewElectiveInput(prev => ({ ...prev, [inputKey]: '' }));
+  };
+
+  const handleRemoveElectiveFromGrade = (gradeName: string, majorName: string, toRemove: string) => {
+    setGradesConfig(prev => prev.map(g => {
+      if (g.name === gradeName) {
+        const electivesByMajor = g.electivesByMajor || {};
+        const majorElectives = electivesByMajor[majorName] || [];
+        return { 
+          ...g, 
+          electivesByMajor: {
+            ...electivesByMajor,
+            [majorName]: majorElectives.filter(e => e !== toRemove)
+          }
+        };
       }
       return g;
     }));
@@ -1125,6 +1198,60 @@ const RombelList: React.FC<RombelListProps> = ({
                     </button>
                   </div>
                 </div>
+
+                  {(newRombel.grade === 'XII' || newRombel.grade === '12') && (
+                    <div className="space-y-4">
+                      {(() => {
+                        const gradeConfig = (gradesConfig || []).find(g => g.name === newRombel.grade);
+                        const majors = gradeConfig?.prefixes || [];
+                        if (majors.length === 0) return (
+                          <div className="p-4 bg-amber-50/50 border border-amber-100 rounded-2xl text-center">
+                            <p className="text-xs text-amber-600 font-medium">Belum ada jurusan terdaftar untuk tingkat ini. Silakan tambahkan jurusan terlebih dahulu.</p>
+                          </div>
+                        );
+                        
+                        return majors.map(majorName => {
+                          const inputKey = `${newRombel.grade}-${majorName}`;
+                          return (
+                            <div key={majorName} className="p-4 bg-amber-50/50 border border-amber-100 rounded-2xl space-y-3">
+                              <label className="text-[9px] font-black text-amber-500 uppercase tracking-widest">Kelola Mapel Pilihan - Jurusan {majorName} (Tingkat {newRombel.grade})</label>
+                              <div className="flex flex-wrap gap-1.5">
+                                {getElectivesForGrade(newRombel.grade, majorName).map((m, i) => (
+                                  <span key={i} className="group/tag inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-amber-100 rounded-lg text-[10px] font-bold text-amber-700">
+                                    {m}
+                                    <button
+                                      type="button"
+                                      onClick={() => handleRemoveElectiveFromGrade(newRombel.grade, majorName, m)}
+                                      className="text-amber-300 hover:text-rose-500 transition-colors"
+                                    >
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                  </span>
+                                ))}
+                              </div>
+                              <div className="flex gap-2">
+                                <input
+                                  type="text"
+                                  placeholder={`Tambah mapel pilihan untuk ${majorName}...`}
+                                  className="flex-1 bg-white border border-amber-100 rounded-lg px-3 py-1.5 text-[10px] font-bold outline-none focus:ring-2 focus:ring-amber-200"
+                                  value={newElectiveInput[inputKey] || ''}
+                                  onChange={e => setNewElectiveInput(prev => ({ ...prev, [inputKey]: e.target.value }))}
+                                  onKeyPress={e => e.key === 'Enter' && (e.preventDefault(), handleAddElectiveToGrade(newRombel.grade, majorName))}
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => handleAddElectiveToGrade(newRombel.grade, majorName)}
+                                  className="bg-amber-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-wider hover:bg-amber-700 transition-colors"
+                                >
+                                  Tambah
+                                </button>
+                              </div>
+                            </div>
+                          );
+                        });
+                      })()}
+                    </div>
+                  )}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1236,6 +1363,60 @@ const RombelList: React.FC<RombelListProps> = ({
                     </button>
                   </div>
                 </div>
+
+                {(editForm.grade === 'XII' || editForm.grade === '12') && (
+                  <div className="space-y-4">
+                    {(() => {
+                      const gradeConfig = (gradesConfig || []).find(g => g.name === editForm.grade);
+                      const majors = gradeConfig?.prefixes || [];
+                      if (majors.length === 0) return (
+                        <div className="p-4 bg-amber-50/50 border border-amber-100 rounded-2xl text-center">
+                          <p className="text-xs text-amber-600 font-medium">Belum ada jurusan terdaftar untuk tingkat ini. Silakan tambahkan jurusan terlebih dahulu.</p>
+                        </div>
+                      );
+                      
+                      return majors.map(majorName => {
+                        const inputKey = `${editForm.grade}-${majorName}`;
+                        return (
+                          <div key={majorName} className="p-4 bg-amber-50/50 border border-amber-100 rounded-2xl space-y-3">
+                            <label className="text-[9px] font-black text-amber-500 uppercase tracking-widest">Kelola Mapel Pilihan - Jurusan {majorName} (Tingkat {editForm.grade})</label>
+                            <div className="flex flex-wrap gap-1.5">
+                              {getElectivesForGrade(editForm.grade, majorName).map((m, i) => (
+                                <span key={i} className="group/tag inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-amber-100 rounded-lg text-[10px] font-bold text-amber-700">
+                                  {m}
+                                  <button
+                                    type="button"
+                                    onClick={() => handleRemoveElectiveFromGrade(editForm.grade, majorName, m)}
+                                    className="text-amber-300 hover:text-rose-500 transition-colors"
+                                  >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                  </button>
+                                </span>
+                              ))}
+                            </div>
+                            <div className="flex gap-2">
+                              <input
+                                type="text"
+                                placeholder={`Tambah mapel pilihan untuk ${majorName}...`}
+                                className="flex-1 bg-white border border-amber-100 rounded-lg px-3 py-1.5 text-[10px] font-bold outline-none focus:ring-2 focus:ring-amber-200"
+                                value={newElectiveInput[inputKey] || ''}
+                                onChange={e => setNewElectiveInput(prev => ({ ...prev, [inputKey]: e.target.value }))}
+                                onKeyPress={e => e.key === 'Enter' && (e.preventDefault(), handleAddElectiveToGrade(editForm.grade, majorName))}
+                              />
+                              <button
+                                type="button"
+                                onClick={() => handleAddElectiveToGrade(editForm.grade, majorName)}
+                                className="bg-amber-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-wider hover:bg-amber-700 transition-colors"
+                              >
+                                Tambah
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      });
+                    })()}
+                  </div>
+                )}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

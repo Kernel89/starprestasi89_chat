@@ -179,6 +179,8 @@ const SchoolSettings: React.FC<SchoolSettingsProps> = ({ gradesConfig, setGrades
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+
             {gradesConfig.map((grade) => (
             <div key={grade.id} className="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all relative overflow-hidden group">
                 <div className="absolute top-0 left-0 w-1.5 h-full bg-blue-600" />
@@ -190,15 +192,30 @@ const SchoolSettings: React.FC<SchoolSettingsProps> = ({ gradesConfig, setGrades
                     <input 
                         type="text" 
                         value={grade.name} 
-                        onChange={(e) => handleGradeNameChange(grade.id, e.target.value)}
                         readOnly={!isSuperAdmin}
-                        className={`text-3xl font-black text-slate-800 bg-transparent border-b-2 border-dashed border-slate-200 outline-none w-24 transition-all ${isSuperAdmin ? 'focus:border-blue-500 cursor-text' : 'cursor-default'}`}
+                        onChange={(e) => handleGradeNameChange(grade.id, e.target.value)}
+                        className={`text-3xl font-black text-slate-800 bg-transparent border-b-2 border-dashed border-slate-200 outline-none w-24 transition-all ${isSuperAdmin ? 'cursor-text hover:bg-slate-50 focus:border-blue-500 focus:bg-white' : 'cursor-default'}`}
+                        title={isSuperAdmin ? "Edit Nama Jenjang" : ""}
                     />
                     </div>
                     <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-1">Jenjang Pendidikan</p>
                 </div>
-                <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black text-xl border border-blue-100 shadow-sm">
-                    {grade.name}
+                <div className="flex flex-col items-end gap-2">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black text-xl border border-blue-100 shadow-sm">
+                      {grade.name || '?'}
+                  </div>
+                  {isSuperAdmin && (
+                    <button 
+                      onClick={() => {
+                        if (confirm(`Hapus jenjang ${grade.name}? Semua pengaturan terkait rombel untuk jenjang ini tidak akan otomatis terhapus dari database rombel, tapi akan hilang dari struktur.`)) {
+                          setGradesConfig(prev => prev.filter(g => g.id !== grade.id));
+                        }
+                      }}
+                      className="text-[10px] text-rose-500 font-bold hover:text-rose-700 bg-rose-50 px-2 py-1 rounded transition-colors"
+                    >
+                      Hapus Jenjang
+                    </button>
+                  )}
                 </div>
                 </div>
 
@@ -262,6 +279,22 @@ const SchoolSettings: React.FC<SchoolSettingsProps> = ({ gradesConfig, setGrades
                 </div>
             </div>
             ))}
+            
+            {isSuperAdmin && (
+              <div 
+                onClick={() => {
+                  const id = `g${Date.now()}`;
+                  setGradesConfig([...gradesConfig, { id, name: 'Baru', classCount: 1, prefixes: [] }]);
+                }}
+                className="bg-white/50 p-6 rounded-[2rem] border-2 border-dashed border-slate-200 shadow-sm hover:border-blue-400 hover:bg-blue-50/50 hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col items-center justify-center min-h-[300px] cursor-pointer group text-slate-400 hover:text-blue-600"
+              >
+                <div className="w-16 h-16 rounded-full bg-slate-100 group-hover:bg-blue-100 flex items-center justify-center mb-4 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                </div>
+                <h3 className="text-xl font-black uppercase tracking-tight">Tambah Jenjang</h3>
+                <p className="text-xs font-bold text-center mt-2 opacity-60">Klik untuk menambahkan struktur jenjang pendidikan baru ke dalam sistem.</p>
+              </div>
+            )}
         </div>
       </section>
 
