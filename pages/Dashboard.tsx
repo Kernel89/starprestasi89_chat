@@ -258,23 +258,8 @@ const Dashboard: React.FC<DashboardProps> = ({
       if (a.targetType === 'Individu' && a.targetId === currentUser.id) {
         isTargetMatch = true;
       } else if (a.targetType === 'Rombel') {
-        const targetRombelObj = rombels.find(r => r.id === a.targetId);
-        if (targetRombelObj) {
-          const sGrade = student.grade.trim().toUpperCase();
-          const rGrade = targetRombelObj.grade.trim().toUpperCase();
-          const normalize = (str: string) => {
-            if (!str) return '';
-            const g = rGrade.trim().toUpperCase();
-            return str.toUpperCase()
-              .replace(new RegExp(`^${g}\\s*`, 'i'), '') // Remove Grade prefix if present
-              .replace(/\s+/g, ' ') // Standardize spaces
-              .replace(/\b0+(\d)/g, '$1') // Remove leading zeros from numbers (01 -> 1)
-              .trim();
-          };
-          
-          if (sGrade === rGrade && normalize(student.class) === normalize(targetRombelObj.name)) {
-            isTargetMatch = true;
-          }
+        if (currentStudentRombel && a.targetId === currentStudentRombel.id) {
+          isTargetMatch = true;
         }
       }
       if (!isTargetMatch) return false;
@@ -290,7 +275,7 @@ const Dashboard: React.FC<DashboardProps> = ({
         return !questionnaireSubmissions.some(s => s.assignmentId === a.id && s.studentId === currentUser.id);
       }
     });
-  }, [isStudent, currentUser, assignments, students, rombels, dcmSubmissions, sociometrySessions, feedbacks, questionnaireSubmissions]);
+  }, [isStudent, currentUser, assignments, students, rombels, dcmSubmissions, sociometrySessions, feedbacks, questionnaireSubmissions, currentStudentRombel]);
 
   const studentStarData = useMemo(() => {
     if (!isStudent || !currentUser?.id) return null;
