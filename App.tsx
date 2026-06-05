@@ -1623,10 +1623,6 @@ const App: React.FC = () => {
     ];
   }, [questionnaireSubmissions, eqSubmissions, aqSubmissions, sqSubmissions]);
 
-  if (!user) {
-    return <LoginPage onLogin={handleLogin} appUsers={appUsers} students={students} schoolProfile={safeSchoolProfile} quotes={quotes} />;
-  }
-
   // Check session variables (migration logic for old login states)
   useEffect(() => {
     if (user && !['student', 'ketua_murid', 'siswa', '-'].includes(user.role as any)) {
@@ -1644,6 +1640,10 @@ const App: React.FC = () => {
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
   const activeCounselorProfile = getCurrentCounselorProfile();
+
+  if (!user) {
+    return <LoginPage onLogin={handleLogin} appUsers={appUsers} students={students} schoolProfile={safeSchoolProfile} quotes={quotes} />;
+  }
 
   return (
     <Router>
@@ -1896,6 +1896,7 @@ const App: React.FC = () => {
                 studentGrades={studentGrades}
                 classReports={classReports}
                 setClassReports={setClassReports}
+                gradesConfig={gradesConfig}
               />} />
               <Route path="/students" element={(user.role === 'super_admin' || user.role === 'counselor') ? <StudentsList
                 students={students}
@@ -2035,7 +2036,7 @@ const App: React.FC = () => {
               <Route path="/administration" element={(user.role === 'super_admin' || user.role === 'counselor') ? <BKAdministrationPage data={bkAdmin} setData={setBkAdmin} notify={notify} schoolProfile={safeSchoolProfile} gradesConfig={gradesConfig} counselorProfile={counselorProfiles[user.id] || counselorProfiles['u2']} /> : <Navigate to="/" replace />} />
               <Route path="/change-password" element={<ChangePasswordPage notify={notify} currentUser={user} appUsers={appUsers} setAppUsers={setAppUsers} />} />
               <Route path="/grade-management" element={(user.role === 'super_admin' || user.role === 'principal' || user.role === 'curriculum') ? <GradeManagement students={students} setStudents={setStudents} alumni={alumni} setAlumni={setAlumni} rombels={rombels} classSubjects={classSubjects} setClassSubjects={setClassSubjects} studentGrades={studentGrades} setStudentGrades={setStudentGrades} notify={notify} schoolProfile={safeSchoolProfile} gradesConfig={gradesConfig} /> : <Navigate to="/" replace />} />
-              <Route path="/grade-reports" element={(user.role === 'super_admin' || user.role === 'principal' || user.role === 'curriculum') ? <GradeReports students={students} setStudents={setStudents} alumni={alumni} setAlumni={setAlumni} rombels={rombels} classSubjects={classSubjects} schoolProfile={safeSchoolProfile} studentGrades={studentGrades} gradesConfig={gradesConfig} graduationInfo={kurikulumDb} activeAcademicYear={safeSchoolProfile.activeAcademicYear} activeSemester={safeSchoolProfile.activeSemester} us1Records={us1Records} setUs1Records={setUs1Records} /> : <Navigate to="/" replace />} />
+              <Route path="/grade-reports" element={(user.role === 'super_admin' || user.role === 'principal' || user.role === 'curriculum') ? <GradeReports students={students} setStudents={setStudents} alumni={alumni} setAlumni={setAlumni} rombels={rombels} classSubjects={classSubjects} schoolProfile={safeSchoolProfile} studentGrades={studentGrades} gradesConfig={gradesConfig} graduationInfo={kurikulumDb} activeAcademicYear={user?.sessionAcademicYear || safeSchoolProfile.activeAcademicYear} activeSemester={user?.sessionSemester || safeSchoolProfile.activeSemester} us1Records={us1Records} setUs1Records={setUs1Records} /> : <Navigate to="/" replace />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </div>

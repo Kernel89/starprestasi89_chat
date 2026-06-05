@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { Student, Rombel } from '../types';
+import { Student, Rombel, GradeConfig } from '../types';
 import { ICONS } from '../constants';
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
@@ -34,9 +34,20 @@ interface CurriculumDashboardViewProps {
   students: Student[];
   rombels: Rombel[];
   classSubjects?: any[];
+  gradesConfig?: GradeConfig[];
+  activeYear?: string;
 }
 
-const CurriculumDashboardView: React.FC<CurriculumDashboardViewProps> = ({ students, rombels, classSubjects = [] }) => {
+const CurriculumDashboardView: React.FC<CurriculumDashboardViewProps> = ({ students, rombels, classSubjects = [], gradesConfig = [], activeYear }) => {
+  // Filter students based on activeYear
+  const activeStudentsInYear = useMemo(() => {
+    if (!activeYear) return students;
+    return students.filter(student => {
+      const rombel = getRombelForStudent(student, rombels);
+      if (!rombel) return true;
+      return !rombel.tahun_pelajaran || rombel.tahun_pelajaran === activeYear;
+    });
+  }, [students, rombels, activeYear]);
   // Aggregate grades by semester for MIPA vs IPS vs UMUM (Kurikulum Merdeka might just be UMUM or based on class)
   const chartData = useMemo(() => {
     const semesters = ['1', '2', '3', '4', '5', '6'];
@@ -47,7 +58,7 @@ const CurriculumDashboardView: React.FC<CurriculumDashboardViewProps> = ({ stude
       let ipsTotal = 0, ipsCount = 0;
       let umumTotal = 0, umumCount = 0;
       
-      students.forEach(student => {
+      activeStudentsInYear.forEach(student => {
         if (!student.semesterGrades || !student.semesterGrades[sem]) return;
         
         const grades = Object.values(student.semesterGrades[sem]);
@@ -79,10 +90,10 @@ const CurriculumDashboardView: React.FC<CurriculumDashboardViewProps> = ({ stude
     });
     
     return data;
-  }, [students, rombels]);
+  }, [activeStudentsInYear, rombels]);
 
   const topStudents = useMemo(() => {
-    const studentAvgs = students.map(student => {
+    const studentAvgs = activeStudentsInYear.map(student => {
       if (!student.semesterGrades) return { student, avg: 0 };
       
       let totalAvg = 0;
@@ -102,7 +113,7 @@ const CurriculumDashboardView: React.FC<CurriculumDashboardViewProps> = ({ stude
     }).filter(s => s.avg > 0);
     
     return studentAvgs.sort((a, b) => b.avg - a.avg).slice(0, 10);
-  }, [students]);
+  }, [activeStudentsInYear]);
 
   // SNBP Eligible Averages
   const snbpData = useMemo(() => {
@@ -114,7 +125,7 @@ const CurriculumDashboardView: React.FC<CurriculumDashboardViewProps> = ({ stude
     semesters.forEach(sem => {
       let semTotal = 0, semCount = 0;
       
-      students.forEach(student => {
+      activeStudentsInYear.forEach(student => {
         if (!student.semesterGrades || !student.semesterGrades[sem]) return;
         
         const rombel = getRombelForStudent(student, rombels);
@@ -157,28 +168,48 @@ const CurriculumDashboardView: React.FC<CurriculumDashboardViewProps> = ({ stude
     const overallAvg = overallCount > 0 ? parseFloat((overallTotal / overallCount).toFixed(2)) : 0;
     
     return { semData, overallAvg };
-  }, [students, rombels, classSubjects]);
+  }, [activeStudentsInYear, rombels, classSubjects]);
+
+  const [statsTingkat, setStatsTingkat] = useState<string>('all');
 
   // Subject Stats (Max, Min, Avg) & Trend Data
   const subjectStats = useMemo(() => {
     const stats: Record<string, { total: number, count: number, max: number, min: number }> = {};
     const trend: Record<string, Record<string, { total: number, count: number }>> = {};
     
-    students.forEach(student => {
+    activeStudentsInYear.forEach(student => {
       if (!student.semesterGrades) return;
       
+      const rombel = getRombelForStudent(student, rombels);
+      const studentTingkat = rombel ? (rombel.grade || '').trim().toUpperCase() : (student.grade || '').trim().toUpperCase();
+      
+      // Find selected Tingkat Name from gradesConfig
+      const selectedTingkatConfig = gradesConfig.find(c => c.id === statsTingkat);
+      const selectedTingkatName = selectedTingkatConfig ? selectedTingkatConfig.name.toUpperCase() : 'ALL';
+      
+      // Filter by Tingkat
+      if (statsTingkat !== 'all' && studentTingkat !== selectedTingkatName) return;
+
       Object.entries(student.semesterGrades).forEach(([sem, grades]) => {
+        let isActiveSemester = false;
+        if (studentTingkat === 'X' && (sem === '1' || sem === '2')) isActiveSemester = true;
+        else if (studentTingkat === 'XI' && (sem === '3' || sem === '4')) isActiveSemester = true;
+        else if (studentTingkat === 'XII' && (sem === '5' || sem === '6')) isActiveSemester = true;
+        else if (!studentTingkat) isActiveSemester = true;
+
         Object.entries(grades).forEach(([subj, score]) => {
-          // Global stats
-          if (!stats[subj]) {
-            stats[subj] = { total: 0, count: 0, max: -Infinity, min: Infinity };
+          // Global stats (only for active semester of that Tingkat)
+          if (isActiveSemester) {
+            if (!stats[subj]) {
+              stats[subj] = { total: 0, count: 0, max: -Infinity, min: Infinity };
+            }
+            stats[subj].total += score;
+            stats[subj].count++;
+            if (score > stats[subj].max) stats[subj].max = score;
+            if (score < stats[subj].min) stats[subj].min = score;
           }
-          stats[subj].total += score;
-          stats[subj].count++;
-          if (score > stats[subj].max) stats[subj].max = score;
-          if (score < stats[subj].min) stats[subj].min = score;
           
-          // Trend stats
+          // Trend stats (ALWAYS calculate for all available semesters of the student)
           if (!trend[subj]) trend[subj] = {};
           if (!trend[subj][sem]) trend[subj][sem] = { total: 0, count: 0 };
           
@@ -196,7 +227,7 @@ const CurriculumDashboardView: React.FC<CurriculumDashboardViewProps> = ({ stude
     })).sort((a, b) => a.subject.localeCompare(b.subject));
     
     return { statsArray, trend };
-  }, [students]);
+  }, [activeStudentsInYear, statsTingkat, rombels, gradesConfig]);
 
   const [selectedSubject, setSelectedSubject] = useState<string>('');
   
@@ -209,7 +240,15 @@ const CurriculumDashboardView: React.FC<CurriculumDashboardViewProps> = ({ stude
   const subjectTrendData = useMemo(() => {
     if (!selectedSubject || !subjectStats.trend[selectedSubject]) return [];
     
-    const semesters = ['1', '2', '3', '4', '5', '6'];
+    const selectedTingkatConfig = gradesConfig.find(c => c.id === statsTingkat);
+    const selectedTingkatName = selectedTingkatConfig ? selectedTingkatConfig.name.toUpperCase() : 'ALL';
+    
+    // Determine which semesters to show based on statsTingkat
+    let semesters = ['1', '2', '3', '4', '5', '6'];
+    if (selectedTingkatName === 'X') semesters = ['1', '2'];
+    else if (selectedTingkatName === 'XI') semesters = ['3', '4'];
+    else if (selectedTingkatName === 'XII') semesters = ['5', '6'];
+    
     const data: any[] = [];
     
     semesters.forEach(sem => {
@@ -220,7 +259,7 @@ const CurriculumDashboardView: React.FC<CurriculumDashboardViewProps> = ({ stude
       });
     });
     return data;
-  }, [selectedSubject, subjectStats]);
+  }, [selectedSubject, subjectStats, statsTingkat, gradesConfig]);
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -328,16 +367,28 @@ const CurriculumDashboardView: React.FC<CurriculumDashboardViewProps> = ({ stude
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-        {/* TABEL STATISTIK */}
-        <div className="bg-white p-8 rounded-[3rem] border border-slate-100 shadow-sm">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="p-4 bg-emerald-50 text-emerald-600 rounded-2xl">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+        {/* STATISTIK PER MATA PELAJARAN */}
+        <div className="bg-white p-8 rounded-[3rem] border border-slate-100 shadow-sm col-span-1">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-4">
+              <div className="p-4 bg-emerald-50 text-emerald-600 rounded-2xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+              </div>
+              <div>
+                <h3 className="text-xl font-black text-slate-800 tracking-tight">Statistik per Mata Pelajaran</h3>
+                <p className="text-xs font-bold text-slate-400">Nilai Tertinggi, Terendah, dan Rata-rata</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-xl font-black text-slate-800 tracking-tight">Statistik per Mata Pelajaran</h3>
-              <p className="text-xs font-bold text-slate-400">Nilai Tertinggi, Terendah, dan Rata-rata</p>
-            </div>
+            <select 
+              value={statsTingkat}
+              onChange={(e) => setStatsTingkat(e.target.value)}
+              className="bg-slate-50 border-none text-slate-700 text-sm font-bold rounded-xl px-4 py-2 outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer"
+            >
+              <option value="all">Semua Tingkat</option>
+              {gradesConfig.map(c => (
+                <option key={c.id} value={c.id}>{c.name}</option>
+              ))}
+            </select>
           </div>
           
           <div className="overflow-x-auto custom-scrollbar max-h-[400px]">

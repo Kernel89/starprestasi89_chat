@@ -46,6 +46,7 @@ interface DashboardProps {
   setAttendanceLogs: React.Dispatch<React.SetStateAction<AttendanceLog[]>>;
   classReports: ClassReport[];
   setClassReports: React.Dispatch<React.SetStateAction<ClassReport[]>>;
+  gradesConfig?: any[];
 }
 
 const Dashboard: React.FC<DashboardProps> = ({
@@ -59,7 +60,8 @@ const Dashboard: React.FC<DashboardProps> = ({
   currentUser, starData, assignments, dcmSubmissions, materials,
   appointments, sociometrySessions: rawSociometrySessions, universities, studyPrograms,
   feedbacks, setFeedbacks, notify, quotes, questionnaireSubmissions,
-  attendanceLogs: rawAttendanceLogs, setAttendanceLogs, classReports: rawClassReports, setClassReports
+  attendanceLogs: rawAttendanceLogs, setAttendanceLogs, classReports: rawClassReports, setClassReports,
+  gradesConfig = []
 }) => {
   const activeYear = currentUser.sessionAcademicYear;
 
@@ -746,7 +748,7 @@ const Dashboard: React.FC<DashboardProps> = ({
       {/* Charts Section */}
       {(userRole === 'curriculum' || userRole === 'super_admin' || userRole === 'principal' || userRole === 'supervisor') && (
         <div className="mb-12">
-          <CurriculumDashboardView students={students} rombels={rombels} classSubjects={classSubjects} />
+          <CurriculumDashboardView students={students} rombels={rombels} classSubjects={classSubjects} gradesConfig={gradesConfig} activeYear={activeYear} />
         </div>
       )}
       
@@ -1123,7 +1125,11 @@ const Dashboard: React.FC<DashboardProps> = ({
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {classReports.filter(r => r.notes && r.notes.trim() !== '').slice(0, 6).map(report => {
+                {classReports
+                  .filter(r => r.notes && r.notes.trim() !== '')
+                  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                  .slice(0, 6)
+                  .map(report => {
                   const rombel = rombels.find(r => r.id === report.rombelId);
                   const reporter = students.find(s => s.id === report.reporterId);
                   return (
