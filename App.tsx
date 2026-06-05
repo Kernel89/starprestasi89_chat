@@ -3,7 +3,7 @@ import { HashRouter as Router, Routes, Route, Link, useLocation, Navigate } from
 import { pushToCloud, pullFromCloud, syncTableToCloud, deleteFromCloud, TABLES_MAP } from './syncService';
 import useLocalStorage from './useLocalStorage';
 import { ICONS, MOCK_STUDENTS, MOCK_TEACHERS, MOCK_ROMBELS, MOCK_SCHEDULE, MOCK_APPOINTMENTS, DCM_QUESTIONS, SNPMB_UNIVERSITIES, SNPMB_PROGRAMS, MBTI_TEMPLATE, SQ_TEMPLATE, EQ_TEMPLATE, AQ_TEMPLATE, DEFAULT_QUOTES } from './constants';
-import { UserRole, Student, Teacher, Rombel, TeachingSlot, DCMSubmission, GuidanceSession, SchoolProfile, Referral, HomeVisit, Advocacy, CaseConference, SociometrySession, GuidanceMaterial, Assignment, Appointment, DCMQuestion, University, StudyProgram, UserSession, AppUser, CounselorProfileData, StarPrestasi, Scholarship, TrackGuidanceData, CareerVisibility, ChatMessage, SatisfactionFeedback, Quote, QuestionnaireSubmission, AttendanceLog, ClassReport, ForumPost, BKAdministration, PrivateCounselingSession, PrivateCounselingMessage, MengenalProdi, StudentJournal, ClassSubjectRecord, StudentGradeRecord } from './types';
+import { UserRole, Student, Teacher, Rombel, TeachingSlot, DCMSubmission, GuidanceSession, SchoolProfile, Referral, HomeVisit, Advocacy, CaseConference, SociometrySession, GuidanceMaterial, Assignment, Appointment, DCMQuestion, University, StudyProgram, UserSession, AppUser, CounselorProfileData, StarPrestasi, Scholarship, TrackGuidanceData, CareerVisibility, ChatMessage, SatisfactionFeedback, Quote, QuestionnaireSubmission, AttendanceLog, ClassReport, ForumPost, BKAdministration, PrivateCounselingSession, PrivateCounselingMessage, MengenalProdi, StudentJournal, ClassSubjectRecord, StudentGradeRecord, GraduationInfo, US1Record } from './types';
 import Dashboard from './pages/Dashboard';
 import StudentsList from './pages/StudentsList';
 import StudentProfile from './pages/StudentProfile';
@@ -1556,7 +1556,7 @@ const App: React.FC = () => {
       setAttendanceLogs(prev => prev.filter(l => !ids.includes(l.studentId)));
       notify("Data Kolektif (Laporan KM & Forum) dan Absensi Siswa telah dibersihkan untuk tahun pelajaran baru.", "info");
     } else if (mode === 'GRADUATE') {
-      wipeStudentData();
+      // Data dipertahankan untuk Tracer Alumni sesuai permintaan
     }
   };
 
@@ -1921,7 +1921,7 @@ const App: React.FC = () => {
               />} />
               <Route path="/teachers" element={<TeachersList teachers={teachers} setTeachers={setTeachers} students={students} rombels={rombels} schedule={schedule} notify={notify} userRole={user.role} appUsers={appUsers} setAppUsers={setAppUsers} />} />
               <Route path="/rombels" element={<RombelList rombels={rombels} setRombels={setRombels} students={students} setStudents={setStudents} setAlumni={setAlumni} teachers={teachers} gradesConfig={gradesConfig} setGradesConfig={setGradesConfig} notify={notify} userRole={user.role} currentUser={user} handleCleanup={handleStudentCleanup} onGraduateCleanup={handleGraduateCleanup} />} />
-              <Route path="/settings" element={<SchoolSettings gradesConfig={gradesConfig} setGradesConfig={setGradesConfig} rombels={rombels} setRombels={setRombels} notify={notify} userRole={user.role} quotes={quotes} setQuotes={setQuotes} />} />
+              <Route path="/settings" element={<SchoolSettings gradesConfig={gradesConfig} setGradesConfig={setGradesConfig} rombels={rombels} setRombels={setRombels} notify={notify} userRole={user.role} quotes={quotes} setQuotes={setQuotes} students={students} setStudents={setStudents} alumni={alumni} setAlumni={setAlumni} />} />
               <Route path="/alumni" element={(user.role === 'super_admin' || user.role === 'humas' || user.role === 'counselor' || user.role === 'principal' || user.role === 'supervisor') ? <AlumniList students={alumni} setStudents={setAlumni} schoolProfile={safeSchoolProfile} notify={notify} userRole={user.role} /> : <Navigate to="/" replace />} />
               <Route path="/schedule" element={<TeachingSchedule schedule={schedule} setSchedule={setSchedule} rombels={rombels} teachers={teachers} userRole={user.role} students={students} attendanceLogs={attendanceLogs} setAttendanceLogs={setAttendanceLogs} notify={notify} />} />
               <Route path="/dcm" element={(user.role !== 'principal' && user.role !== 'supervisor') ? <DCMManagement students={students} submissions={submissions} setSubmissions={setSubmissions} questions={questions} setQuestions={setQuestions} notify={notify} userRole={user.role} currentUserId={user.id} assignments={assignments} rombels={rombels} schoolProfile={safeSchoolProfile} /> : <Navigate to="/" replace />} />

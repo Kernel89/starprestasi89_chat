@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { GradeConfig } from '../App';
-import { Rombel, UserRole, Quote } from '../types';
+import { Rombel, UserRole, Quote, Student } from '../types';
 
 interface SchoolSettingsProps {
   gradesConfig: GradeConfig[];
@@ -12,9 +12,13 @@ interface SchoolSettingsProps {
   userRole?: UserRole;
   quotes: Quote[];
   setQuotes: React.Dispatch<React.SetStateAction<Quote[]>>;
+  students?: Student[];
+  setStudents?: React.Dispatch<React.SetStateAction<Student[]>>;
+  alumni?: Student[];
+  setAlumni?: React.Dispatch<React.SetStateAction<Student[]>>;
 }
 
-const SchoolSettings: React.FC<SchoolSettingsProps> = ({ gradesConfig, setGradesConfig, rombels, setRombels, notify, userRole, quotes, setQuotes }) => {
+const SchoolSettings: React.FC<SchoolSettingsProps> = ({ gradesConfig, setGradesConfig, rombels, setRombels, notify, userRole, quotes, setQuotes, students = [], setStudents, alumni = [], setAlumni }) => {
   const [newPrefix, setNewPrefix] = useState<{ [key: string]: string }>({});
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [editingQuote, setEditingQuote] = useState<Quote | null>(null);
@@ -23,6 +27,76 @@ const SchoolSettings: React.FC<SchoolSettingsProps> = ({ gradesConfig, setGrades
   const isSuperAdmin = userRole === 'super_admin';
   const isCounselor = userRole === 'counselor';
   const canManage = isSuperAdmin || isCounselor;
+
+  const [isPromotionModalOpen, setIsPromotionModalOpen] = useState(false);
+  const [classXPromotionMode, setClassXPromotionMode] = useState<'AUTO' | 'MANUAL'>('MANUAL');
+
+  const handleMassPromotion = () => {
+    if (!isSuperAdmin) {
+      notify("Hanya Super Admin yang dapat memproses Kenaikan Kelas Serentak.", "error");
+      return;
+    }
+    if (!setStudents || !setAlumni) return;
+
+    if (!confirm("PENTING: Aksi ini akan menaikkan jenjang seluruh siswa secara serentak. Kelas XII akan dialihkan menjadi Alumni. Lanjutkan?")) {
+      return;
+    }
+
+    const currentYear = new Date().getFullYear();
+
+    const newAlumniRecords: Student[] = [];
+    const updatedStudents = students.map(s => {
+      // Kelas XII -> Alumni
+      if (s.grade === 'XII' || s.grade === 'Lulus' || s.grade === 'Alumni') {
+        const alumniRecord = {
+          ...s,
+          status: 'Alumni',
+          grade: 'Alumni',
+          class: s.class === 'Alumni' ? 'Lulus' : (s.class || 'Lulus'),
+          graduationClass: s.graduationClass || `${s.grade || 'XII'} ${s.class || 'Lulus'}`,
+          graduationYear: s.graduationYear || currentYear,
+          alumniStatus: s.alumniStatus || 'Lain-lain',
+          lastMood: 'Netral',
+          attendanceRate: 100,
+          totalSessions: 0,
+          riskLevel: 'Rendah'
+        } as Student;
+        newAlumniRecords.push(alumniRecord);
+        return null;
+      }
+
+      // Kelas XI -> XII
+      if (s.grade === 'XI') {
+        return {
+          ...s,
+          grade: 'XII',
+          class: s.class ? s.class.replace('XI ', 'XII ') : ''
+        };
+      }
+
+      // Kelas X -> XI
+      if (s.grade === 'X') {
+        return {
+          ...s,
+          grade: 'XI',
+          class: classXPromotionMode === 'AUTO' ? (s.class ? s.class.replace('X ', 'XI ') : '') : ''
+        };
+      }
+
+      return s;
+    }).filter(Boolean) as Student[];
+
+    if (newAlumniRecords.length > 0) {
+      setAlumni(prev => {
+        const existingIds = new Set(prev.map(a => a.id));
+        const filteredNew = newAlumniRecords.filter(a => !existingIds.has(a.id));
+        return [...filteredNew, ...prev];
+      });
+    }
+    setStudents(updatedStudents);
+    setIsPromotionModalOpen(false);
+    notify(`Kenaikan Kelas Berhasil! ${newAlumniRecords.length} siswa dialihkan menjadi Alumni.`, "success");
+  };
 
   const updateClassCount = (id: string, count: number) => {
     if (!isSuperAdmin) {
@@ -168,6 +242,28 @@ const SchoolSettings: React.FC<SchoolSettingsProps> = ({ gradesConfig, setGrades
           </div>
         </div>
       </header>
+
+      {/* KENAIKAN KELAS SECTION */}
+      {isSuperAdmin && (
+      <section className="space-y-6">
+        <div className="flex items-center gap-4 border-b border-slate-100 pb-4">
+            <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/><path d="m18 9-6-6-6 6"/></svg>
+            </div>
+            <h3 className="text-xl font-black text-slate-800 uppercase tracking-tight">Kenaikan Kelas Serentak</h3>
+        </div>
+        <div className="bg-white p-6 rounded-[2rem] border border-amber-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+           <div>
+               <h4 className="text-lg font-bold text-slate-800">Proses Akhir Tahun Ajaran</h4>
+               <p className="text-sm text-slate-500 max-w-3xl mt-1">Gunakan fitur ini untuk memproses kenaikan jenjang seluruh siswa secara serentak. Kelas XII akan dialihkan menjadi Alumni. Kelas XI akan naik ke XII di Rombel yang sama. Kelas X akan naik ke XI dengan opsi jurusan.</p>
+           </div>
+           <button onClick={() => setIsPromotionModalOpen(true)} className="px-6 py-3 bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold rounded-xl shadow-lg shadow-amber-200 transition-all flex items-center gap-2 whitespace-nowrap">
+               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/><path d="m18 9-6-6-6 6"/></svg>
+               Proses Kenaikan
+           </button>
+        </div>
+      </section>
+      )}
 
       {/* STRUKTUR KELAS SECTION */}
       <section className="space-y-6">
@@ -381,6 +477,50 @@ const SchoolSettings: React.FC<SchoolSettingsProps> = ({ gradesConfig, setGrades
             </div>
         </div>
       )}
+      {/* Modal Kenaikan Kelas */}
+      {isPromotionModalOpen && (
+        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-[2rem] p-8 max-w-lg w-full shadow-2xl animate-in zoom-in-95 duration-200">
+            <h3 className="text-2xl font-black text-slate-800 mb-2">Kenaikan Kelas Serentak</h3>
+            <p className="text-slate-500 text-sm mb-6">Sistem akan secara otomatis menaikkan jenjang seluruh siswa aktif. Tentukan opsi penempatan jurusan khusus untuk Kelas X yang akan naik ke Kelas XI.</p>
+            
+            <div className="space-y-4 mb-8">
+                <label className="flex items-start gap-4 p-4 border border-slate-200 rounded-2xl cursor-pointer hover:bg-slate-50 transition-colors">
+                    <input type="radio" name="classXMode" value="MANUAL" checked={classXPromotionMode === 'MANUAL'} onChange={() => setClassXPromotionMode('MANUAL')} className="mt-1 w-5 h-5 text-blue-600 border-slate-300 focus:ring-blue-600" />
+                    <div>
+                        <span className="block font-bold text-slate-800">Acak Ulang Manual (X ke XI)</span>
+                        <span className="block text-sm text-slate-500 mt-1">Siswa akan dinaikkan jenjangnya menjadi XI, namun kelasnya akan dikosongkan. Admin harus memasukkan mereka ke rombel baru secara manual.</span>
+                    </div>
+                </label>
+
+                <label className="flex items-start gap-4 p-4 border border-slate-200 rounded-2xl cursor-pointer hover:bg-slate-50 transition-colors">
+                    <input type="radio" name="classXMode" value="AUTO" checked={classXPromotionMode === 'AUTO'} onChange={() => setClassXPromotionMode('AUTO')} className="mt-1 w-5 h-5 text-blue-600 border-slate-300 focus:ring-blue-600" />
+                    <div>
+                        <span className="block font-bold text-slate-800">Otomatis Jurusan Sama (X ke XI)</span>
+                        <span className="block text-sm text-slate-500 mt-1">Siswa akan otomatis dimasukkan ke rombel dengan nama dan jurusan yang sama (misal: "X MIPA 1" otomatis menjadi "XI MIPA 1").</span>
+                    </div>
+                </label>
+            </div>
+
+            <div className="flex gap-3 justify-end pt-6 border-t border-slate-100">
+              <button 
+                onClick={() => setIsPromotionModalOpen(false)}
+                className="px-6 py-3 rounded-xl font-bold text-slate-600 hover:bg-slate-100 transition-colors"
+              >
+                Batal
+              </button>
+              <button 
+                onClick={handleMassPromotion}
+                className="px-6 py-3 rounded-xl font-bold text-white bg-amber-600 hover:bg-amber-700 transition-colors flex items-center gap-2"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/><path d="m18 9-6-6-6 6"/></svg>
+                Eksekusi Sekarang
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

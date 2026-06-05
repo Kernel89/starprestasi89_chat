@@ -470,6 +470,8 @@ export interface SchoolProfile {
   principalNip: string;
   principalRank?: string;
   principalGrade?: string;
+    activeAcademicYear?: string;
+    activeSemester?: string;
   counselorName: string;
   counselorNip: string;
   vision: string;
