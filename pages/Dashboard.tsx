@@ -232,6 +232,17 @@ const Dashboard: React.FC<DashboardProps> = ({
     return students.find(s => s.id === currentUser.id) || null;
   }, [isStudent, currentUser, students]);
 
+  const currentStudentRombel = useMemo(() => {
+    if (!currentStudent || !rombels) return null;
+    const sGrade = (currentStudent.grade || '').trim().toUpperCase();
+    const sSuffix = normalizeClassSuffix(currentStudent.class || '');
+    return rombels.find(r => {
+      const rGrade = (r.grade || '').trim().toUpperCase();
+      const rSuffix = extractShortName(r.name, r.grade);
+      return rGrade === sGrade && rSuffix === sSuffix;
+    });
+  }, [currentStudent, rombels]);
+
   const uncompletedAssignments = useMemo(() => {
     if (!isStudent || !currentUser?.id) return [];
 
@@ -526,7 +537,7 @@ const Dashboard: React.FC<DashboardProps> = ({
             {currentStudent && currentStudent.grade && currentStudent.class && (
                <div className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 bg-emerald-50 text-emerald-700 rounded-xl border border-emerald-100 shadow-sm animate-in slide-in-from-left-4 duration-500">
                  <ICONS.Sparkles />
-                 <span className="font-black tracking-wide">Selamat anda masuk ke kelas {currentStudent.grade} {currentStudent.class}</span>
+                 <span className="font-black tracking-wide">Selamat anda masuk ke kelas {currentStudentRombel?.name || `${currentStudent.grade} ${currentStudent.class}`}</span>
                </div>
             )}
           </div>
