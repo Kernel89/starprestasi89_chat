@@ -1711,11 +1711,9 @@ const App: React.FC = () => {
                     }}
                     className="w-full bg-white border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-bold text-slate-700 outline-none focus:ring-2 focus:ring-indigo-500/20"
                   >
-                    {(safeSchoolProfile.academicYears || ['2023/2024']).map(y => (
+                    {(safeSchoolProfile.academicYears || [safeSchoolProfile.activeAcademicYear || '2023/2024']).map(y => (
                       <option key={y} value={y}>{y}</option>
                     ))}
-                    {!(safeSchoolProfile.academicYears || []).includes('2024/2025') && <option value="2024/2025">2024/2025</option>}
-                    {!(safeSchoolProfile.academicYears || []).includes('2025/2026') && <option value="2025/2026">2025/2026</option>}
                   </select>
                   <select 
                     value={user.sessionSemester || safeSchoolProfile.activeSemester || ''}
