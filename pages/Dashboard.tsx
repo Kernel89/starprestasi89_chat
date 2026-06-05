@@ -227,6 +227,11 @@ const Dashboard: React.FC<DashboardProps> = ({
 
   const isStudent = userRole === 'student' || userRole === 'ketua_murid';
 
+  const currentStudent = useMemo(() => {
+    if (!isStudent || !currentUser?.id) return null;
+    return students.find(s => s.id === currentUser.id) || null;
+  }, [isStudent, currentUser, students]);
+
   const uncompletedAssignments = useMemo(() => {
     if (!isStudent || !currentUser?.id) return [];
 
@@ -516,7 +521,15 @@ const Dashboard: React.FC<DashboardProps> = ({
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h2 className="text-3xl font-black text-slate-900 tracking-tight">Dashboard</h2>
-          <p className="text-slate-500 text-sm font-medium">Selamat datang kembali, <span className="text-base font-bold text-slate-800">{currentUser?.name || 'User'}</span>!</p>
+          <div className="text-slate-500 text-sm font-medium space-y-1 mt-1">
+            <p>Selamat datang kembali, <span className="text-base font-bold text-slate-800">{currentUser?.name || 'User'}</span>!</p>
+            {currentStudent && currentStudent.grade && currentStudent.class && (
+               <div className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 bg-emerald-50 text-emerald-700 rounded-xl border border-emerald-100 shadow-sm animate-in slide-in-from-left-4 duration-500">
+                 <ICONS.Sparkles />
+                 <span className="font-black tracking-wide">Selamat anda masuk ke kelas {currentStudent.grade} {currentStudent.class}</span>
+               </div>
+            )}
+          </div>
         </div>
         <div className="bg-white px-6 py-3 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
           <div className="p-2 bg-teal-50 rounded-lg text-teal-600">
