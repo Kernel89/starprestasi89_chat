@@ -238,28 +238,63 @@ const CurriculumDashboardView: React.FC<CurriculumDashboardViewProps> = ({ stude
   }, [subjectStats, selectedSubject]);
 
   const subjectTrendData = useMemo(() => {
-    if (!selectedSubject || !subjectStats.trend[selectedSubject]) return [];
+    if (!selectedSubject) return [];
     
-    const selectedTingkatConfig = gradesConfig.find(c => c.id === statsTingkat);
-    const selectedTingkatName = selectedTingkatConfig ? selectedTingkatConfig.name.toUpperCase() : 'ALL';
+    // We want to calculate the trend grouped by Tingkat for the selected subject
+    const trendByTingkat: Record<string, { ganjil: { total: number, count: number }, genap: { total: number, count: number } }> = {};
     
-    // Determine which semesters to show based on statsTingkat
-    let semesters = ['1', '2', '3', '4', '5', '6'];
-    if (selectedTingkatName === 'X') semesters = ['1', '2'];
-    else if (selectedTingkatName === 'XI') semesters = ['3', '4'];
-    else if (selectedTingkatName === 'XII') semesters = ['5', '6'];
-    
-    const data: any[] = [];
-    
-    semesters.forEach(sem => {
-      const semData = subjectStats.trend[selectedSubject][sem];
-      data.push({
-        name: `Sem ${sem}`,
-        [selectedSubject]: semData && semData.count > 0 ? parseFloat((semData.total / semData.count).toFixed(2)) : null
+    // Initialize the structure based on gradesConfig
+    gradesConfig.forEach(c => {
+      trendByTingkat[c.name.toUpperCase()] = {
+        ganjil: { total: 0, count: 0 },
+        genap: { total: 0, count: 0 }
+      };
+    });
+
+    activeStudentsInYear.forEach(student => {
+      if (!student.semesterGrades) return;
+      
+      const rombel = getRombelForStudent(student, rombels);
+      const studentTingkat = rombel ? (rombel.grade || '').trim().toUpperCase() : (student.grade || '').trim().toUpperCase();
+      
+      if (!trendByTingkat[studentTingkat]) return;
+
+      Object.entries(student.semesterGrades).forEach(([sem, grades]) => {
+        const score = grades[selectedSubject];
+        if (typeof score !== 'number') return;
+
+        // Determine if it's Ganjil or Genap based on the exact semester mapping for that Tingkat
+        let period: 'ganjil' | 'genap' | null = null;
+        if (studentTingkat === 'X' && sem === '1') period = 'ganjil';
+        else if (studentTingkat === 'X' && sem === '2') period = 'genap';
+        else if (studentTingkat === 'XI' && sem === '3') period = 'ganjil';
+        else if (studentTingkat === 'XI' && sem === '4') period = 'genap';
+        else if (studentTingkat === 'XII' && sem === '5') period = 'ganjil';
+        else if (studentTingkat === 'XII' && sem === '6') period = 'genap';
+
+        if (period) {
+          trendByTingkat[studentTingkat][period].total += score;
+          trendByTingkat[studentTingkat][period].count++;
+        }
       });
     });
+
+    const data = [
+      { name: 'Semester Ganjil' },
+      { name: 'Semester Genap' }
+    ];
+
+    gradesConfig.forEach(c => {
+      const tingkat = c.name.toUpperCase();
+      const ganjilData = trendByTingkat[tingkat].ganjil;
+      const genapData = trendByTingkat[tingkat].genap;
+      
+      (data[0] as any)[c.name] = ganjilData.count > 0 ? parseFloat((ganjilData.total / ganjilData.count).toFixed(2)) : null;
+      (data[1] as any)[c.name] = genapData.count > 0 ? parseFloat((genapData.total / genapData.count).toFixed(2)) : null;
+    });
+
     return data;
-  }, [selectedSubject, subjectStats, statsTingkat, gradesConfig]);
+  }, [selectedSubject, activeStudentsInYear, gradesConfig, rombels]);
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -453,7 +488,21 @@ const CurriculumDashboardView: React.FC<CurriculumDashboardViewProps> = ({ stude
                   <YAxis axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} domain={['dataMin - 5', 100]} />
                   <Tooltip cursor={{ fill: '#f8fafc' }} contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 15px rgba(0,0,0,0.1)', fontSize: '11px', fontWeight: 700 }} />
                   <Legend iconType="circle" wrapperStyle={{ fontSize: '12px', fontWeight: 600 }} />
-                  <Line type="monotone" dataKey={selectedSubject} stroke="#0ea5e9" strokeWidth={4} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                  {gradesConfig.map((c, i) => {
+                    const colors = ['#0ea5e9', '#f43f5e', '#8b5cf6', '#10b981', '#f59e0b'];
+                    return (
+                      <Line 
+                        key={c.id} 
+                        type="monotone" 
+                        dataKey={c.name} 
+                        stroke={colors[i % colors.length]} 
+                        strokeWidth={4} 
+                        dot={{ r: 4, strokeWidth: 2 }} 
+                        activeDot={{ r: 6 }} 
+                        connectNulls={true}
+                      />
+                    );
+                  })}
                 </LineChart>
               </ResponsiveContainer>
             ) : (
