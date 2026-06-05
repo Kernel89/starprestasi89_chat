@@ -48,7 +48,7 @@ const SchoolProfilePage: React.FC<SchoolProfileProps> = ({ profile, setProfile, 
       const gradData = { ...graduationInfo };
       const activeYear = activeAcademicYear || '';
       if (activeYear && !gradData[activeYear]) {
-        gradData[activeYear] = { printDate: '', transcriptPrintDate: '', transcriptNumber: '', sklNumber: '', skkbNumber: '' };
+        gradData[activeYear] = { tanggalKelulusan: '', tanggalRapatPleno: '', noTranskripNilai: '', noSkl: '', noSkkb: '' };
       }
       setGraduationInfo(gradData);
     }

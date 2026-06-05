@@ -483,7 +483,6 @@ export interface SchoolProfile {
   isLocked?: boolean;
   editCount?: number;
   academicYears?: string[];
-  activeAcademicYear?: string;
   updated_at?: string;
 }
 

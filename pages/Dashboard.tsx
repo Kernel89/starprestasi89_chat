@@ -51,16 +51,26 @@ interface DashboardProps {
 const Dashboard: React.FC<DashboardProps> = ({
   schoolName, schoolLogo, students, alumni = [],
   rombels,
-  sessions,
+  sessions: rawSessions,
   classSubjects,
   studentGrades,
-  homeVisits,
-  advocacies, conferences, referrals, userRole, teachers, schedule,
+  homeVisits: rawHomeVisits,
+  advocacies: rawAdvocacies, conferences: rawConferences, referrals: rawReferrals, userRole, teachers, schedule,
   currentUser, starData, assignments, dcmSubmissions, materials,
-  appointments, sociometrySessions, universities, studyPrograms,
+  appointments, sociometrySessions: rawSociometrySessions, universities, studyPrograms,
   feedbacks, setFeedbacks, notify, quotes, questionnaireSubmissions,
-  attendanceLogs, setAttendanceLogs, classReports, setClassReports
+  attendanceLogs: rawAttendanceLogs, setAttendanceLogs, classReports: rawClassReports, setClassReports
 }) => {
+  const activeYear = currentUser.sessionAcademicYear;
+
+  const sessions = useMemo(() => rawSessions.filter(s => !s.tahun_pelajaran || s.tahun_pelajaran === activeYear), [rawSessions, activeYear]);
+  const homeVisits = useMemo(() => rawHomeVisits.filter(h => !h.tahun_pelajaran || h.tahun_pelajaran === activeYear), [rawHomeVisits, activeYear]);
+  const advocacies = useMemo(() => rawAdvocacies.filter(a => !a.tahun_pelajaran || a.tahun_pelajaran === activeYear), [rawAdvocacies, activeYear]);
+  const conferences = useMemo(() => rawConferences.filter(c => !c.tahun_pelajaran || c.tahun_pelajaran === activeYear), [rawConferences, activeYear]);
+  const referrals = useMemo(() => rawReferrals.filter(r => !r.tahun_pelajaran || r.tahun_pelajaran === activeYear), [rawReferrals, activeYear]);
+  const attendanceLogs = useMemo(() => rawAttendanceLogs.filter(a => !a.tahun_pelajaran || a.tahun_pelajaran === activeYear), [rawAttendanceLogs, activeYear]);
+  const sociometrySessions = useMemo(() => rawSociometrySessions.filter(s => !s.tahun_pelajaran || s.tahun_pelajaran === activeYear), [rawSociometrySessions, activeYear]);
+  const classReports = useMemo(() => rawClassReports.filter(c => !c.tahun_pelajaran || c.tahun_pelajaran === activeYear), [rawClassReports, activeYear]);
 
   const normalizeClassSuffix = (str: string) => {
     if (!str) return '';
@@ -736,7 +746,7 @@ const Dashboard: React.FC<DashboardProps> = ({
       {/* Charts Section */}
       {(userRole === 'curriculum' || userRole === 'super_admin' || userRole === 'principal' || userRole === 'supervisor') && (
         <div className="mb-12">
-          <CurriculumDashboardView students={students} rombels={rombels} classSubjects={classSubjects} studentGrades={studentGrades || []} />
+          <CurriculumDashboardView students={students} rombels={rombels} classSubjects={classSubjects} />
         </div>
       )}
       

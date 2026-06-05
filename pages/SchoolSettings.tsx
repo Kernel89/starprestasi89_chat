@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { GradeConfig } from '../App';
-import { Rombel, UserRole, Quote, Student } from '../types';
+import { Rombel, UserRole, Quote, Student, Mood } from '../types';
 
 interface SchoolSettingsProps {
   gradesConfig: GradeConfig[];
@@ -56,7 +56,7 @@ const SchoolSettings: React.FC<SchoolSettingsProps> = ({ gradesConfig, setGrades
           graduationClass: s.graduationClass || `${s.grade || 'XII'} ${s.class || 'Lulus'}`,
           graduationYear: s.graduationYear || currentYear,
           alumniStatus: s.alumniStatus || 'Lain-lain',
-          lastMood: 'Netral',
+          lastMood: Mood.Netral,
           attendanceRate: 100,
           totalSessions: 0,
           riskLevel: 'Rendah'

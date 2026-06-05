@@ -113,7 +113,7 @@ const DEFAULT_COUNSELOR_PROFILE: CounselorProfileData = {
 };
 
 const DEFAULT_SCHOOL_PROFILE: SchoolProfile = {
-  name: 'SMA NEGERI CONTOH',
+  name: 'SMAN 1 Cibadak',
   agencyName: 'PEMERINTAH PROVINSI',
   subAgencyName: 'DINAS PENDIDIKAN',
   branchAgencyName: 'CABANG DINAS WILAYAH',
@@ -1497,6 +1497,11 @@ const App: React.FC = () => {
   }
 
   const handleLogin = async (u: UserSession) => {
+    // Auto set session context for non-students
+    if (!['student', 'ketua_murid', 'siswa', '-'].includes(u.role as any)) {
+      if (!u.sessionAcademicYear) u.sessionAcademicYear = safeSchoolProfile.activeAcademicYear || '2023/2024';
+      if (!u.sessionSemester) u.sessionSemester = safeSchoolProfile.activeSemester || 'Ganjil';
+    }
     setUser(u);
     window.location.hash = '#/';
     notify(`Selamat datang, ${u.name}! Sedang mensinkronkan data...`, 'info');
@@ -1622,54 +1627,20 @@ const App: React.FC = () => {
     return <LoginPage onLogin={handleLogin} appUsers={appUsers} students={students} schoolProfile={safeSchoolProfile} quotes={quotes} />;
   }
 
-  // Session context prompt for non-students
-  const isStudentRole = ['student', 'ketua_murid', 'siswa', '-'].includes(user.role as any);
-  if (!isStudentRole && (!user.sessionAcademicYear || !user.sessionSemester)) {
-    return (
-      <div className="min-h-[100dvh] bg-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-tr from-indigo-900/50 to-slate-900/80 z-0" />
-        <div className="bg-white rounded-[2rem] w-full max-w-md p-8 shadow-2xl relative z-10 animate-in zoom-in-95 fade-in duration-300">
-          <div className="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center mb-6 text-indigo-600">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <h2 className="text-2xl font-black text-slate-800 tracking-tight">Konteks Sesi</h2>
-          <p className="text-slate-500 mb-8 text-sm font-medium leading-relaxed">Silakan tentukan Tahun Pelajaran dan Semester untuk sesi Anda saat ini.</p>
-          
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            const formData = new FormData(e.currentTarget);
-            const academicYear = formData.get('academicYear') as string;
-            const semester = formData.get('semester') as string;
-            const updatedUser = { ...user, sessionAcademicYear: academicYear, sessionSemester: semester };
-            setUser(updatedUser);
-            localStorage.setItem('star_auth_user', JSON.stringify(updatedUser));
-          }} className="space-y-5">
-            <div>
-              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Tahun Pelajaran</label>
-              <select name="academicYear" defaultValue={safeSchoolProfile.activeAcademicYear} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all cursor-pointer appearance-none" required>
-                {(safeSchoolProfile.academicYears || ['2023/2024']).map(y => (
-                  <option key={y} value={y}>{y}</option>
-                ))}
-                {!(safeSchoolProfile.academicYears || []).includes('2024/2025') && <option value="2024/2025">2024/2025</option>}
-                {!(safeSchoolProfile.academicYears || []).includes('2025/2026') && <option value="2025/2026">2025/2026</option>}
-              </select>
-            </div>
-            <div>
-              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Semester</label>
-              <select name="semester" defaultValue={safeSchoolProfile.activeSemester} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm font-bold text-slate-700 outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all cursor-pointer appearance-none" required>
-                <option value="Ganjil">Ganjil</option>
-                <option value="Genap">Genap</option>
-              </select>
-            </div>
-            <button type="submit" className="w-full h-14 bg-indigo-600 text-white rounded-xl text-xs font-black uppercase tracking-[0.2em] shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:-translate-y-1 transition-all active:scale-95 flex items-center justify-center gap-2 mt-4">
-              Masuk Dashboard
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </button>
-          </form>
-        </div>
-      </div>
-    );
-  }
+  // Check session variables (migration logic for old login states)
+  useEffect(() => {
+    if (user && !['student', 'ketua_murid', 'siswa', '-'].includes(user.role as any)) {
+      if (!user.sessionAcademicYear || !user.sessionSemester) {
+        const updatedUser = { 
+          ...user, 
+          sessionAcademicYear: user.sessionAcademicYear || safeSchoolProfile.activeAcademicYear || '2023/2024',
+          sessionSemester: user.sessionSemester || safeSchoolProfile.activeSemester || 'Ganjil'
+        };
+        setUser(updatedUser);
+        localStorage.setItem('star_currentUser', JSON.stringify(updatedUser));
+      }
+    }
+  }, [user, safeSchoolProfile.activeAcademicYear, safeSchoolProfile.activeSemester]);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
   const activeCounselorProfile = getCurrentCounselorProfile();
@@ -1725,6 +1696,43 @@ const App: React.FC = () => {
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
           </div>
+
+          {['super_admin', 'counselor', 'principal', 'supervisor', 'curriculum'].includes(user.role) && (
+            <div className="px-4 pb-2 print-hide">
+              <div className="bg-slate-100/80 rounded-xl p-3 border border-slate-200 shadow-inner">
+                <label className="block text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Periode Sesi Aktif</label>
+                <div className="space-y-2">
+                  <select 
+                    value={user.sessionAcademicYear || safeSchoolProfile.activeAcademicYear || ''}
+                    onChange={(e) => {
+                      const updatedUser = { ...user, sessionAcademicYear: e.target.value };
+                      setUser(updatedUser);
+                      localStorage.setItem('star_currentUser', JSON.stringify(updatedUser));
+                    }}
+                    className="w-full bg-white border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-bold text-slate-700 outline-none focus:ring-2 focus:ring-indigo-500/20"
+                  >
+                    {(safeSchoolProfile.academicYears || ['2023/2024']).map(y => (
+                      <option key={y} value={y}>{y}</option>
+                    ))}
+                    {!(safeSchoolProfile.academicYears || []).includes('2024/2025') && <option value="2024/2025">2024/2025</option>}
+                    {!(safeSchoolProfile.academicYears || []).includes('2025/2026') && <option value="2025/2026">2025/2026</option>}
+                  </select>
+                  <select 
+                    value={user.sessionSemester || safeSchoolProfile.activeSemester || ''}
+                    onChange={(e) => {
+                      const updatedUser = { ...user, sessionSemester: e.target.value };
+                      setUser(updatedUser);
+                      localStorage.setItem('star_currentUser', JSON.stringify(updatedUser));
+                    }}
+                    className="w-full bg-white border border-slate-200 rounded-lg px-2 py-1.5 text-xs font-bold text-slate-700 outline-none focus:ring-2 focus:ring-indigo-500/20"
+                  >
+                    <option value="Ganjil">Ganjil</option>
+                    <option value="Genap">Genap</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          )}
 
           <nav className="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-1">
             {user.role !== 'humas' && user.role !== 'curriculum' && <SidebarItem to="/" icon={<ICONS.Dashboard />} label={(user.role === 'student' || user.role === 'ketua_murid' || (user.role as any) === 'siswa' || (user.role as any) === '-') ? "Dashboard Siswa" : "Dashboard"} onClick={closeMobileMenu} />}

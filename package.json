@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "tsc --noEmit",
-    "start": "tsx server.ts"
+    "start": "tsx server.ts",
+    "backup": "node auto_backup.cjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.0",
