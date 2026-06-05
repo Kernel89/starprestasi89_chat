@@ -225,7 +225,7 @@ const Dashboard: React.FC<DashboardProps> = ({
     return quotes[Math.floor(Math.random() * quotes.length)];
   }, [quotes]);
 
-  const isStudent = userRole === 'student' || userRole === 'ketua_murid';
+  const isStudent = ['student', 'ketua_murid', 'siswa', '-'].includes(userRole);
 
   const currentStudent = useMemo(() => {
     if (!isStudent || !currentUser?.id) return null;
