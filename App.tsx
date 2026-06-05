@@ -1697,7 +1697,7 @@ const App: React.FC = () => {
             </button>
           </div>
 
-          {['super_admin', 'admin', 'counselor', 'principal', 'supervisor', 'curriculum'].includes((user.role || '').toLowerCase()) && (
+          {['super_admin', 'admin', 'counselor', 'konselor', 'principal', 'kepala_sekolah', 'supervisor', 'pengawas', 'curriculum', 'kurikulum'].includes((user.role || '').toLowerCase().replace(/ /g, '_')) && (
             <div className="px-4 pb-2 print-hide">
               <div className="bg-slate-100/80 rounded-xl p-3 border border-slate-200 shadow-inner">
                 <label className="block text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Periode Sesi Aktif</label>
