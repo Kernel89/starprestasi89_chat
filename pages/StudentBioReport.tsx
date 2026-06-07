@@ -102,7 +102,8 @@ const StudentBioReport: React.FC<StudentBioReportProps> = ({
     doc.setFontSize(14); doc.setFont("times", "bold");
     doc.text(`LAPORAN BIODATA SISWA ASUH`, 148.5, startY + 5, { align: 'center' });
     doc.setFontSize(11);
-    doc.text(`Jumlah: ${classStudents.length} Siswa`, 148.5, startY + 11, { align: 'center' });
+    doc.text(`Tahun Pelajaran: ${schoolProfile.activeAcademicYear || '-'}`, 148.5, startY + 11, { align: 'center' });
+    doc.text(`Jumlah: ${classStudents.length} Siswa`, 148.5, startY + 17, { align: 'center' });
 
     // --- TABEL ---
     const tableHead = [[
@@ -227,6 +228,7 @@ const StudentBioReport: React.FC<StudentBioReportProps> = ({
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h2 className="text-3xl font-black text-slate-900 tracking-tight">Biodata Siswa Asuh</h2>
+          <p className="text-sm font-bold text-slate-700 mt-2">Tahun Pelajaran: {schoolProfile.activeAcademicYear || '-'}</p>
           <p className="text-slate-500 text-sm">Laporan lengkap profil siswa berdasarkan jadwal bimbingan kelas.</p>
         </div>
         <div className="bg-white px-6 py-3 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">

@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { TeachingSlot, Teacher, Rombel, UserRole, Student, AttendanceLog } from '../types';
+import { TeachingSlot, Teacher, Rombel, UserRole, Student, AttendanceLog, SchoolProfile } from '../types';
 
 interface TeachingScheduleProps {
   schedule: TeachingSlot[];
@@ -12,11 +12,13 @@ interface TeachingScheduleProps {
   attendanceLogs: AttendanceLog[];
   setAttendanceLogs: React.Dispatch<React.SetStateAction<AttendanceLog[]>>;
   notify: (msg: string, type?: 'success' | 'error' | 'info') => void;
+  schoolProfile?: SchoolProfile;
 }
 
 const TeachingSchedule: React.FC<TeachingScheduleProps> = ({ 
   schedule, setSchedule, rombels, teachers, userRole, 
-  students, attendanceLogs, setAttendanceLogs, notify 
+  students, attendanceLogs, setAttendanceLogs, notify,
+  schoolProfile
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAttendanceModalOpen, setIsAttendanceModalOpen] = useState(false);
@@ -312,6 +314,25 @@ const TeachingSchedule: React.FC<TeachingScheduleProps> = ({
                   )}
                 </div>
               </div>
+              
+              {schoolProfile?.learningSchedules && (
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Pilih Jam Ke- (Opsional)</label>
+                  <select 
+                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm font-bold focus:ring-4 focus:ring-indigo-500/10 outline-none"
+                    onChange={e => {
+                      if (!e.target.value) return;
+                      const [start, end] = e.target.value.split('|');
+                      setFormData({...formData, startTime: start, endTime: end});
+                    }}
+                  >
+                    <option value="">-- Pilih Jam Berdasarkan Profil Sekolah --</option>
+                    {schoolProfile.learningSchedules.find(s => s.day === formData.day)?.hours.map((h, i) => (
+                      <option key={i} value={`${h.startTime}|${h.endTime}`}>Jam Ke- {h.period} ({h.startTime} - {h.endTime})</option>
+                    ))}
+                  </select>
+                </div>
+              )}
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">

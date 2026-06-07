@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { UserSession, Student, SatisfactionFeedback, Assignment, Rombel } from '../types';
+import { UserSession, Student, SatisfactionFeedback, Assignment, Rombel, SchoolProfile } from '../types';
 
 interface StudentSatisfactionProps {
   currentUser: UserSession;
@@ -10,6 +10,7 @@ interface StudentSatisfactionProps {
   setFeedbacks: React.Dispatch<React.SetStateAction<SatisfactionFeedback[]>>;
   notify: (msg: string, type?: 'success' | 'error' | 'info') => void;
   assignments?: Assignment[];
+  schoolProfile: SchoolProfile;
 }
 
 const SCHOOL_CATEGORIES = [
@@ -30,7 +31,7 @@ const BK_CATEGORIES = [
 ];
 
 const StudentSatisfaction: React.FC<StudentSatisfactionProps> = ({
-  currentUser, students, rombels, feedbacks, setFeedbacks, notify, assignments = []
+  currentUser, students, rombels, feedbacks, setFeedbacks, notify, assignments = [], schoolProfile
 }) => {
   const getInitials = (name: string) => {
     if (!name) return '-';
@@ -111,8 +112,11 @@ const StudentSatisfaction: React.FC<StudentSatisfactionProps> = ({
     const commonData = {
       studentId: currentUser.id!,
       studentName: getInitials(currentUser.name),
-      studentClass: '-',
-      date: new Date().toISOString()
+      studentClass: myRombel?.name || '-',
+      gradeAtTime: myRombel?.tingkat || '',
+      serviceSource,
+      date: new Date().toISOString(),
+      academicYear: schoolProfile?.activeAcademicYear || '-'
     };
 
     setTimeout(() => {

@@ -3,6 +3,7 @@ import { SatisfactionFeedback, Assignment, Rombel, Student, UserRole, SchoolProf
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { drawLetterhead } from '../utils/pdfHelper';
+import Letterhead from '../components/Letterhead';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
   Cell
@@ -31,6 +32,9 @@ const SatisfactionReport: React.FC<SatisfactionReportProps & { schoolProfile: Sc
     isCounselor ? 'BK' : 'All'
   );
   
+  const [reportViewMode, setReportViewMode] = useState<'dashboard' | 'report'>('dashboard');
+  const [webReportTingkat, setWebReportTingkat] = useState<string>('Semua');
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 50;
   
@@ -58,9 +62,35 @@ const SatisfactionReport: React.FC<SatisfactionReportProps & { schoolProfile: Sc
 
   const canManage = isSuperAdmin || isCounselor || isPrincipal;
 
+  const [academicYearFilter, setAcademicYearFilter] = useState<string>(schoolProfile.activeAcademicYear || 'Semua');
+
+  const availableAcademicYears = useMemo(() => {
+    const years = new Set<string>();
+    feedbacks.forEach(f => {
+      if (f.academicYear && f.academicYear !== '-') {
+        years.add(f.academicYear);
+      }
+    });
+    if (schoolProfile.activeAcademicYear) {
+      years.add(schoolProfile.activeAcademicYear);
+    }
+    return Array.from(years).sort().reverse();
+  }, [feedbacks, schoolProfile.activeAcademicYear]);
+
   const filteredData = useMemo(() => {
-    return feedbacks.filter(f => f.serviceSource === filterSource);
-  }, [feedbacks, filterSource]);
+    let result = feedbacks;
+    if (academicYearFilter !== 'Semua') {
+      result = result.filter(f => {
+        const y = f.academicYear || '-';
+        if (academicYearFilter === '-') return y === '-';
+        return y === academicYearFilter;
+      });
+    }
+    if (filterSource !== 'All') {
+      result = result.filter(f => f.serviceSource === filterSource);
+    }
+    return result;
+  }, [feedbacks, filterSource, academicYearFilter]);
 
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
   const paginatedFeedbacks = useMemo(() => {
@@ -70,7 +100,26 @@ const SatisfactionReport: React.FC<SatisfactionReportProps & { schoolProfile: Sc
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [filterSource]);
+  }, [filterSource, academicYearFilter]);
+
+  const webReportData = useMemo(() => {
+    if (webReportTingkat === 'Semua') return filteredData;
+    return filteredData.filter(f => {
+       const c = f.studentClass.trim().toUpperCase();
+       if (webReportTingkat === 'XII') return c.startsWith('XII');
+       if (webReportTingkat === 'XI') return c.startsWith('XI') && !c.startsWith('XII');
+       if (webReportTingkat === 'X') return c.startsWith('X') && !c.startsWith('XI') && !c.startsWith('XII');
+       return true;
+    });
+  }, [filteredData, webReportTingkat]);
+
+  const webReportStats = useMemo(() => {
+    if (webReportData.length === 0) return null;
+    const sum = webReportData.reduce((acc, curr) => acc + curr.rating, 0);
+    const avg = (sum / webReportData.length).toFixed(1);
+    const total = new Set(webReportData.map(f => f.studentId)).size;
+    return { avg, total };
+  }, [webReportData]);
 
   const activeCollections = useMemo(() => {
     return assignments.filter(a => {
@@ -168,29 +217,59 @@ const SatisfactionReport: React.FC<SatisfactionReportProps & { schoolProfile: Sc
     notify("Akses pengisian ditutup.");
   };
 
-  const handleExportPDF = () => {
-    if (filteredData.length === 0) return;
+  const handleExportPDF = (tingkatFilter?: string) => {
+    let dataToExport = filteredData;
+    let titleSuffix = '';
+
+    if (tingkatFilter) {
+      dataToExport = filteredData.filter(f => {
+         const c = f.studentClass.trim().toUpperCase();
+         if (tingkatFilter === 'XII') return c.startsWith('XII');
+         if (tingkatFilter === 'XI') return c.startsWith('XI') && !c.startsWith('XII');
+         if (tingkatFilter === 'X') return c.startsWith('X') && !c.startsWith('XI') && !c.startsWith('XII');
+         return true;
+      });
+      titleSuffix = ` (Tingkat ${tingkatFilter})`;
+    }
+
+    const sum = dataToExport.reduce((acc, curr) => acc + curr.rating, 0);
+    const avg = dataToExport.length > 0 ? (sum / dataToExport.length).toFixed(1) : "0.0";
+    const total = new Set(dataToExport.map(f => f.studentId)).size;
+
     const doc = new jsPDF('portrait');
     const startY = drawLetterhead(doc, schoolProfile, 'p');
 
     doc.setFontSize(14); doc.setFont("times", "bold");
-    doc.text("LAPORAN ANALISIS KEPUASAN LAYANAN", 105, startY + 5, { align: 'center' });
+    doc.text(`LAPORAN ANALISIS KEPUASAN LAYANAN${titleSuffix.toUpperCase()}`, 105, startY + 5, { align: 'center' });
     doc.setFontSize(11); doc.setFont("times", "normal");
-    doc.text(`Sumber: ${filterSource === 'All' ? 'Semua Layanan' : filterSource}`, 105, startY + 11, { align: 'center' });
-    doc.text(`Rata-rata Skor: ${stats?.avg}/5.0 | Responden: ${stats?.total} Siswa`, 105, startY + 17, { align: 'center' });
+    doc.text(`Tahun Pelajaran: ${schoolProfile.activeAcademicYear || '-'}`, 105, startY + 11, { align: 'center' });
+    doc.text(`Sumber: ${filterSource === 'All' ? 'Semua Layanan' : filterSource}`, 105, startY + 17, { align: 'center' });
+    doc.text(`Rata-rata Skor: ${avg}/5.0 | Responden: ${total} Siswa`, 105, startY + 23, { align: 'center' });
+
+    const tableBody = dataToExport.length > 0 
+      ? dataToExport.map((f, idx) => [
+          idx + 1,
+          f.studentName,
+          f.studentClass || '-',
+          f.serviceSource,
+          f.rating,
+          f.comment || '-'
+        ])
+      : [['-', 'Belum ada data umpan balik pelanggan', '-', '-', '-', '-']];
 
     autoTable(doc, {
-      startY: startY + 25,
-      head: [['No', 'Nama Siswa', 'Layanan', 'Rating', 'Komentar']],
-      body: filteredData.map((f, idx) => [
-        idx + 1,
-        f.studentName,
-        f.serviceSource,
-        f.rating,
-        f.comment || '-'
-      ]),
+      startY: startY + 31,
+      head: [['No', 'Nama Siswa', 'Kelas', 'Layanan', 'Rating', 'Komentar']],
+      body: tableBody,
       styles: { font: 'times', fontSize: 9 },
-      headStyles: { fillColor: [63, 81, 181] }
+      headStyles: { fillColor: [63, 81, 181] },
+      columnStyles: {
+        0: { cellWidth: 10 },
+        1: { cellWidth: 40 },
+        2: { cellWidth: 20 },
+        3: { cellWidth: 25 },
+        4: { cellWidth: 15 },
+      }
     });
 
     const finalY = (doc as any).lastAutoTable.finalY + 20;
@@ -199,15 +278,15 @@ const SatisfactionReport: React.FC<SatisfactionReportProps & { schoolProfile: Sc
 
     doc.text("Mengetahui,", 30, signY);
     doc.text("Kepala Sekolah,", 30, signY + 5);
-    doc.text(schoolProfile.principalName, 30, signY + 30);
-    doc.text(`NIP. ${schoolProfile.principalNip}`, 30, signY + 35);
+    doc.text(schoolProfile.principalName || ".......................", 30, signY + 30);
+    doc.text(`NIP. ${schoolProfile.principalNip || "-"}`, 30, signY + 35);
 
     doc.text(`${schoolProfile.city || '...'}, ${new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}`, 140, signY);
     doc.text("Guru BK / Konselor,", 140, signY + 5);
-    doc.text(schoolProfile.counselorName, 140, signY + 30);
-    doc.text(`NIP. ${schoolProfile.counselorNip}`, 140, signY + 35);
+    doc.text(schoolProfile.counselorName || ".......................", 140, signY + 30);
+    doc.text(`NIP. ${schoolProfile.counselorNip || "-"}`, 140, signY + 35);
 
-    doc.save(`Laporan_Kepuasan_${filterSource}_${Date.now()}.pdf`);
+    doc.save(`Laporan_Kepuasan_${filterSource}${tingkatFilter ? '_Tingkat_'+tingkatFilter : ''}_${Date.now()}.pdf`);
     notify("Laporan kepuasan berhasil diunduh.", "success");
   };
 
@@ -222,12 +301,26 @@ const SatisfactionReport: React.FC<SatisfactionReportProps & { schoolProfile: Sc
             {canManage && (
               <div className="flex gap-2">
                 <button 
-                  onClick={handleExportPDF}
+                  onClick={() => setReportViewMode(prev => prev === 'dashboard' ? 'report' : 'dashboard')}
                   className="bg-white border border-slate-200 text-slate-600 px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-sm hover:bg-slate-50 flex items-center gap-2 active:scale-95 transition-all"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                  PDF
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                  {reportViewMode === 'dashboard' ? 'Lihat Laporan Web' : 'Tutup Laporan Web'}
                 </button>
+                <div className="relative group">
+                  <button 
+                    className="bg-white border border-slate-200 text-slate-600 px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-sm hover:bg-slate-50 flex items-center gap-2 active:scale-95 transition-all"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                    PDF
+                  </button>
+                  <div className="absolute right-0 mt-2 w-48 bg-white border border-slate-100 rounded-xl shadow-xl hidden group-hover:block z-50 overflow-hidden">
+                    <button onClick={() => handleExportPDF()} className="w-full text-left px-4 py-3 text-[10px] font-black uppercase text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">Semua Tingkat</button>
+                    <button onClick={() => handleExportPDF('X')} className="w-full text-left px-4 py-3 text-[10px] font-black uppercase text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors border-t border-slate-50">Tingkat X</button>
+                    <button onClick={() => handleExportPDF('XI')} className="w-full text-left px-4 py-3 text-[10px] font-black uppercase text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors border-t border-slate-50">Tingkat XI</button>
+                    <button onClick={() => handleExportPDF('XII')} className="w-full text-left px-4 py-3 text-[10px] font-black uppercase text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors border-t border-slate-50">Tingkat XII</button>
+                  </div>
+                </div>
                 <button 
                   onClick={() => setIsManageModalOpen(true)}
                   className="bg-indigo-600 text-white px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-indigo-100 hover:bg-indigo-700 transition-all flex items-center gap-2 active:scale-95"
@@ -237,8 +330,8 @@ const SatisfactionReport: React.FC<SatisfactionReportProps & { schoolProfile: Sc
                 </button>
               </div>
             )}
-            
-            <div className="flex p-1 bg-slate-100 rounded-2xl w-fit">
+
+            <div className="flex flex-wrap p-1 bg-slate-100 rounded-2xl w-fit items-center">
               {(isSuperAdmin || isPrincipal) && (
                 <button 
                   onClick={() => setFilterSource('All')}
@@ -265,6 +358,18 @@ const SatisfactionReport: React.FC<SatisfactionReportProps & { schoolProfile: Sc
                   Layanan Sekolah
                 </button>
               )}
+
+              <select 
+                value={academicYearFilter}
+                onChange={(e) => setAcademicYearFilter(e.target.value)}
+                className="bg-transparent border-none text-[10px] font-black uppercase text-slate-500 py-2 px-3 rounded-xl focus:ring-0 outline-none cursor-pointer hover:bg-slate-200 transition-colors ml-1"
+              >
+                <option value="Semua">Semua Tahun Pelajaran</option>
+                {availableAcademicYears.map(y => (
+                  <option key={y} value={y}>{y}</option>
+                ))}
+                <option value="-">Tanpa Tahun Pelajaran</option>
+              </select>
             </div>
         </div>
       </header>
@@ -294,7 +399,90 @@ const SatisfactionReport: React.FC<SatisfactionReportProps & { schoolProfile: Sc
         </div>
       )}
 
-      {filteredData.length === 0 ? (
+      {reportViewMode === 'report' ? (
+         <div className="bg-white border border-slate-200 rounded-[2.5rem] shadow-xl max-w-5xl mx-auto overflow-hidden animate-in zoom-in-95 duration-500">
+            <Letterhead profile={schoolProfile} />
+            <div className="p-8 md:p-12">
+               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                  <div className="text-center md:text-left flex-1">
+                     <h3 className="text-xl md:text-2xl font-black uppercase tracking-tight">Laporan Analisis Kepuasan Layanan</h3>
+                     <p className="text-sm font-bold text-slate-700 mt-2">Tahun Pelajaran: {schoolProfile.activeAcademicYear || '-'}</p>
+                     <p className="text-sm font-bold text-slate-500 mt-1">Sumber: {filterSource === 'All' ? 'Semua Layanan' : filterSource}</p>
+                  </div>
+                  <div className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-xl border border-slate-200 shrink-0">
+                     {['Semua', 'X', 'XI', 'XII'].map(t => (
+                        <button 
+                          key={t}
+                          onClick={() => setWebReportTingkat(t)}
+                          className={`px-4 py-2 rounded-lg text-[10px] font-black uppercase transition-all ${webReportTingkat === t ? 'bg-white shadow text-indigo-600' : 'text-slate-500 hover:bg-slate-100'}`}
+                        >
+                           {t === 'Semua' ? 'Semua Tingkat' : `Tingkat ${t}`}
+                        </button>
+                     ))}
+                  </div>
+               </div>
+
+               {webReportData.length === 0 ? (
+                  <div className="py-20 text-center border-2 border-dashed border-slate-200 rounded-3xl">
+                     <p className="text-slate-400 font-bold italic">Belum ada data umpan balik untuk tingkat ini.</p>
+                  </div>
+               ) : (
+                  <>
+                    <div className="flex gap-8 mb-8 justify-center md:justify-start border-b border-slate-100 pb-8">
+                       <div>
+                          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Rata-rata Skor</p>
+                          <h4 className="text-4xl font-black text-slate-800">{webReportStats?.avg} <span className="text-lg text-slate-400">/ 5.0</span></h4>
+                       </div>
+                       <div className="w-px bg-slate-100"></div>
+                       <div>
+                          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Responden Siswa</p>
+                          <h4 className="text-4xl font-black text-slate-800">{webReportStats?.total}</h4>
+                       </div>
+                    </div>
+
+                    <div className="overflow-x-auto">
+                       <table className="w-full text-left text-sm">
+                          <thead>
+                             <tr className="border-b-2 border-slate-200">
+                                <th className="py-3 px-4 text-[10px] font-black text-slate-400 uppercase">No</th>
+                                <th className="py-3 px-4 text-[10px] font-black text-slate-400 uppercase">Nama Siswa</th>
+                                <th className="py-3 px-4 text-[10px] font-black text-slate-400 uppercase">Kelas</th>
+                                <th className="py-3 px-4 text-[10px] font-black text-slate-400 uppercase">Layanan</th>
+                                <th className="py-3 px-4 text-[10px] font-black text-slate-400 uppercase">Rating</th>
+                                <th className="py-3 px-4 text-[10px] font-black text-slate-400 uppercase">Komentar</th>
+                             </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-100">
+                             {webReportData.map((f, i) => (
+                                <tr key={f.id} className="hover:bg-slate-50 transition-colors">
+                                   <td className="py-3 px-4 font-bold text-slate-400 text-xs">{i + 1}</td>
+                                   <td className="py-3 px-4 font-bold text-slate-700 text-xs">{f.studentName}</td>
+                                   <td className="py-3 px-4 font-bold text-slate-500 text-xs">{f.studentClass || '-'}</td>
+                                   <td className="py-3 px-4 font-bold text-slate-500 text-[10px] uppercase">{f.serviceSource}</td>
+                                   <td className="py-3 px-4 font-black text-amber-500">{f.rating}</td>
+                                   <td className="py-3 px-4 text-xs text-slate-500 italic">{f.comment || '-'}</td>
+                                </tr>
+                             ))}
+                          </tbody>
+                       </table>
+                    </div>
+                  </>
+               )}
+               <div className="mt-16 flex justify-between items-end">
+                  <div className="text-center">
+                     <p className="text-xs mb-16">Mengetahui,<br/>Kepala Sekolah,</p>
+                     <p className="font-bold underline">{schoolProfile.principalName || '.......................'}</p>
+                     <p className="text-xs">NIP. {schoolProfile.principalNip || '-'}</p>
+                  </div>
+                  <div className="text-center">
+                     <p className="text-xs mb-16">{schoolProfile.city || '...'}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}<br/>Guru BK / Konselor,</p>
+                     <p className="font-bold underline">{schoolProfile.counselorName || '.......................'}</p>
+                     <p className="text-xs">NIP. {schoolProfile.counselorNip || '-'}</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      ) : filteredData.length === 0 ? (
         <div className="py-40 text-center bg-white rounded-[3rem] border border-dashed border-slate-200">
            <p className="text-slate-400 font-bold italic">Belum ada data umpan balik pelanggan yang masuk untuk kategori ini.</p>
         </div>

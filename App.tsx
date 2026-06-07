@@ -133,6 +133,7 @@ const DEFAULT_SCHOOL_PROFILE: SchoolProfile = {
   mission: ['Meningkatkan keimanan dan ketaqwaan.', 'Mengembangkan potensi peserta didik.'],
   academicYears: ['2023/2024'],
   activeAcademicYear: '2023/2024',
+  learningSchedules: [],
   logo: '',
   loginBackground: '',
   isLocked: false,
@@ -178,6 +179,18 @@ const sanitizeProfile = (raw: any): SchoolProfile => {
     }
   } else if (!Array.isArray(clean.academicYears)) {
     clean.academicYears = DEFAULT_SCHOOL_PROFILE.academicYears;
+  }
+
+  // Double check learningSchedules is always a valid array
+  if (typeof clean.learningSchedules === 'string') {
+    try {
+      const parsed = JSON.parse(clean.learningSchedules);
+      clean.learningSchedules = Array.isArray(parsed) ? parsed : DEFAULT_SCHOOL_PROFILE.learningSchedules;
+    } catch {
+      clean.learningSchedules = DEFAULT_SCHOOL_PROFILE.learningSchedules;
+    }
+  } else if (!Array.isArray(clean.learningSchedules)) {
+    clean.learningSchedules = DEFAULT_SCHOOL_PROFILE.learningSchedules;
   }
 
   return clean as SchoolProfile;
@@ -615,7 +628,7 @@ const useAutoSync = (lsKey: string, data: any) => {
         if (tableName) {
           console.log(`[AutoSync] Detected deletion of ${deletedItem.id} in ${tableName}`);
           // Send DELETE request to cloud without blocking the main thread
-          deleteFromCloud(tableName, deletedItem.id).catch(err => 
+          deleteFromCloud(lsKey, deletedItem.id).catch(err => 
             console.error(`[AutoSync] Failed to delete ${deletedItem.id} from ${tableName}`, err)
           );
         }
@@ -1334,6 +1347,7 @@ const App: React.FC = () => {
   useAutoSync('star_forumPosts', forumPosts);
   useAutoSync('star_methodSteps', methodSteps);
   useAutoSync('star_schedule', schedule);
+  useAutoSync('star_gradesConfig', gradesConfig);
   useAutoSync('star_universities', universities);
   useAutoSync('star_studyPrograms', studyPrograms);
   useAutoSync('star_messages', messages);
@@ -1931,7 +1945,7 @@ const App: React.FC = () => {
               <Route path="/rombels" element={<RombelList rombels={rombels} setRombels={setRombels} students={students} setStudents={setStudents} setAlumni={setAlumni} teachers={teachers} gradesConfig={gradesConfig} setGradesConfig={setGradesConfig} notify={notify} userRole={user.role} currentUser={user} handleCleanup={handleStudentCleanup} onGraduateCleanup={handleGraduateCleanup} />} />
               <Route path="/settings" element={<SchoolSettings gradesConfig={gradesConfig} setGradesConfig={setGradesConfig} rombels={rombels} setRombels={setRombels} notify={notify} userRole={user.role} quotes={quotes} setQuotes={setQuotes} students={students} setStudents={setStudents} alumni={alumni} setAlumni={setAlumni} />} />
               <Route path="/alumni" element={(user.role === 'super_admin' || user.role === 'humas' || user.role === 'counselor' || user.role === 'principal' || user.role === 'supervisor') ? <AlumniList students={alumni} setStudents={setAlumni} schoolProfile={safeSchoolProfile} notify={notify} userRole={user.role} /> : <Navigate to="/" replace />} />
-              <Route path="/schedule" element={<TeachingSchedule schedule={schedule} setSchedule={setSchedule} rombels={rombels} teachers={teachers} userRole={user.role} students={students} attendanceLogs={attendanceLogs} setAttendanceLogs={setAttendanceLogs} notify={notify} />} />
+              <Route path="/schedule" element={<TeachingSchedule schedule={schedule} setSchedule={setSchedule} rombels={rombels} teachers={teachers} userRole={user.role} students={students} attendanceLogs={attendanceLogs} setAttendanceLogs={setAttendanceLogs} notify={notify} schoolProfile={safeSchoolProfile} />} />
               <Route path="/dcm" element={(user.role !== 'principal' && user.role !== 'supervisor') ? <DCMManagement students={students} submissions={submissions} setSubmissions={setSubmissions} questions={questions} setQuestions={setQuestions} notify={notify} userRole={user.role} currentUserId={user.id} assignments={assignments} rombels={rombels} schoolProfile={safeSchoolProfile} /> : <Navigate to="/" replace />} />
               <Route path="/sociometry" element={(user.role !== 'principal' && user.role !== 'supervisor') ? <SociometryManagement students={students} rombels={rombels} sessions={sociometrySessions} setSessions={setSociometrySessions} criteria={sociometryCriteria} setCriteria={setSociometryCriteria} notify={notify} userRole={user.role} currentUserId={user.id} assignments={assignments} schoolProfile={safeSchoolProfile} /> : <Navigate to="/" replace />} />
               <Route path="/bimbingan-pribadi" element={<BimbinganPribadi students={students} sessions={sessions} setSessions={setSessions} setAppointments={setAppointments} schoolProfile={safeSchoolProfile} notify={notify} userRole={user.role} counselorProfile={activeCounselorProfile} />} />
@@ -1992,7 +2006,7 @@ const App: React.FC = () => {
               <Route path="/class-report" element={(user.role === 'student' || user.role === 'ketua_murid') ? <ClassReportPage user={user} students={students} rombels={rombels} classReports={classReports} attendanceLogs={attendanceLogs} setClassReports={setClassReports} setAttendanceLogs={setAttendanceLogs} notify={notify} /> : <Navigate to="/" replace />} />
               <Route path="/validate-reports" element={user.role === 'counselor' || user.role === 'super_admin' ? <ValidateReportPage user={user} students={students} rombels={rombels} classReports={classReports} setClassReports={setClassReports} setAttendanceLogs={setAttendanceLogs} notify={notify} teachers={teachers} /> : <Navigate to="/" replace />} />
               <Route path="/satisfaction-report" element={(user.role === 'super_admin' || user.role === 'counselor' || user.role === 'principal' || user.role === 'supervisor') ? <SatisfactionReport feedbacks={feedbacks} assignments={assignments} setAssignments={setAssignments} rombels={rombels} students={students} notify={notify} userRole={user.role} schoolProfile={safeSchoolProfile} /> : <Navigate to="/" replace />} />
-              <Route path="/satisfaction-input" element={<StudentSatisfaction currentUser={user} students={students} rombels={rombels} feedbacks={feedbacks} setFeedbacks={setFeedbacks} notify={notify} assignments={assignments} />} />
+              <Route path="/satisfaction-input" element={<StudentSatisfaction currentUser={user} students={students} rombels={rombels} feedbacks={feedbacks} setFeedbacks={setFeedbacks} notify={notify} assignments={assignments} schoolProfile={safeSchoolProfile} />} />
               <Route path="/report/mbti" element={user.role !== 'principal' && user.role !== 'supervisor' ? <MbtiReport submissions={allQuestionnaireSubmissions} setSubmissions={setQuestionnaireSubmissions} students={students} rombels={rombels} assignments={assignments} schoolProfile={safeSchoolProfile} counselorProfile={activeCounselorProfile} notify={notify} userRole={user.role} /> : <Navigate to="/" replace />} />
               <Route path="/report/sq" element={<SqReport submissions={sqSubmissions} setSubmissions={setSqSubmissions} students={students} rombels={rombels} assignments={assignments} schoolProfile={safeSchoolProfile} counselorProfile={activeCounselorProfile} notify={notify} userRole={user.role} />} />
               <Route path="/report/eq" element={<EqReport submissions={eqSubmissions} setSubmissions={setEqSubmissions} students={students} rombels={rombels} assignments={assignments} schoolProfile={safeSchoolProfile} counselorProfile={activeCounselorProfile} notify={notify} userRole={user.role} />} />

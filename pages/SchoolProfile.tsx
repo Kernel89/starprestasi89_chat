@@ -20,6 +20,8 @@ const SchoolProfilePage: React.FC<SchoolProfileProps> = ({ profile, setProfile, 
   const [formData, setFormData] = useState<SchoolProfile>(profile);
   const [newMission, setNewMission] = useState('');
   const [newAcademicYear, setNewAcademicYear] = useState('');
+  const [activeDayTab, setActiveDayTab] = useState<string>('Senin');
+  const daysOfWeek = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
   const [gradData, setGradData] = useState<Record<string, GraduationInfo>>(graduationInfo);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const bgInputRef = useRef<HTMLInputElement>(null);
@@ -205,6 +207,41 @@ const SchoolProfilePage: React.FC<SchoolProfileProps> = ({ profile, setProfile, 
       academicYears: newYears,
       activeAcademicYear: formData.activeAcademicYear === yearToRemove ? (newYears.length > 0 ? newYears[0] : '') : formData.activeAcademicYear
     });
+  };
+
+  const getSchedulesForDay = (day: string) => {
+    const schedules = formData.learningSchedules || [];
+    const daySchedule = schedules.find(s => s.day === day);
+    return daySchedule ? daySchedule.hours : [];
+  };
+
+  const updateDaySchedule = (day: string, newHours: any[]) => {
+    const schedules = [...(formData.learningSchedules || [])];
+    const dayIndex = schedules.findIndex(s => s.day === day);
+    if (dayIndex >= 0) {
+      schedules[dayIndex] = { ...schedules[dayIndex], hours: newHours };
+    } else {
+      schedules.push({ day, hours: newHours });
+    }
+    setFormData({ ...formData, learningSchedules: schedules });
+  };
+
+  const addLearningHour = (day: string) => {
+    const hours = [...getSchedulesForDay(day)];
+    hours.push({ period: String(hours.length + 1), startTime: '07:00', endTime: '07:45' });
+    updateDaySchedule(day, hours);
+  };
+
+  const updateLearningHour = (day: string, index: number, field: 'period' | 'startTime' | 'endTime', value: string) => {
+    const hours = [...getSchedulesForDay(day)];
+    hours[index] = { ...hours[index], [field]: value };
+    updateDaySchedule(day, hours);
+  };
+
+  const removeLearningHour = (day: string, index: number) => {
+    const hours = [...getSchedulesForDay(day)];
+    hours.splice(index, 1);
+    updateDaySchedule(day, hours);
   };
 
   return (
@@ -726,6 +763,103 @@ const SchoolProfilePage: React.FC<SchoolProfileProps> = ({ profile, setProfile, 
                 <div className="text-center py-8">
                   <p className="text-sm text-slate-400 font-medium">Tahun pelajaran aktif belum diatur.</p>
                 </div>
+              )}
+            </div>
+          </div>
+
+          {/* Pengaturan Jam Pembelajaran Section */}
+          <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-8 space-y-8">
+            <h4 className="text-lg font-black text-slate-800 flex items-center gap-3">
+              <span className="w-1.5 h-6 bg-blue-600 rounded-full" />
+              Pengaturan Jam Pembelajaran
+            </h4>
+
+            <div className="flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
+              {daysOfWeek.map(day => (
+                <button
+                  key={day}
+                  onClick={() => setActiveDayTab(day)}
+                  className={`px-4 py-2 rounded-xl text-sm font-bold whitespace-nowrap transition-all ${activeDayTab === day ? 'bg-blue-100 text-blue-700' : 'bg-slate-50 text-slate-500 hover:bg-slate-100'}`}
+                >
+                  {day}
+                </button>
+              ))}
+            </div>
+
+            <div className="space-y-4">
+              <div className="grid grid-cols-12 gap-4 px-4 pb-2 border-b border-slate-100 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                <div className="col-span-4">Jam Ke- / Label</div>
+                <div className="col-span-3">Mulai</div>
+                <div className="col-span-3">Selesai</div>
+                {isEditMode && <div className="col-span-2 text-center">Aksi</div>}
+              </div>
+
+              {getSchedulesForDay(activeDayTab).map((hour, idx) => (
+                <div key={idx} className="grid grid-cols-12 gap-4 items-center bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                  <div className="col-span-4">
+                    {isEditMode ? (
+                      <input
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm font-bold text-slate-700 outline-none focus:border-blue-500"
+                        value={hour.period}
+                        placeholder="Contoh: 1"
+                        onChange={e => updateLearningHour(activeDayTab, idx, 'period', e.target.value)}
+                      />
+                    ) : (
+                      <p className="text-sm font-bold text-slate-700">{hour.period}</p>
+                    )}
+                  </div>
+                  <div className="col-span-3">
+                    {isEditMode ? (
+                      <input
+                        type="time"
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm font-bold text-slate-700 outline-none focus:border-blue-500"
+                        value={hour.startTime}
+                        onChange={e => updateLearningHour(activeDayTab, idx, 'startTime', e.target.value)}
+                      />
+                    ) : (
+                      <p className="text-sm font-bold text-slate-700">{hour.startTime}</p>
+                    )}
+                  </div>
+                  <div className="col-span-3">
+                    {isEditMode ? (
+                      <input
+                        type="time"
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm font-bold text-slate-700 outline-none focus:border-blue-500"
+                        value={hour.endTime}
+                        onChange={e => updateLearningHour(activeDayTab, idx, 'endTime', e.target.value)}
+                      />
+                    ) : (
+                      <p className="text-sm font-bold text-slate-700">{hour.endTime}</p>
+                    )}
+                  </div>
+                  {isEditMode && (
+                    <div className="col-span-2 flex justify-center">
+                      <button
+                        onClick={() => removeLearningHour(activeDayTab, idx)}
+                        className="p-2 text-rose-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors"
+                        title="Hapus"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ))}
+
+              {getSchedulesForDay(activeDayTab).length === 0 && (
+                <div className="text-center py-8">
+                  <p className="text-sm text-slate-400 font-medium">Belum ada jadwal untuk hari {activeDayTab}.</p>
+                </div>
+              )}
+
+              {isEditMode && (
+                <button
+                  onClick={() => addLearningHour(activeDayTab)}
+                  className="w-full py-3 border-2 border-dashed border-slate-200 rounded-2xl text-sm font-bold text-slate-500 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-200 transition-all flex items-center justify-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  Tambah Jam Pembelajaran
+                </button>
               )}
             </div>
           </div>

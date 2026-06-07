@@ -92,10 +92,11 @@ const SqReport: React.FC<SqReportProps> = ({ submissions, setSubmissions, studen
     doc.setFontSize(12); doc.setFont("times", "bold");
     doc.text(`LAPORAN HASIL TES KECERDASAN SPIRITUAL (SQ)`, 148.5, startY + 5, { align: 'center' });
     doc.setFontSize(10); doc.setFont("times", "normal");
-    doc.text(periodStr, 148.5, startY + 10, { align: 'center' });
+    doc.text(`Tahun Pelajaran: ${schoolProfile.activeAcademicYear || '-'}`, 148.5, startY + 10, { align: 'center' });
+    doc.text(periodStr, 148.5, startY + 15, { align: 'center' });
 
     autoTable(doc, {
-      startY: startY + 20,
+      startY: startY + 25,
       head: [['No', 'Nama Lengkap Siswa', 'Tgl Tes', 'Skor SQ', 'Kategori', 'Keterangan']],
       body: filteredResults.map((r, i) => [
         i + 1, 
@@ -148,6 +149,7 @@ const SqReport: React.FC<SqReportProps> = ({ submissions, setSubmissions, studen
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h2 className="text-3xl font-black text-slate-900 tracking-tight italic">Laporan SQ Siswa</h2>
+          <p className="text-sm font-bold text-slate-700 mt-2">Tahun Pelajaran: {schoolProfile.activeAcademicYear || '-'}</p>
           <p className="text-slate-500 text-sm font-medium">Rekapitulasi indeks kecerdasan spiritual untuk bimbingan nilai dan karakter.</p>
         </div>
         <div className="flex gap-2">

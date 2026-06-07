@@ -453,6 +453,17 @@ export interface Scholarship {
   website?: string;
 }
 
+export interface LearningHour {
+  period: string;
+  startTime: string;
+  endTime: string;
+}
+
+export interface DaySchedule {
+  day: string;
+  hours: LearningHour[];
+}
+
 export interface SchoolProfile {
   name: string;
   agencyName: string;
@@ -483,6 +494,7 @@ export interface SchoolProfile {
   isLocked?: boolean;
   editCount?: number;
   academicYears?: string[];
+  learningSchedules?: DaySchedule[];
   updated_at?: string;
 }
 
